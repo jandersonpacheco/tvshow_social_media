@@ -1,10 +1,10 @@
 import { createBrowserRouter } from "react-router-dom"
-import Home from './Components/Pages/Home/Home.jsx'
+import Profile from './Components/Pages/Profile/Profile.jsx'
 import Login from './Components/Pages/Login/Login.jsx'
 
 const router = createBrowserRouter ([
-    {   path: '/home',
-        element: <Home/>
+    {   path: '/profile/:userId',
+        element: <Profile/>
     },
     {   path: '/',
         element: <Login/>
