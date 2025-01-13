@@ -1,36 +1,59 @@
 import axios from "axios"
 import { useEffect, useState } from 'react'
-import {v4 as uuidv4 } from 'uuid'
 
 const Home = () => {
     const [tvShows, setTvShows] = useState([])
-
-    const clientId = '654502a815863970677212a0de2f064945128f3631c8ba3d44e6d5ba354ca974'
-    const clientSecret = 'ef36af63897a7323c764c132667356c23cdcfd577d8b0a75ed91cef59107d951'
+    const [loading, setLoading] = useState(true)
+    const [error, setError] = useState(null)
     
     useEffect(()=>{
         const headers = {
             'Content-Type': 'application/json',
-            'trakt-api-version': '2',
-            'trakt-api-key': clientId
+            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwYTEyMzQ3MTk5NGVmMGU4YzlkNmVhMjlhOWY3YTM5YiIsIm5iZiI6MTczNjczNDY2NS4wNiwic3ViIjoiNjc4NDc3YzkwNjkwYWMwNmU3N2I2YmJjIiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.LPEqmskd9heCWoe_8TymhgsprUedEVuwEZrKVMhD1pw',
         }
 
-        axios.get('https://api.trakt.tv/shows/gangland-undercov/', {headers})
+        axios.get('https://api.themoviedb.org/3/tv/on_the_air?language=en-US&page=1', {headers})
         .then((response)=>{
-            setTvShows(response.data)
-            console.log(response.data)
+            setTvShows(response.data.results)
+            console.log(response.data.results)
+            setLoading(false)
         })
-        .catch(error => console.error('Erro ao buscar os dados!', error))
+        .catch((error)=>{
+            setError('Erro ao carregar os dados!')
+            setLoading(false)
+        })
     },[])
-    
+
+    if(loading){
+        return <h3>Carregando...</h3>
+    }
+
+    if(error){
+        return <h3>{error}</h3>
+    }
+
     return (
     <div className='main'>
-        <h1>Top 10 Séries Mais Assistidas:</h1>
-            <div>
-                <h2>{tvShows.title} {tvShows.year}</h2>
-            </div>
+        {tvShows.length > 0 ? (
+            tvShows.map((show) =>(
+                <div key={show.id}>
+                <h1>{show.name}</h1>
+                <p>{show.overview}</p>
+                <p>{show.vote_average}</p>
+                {show.poster_path && (
+                    <img
+                        src={`https://image.tmdb.org/t/p/w500${show.poster_path}`}
+                        style={{ width: "200px", height: "auto" }}
+                    />
+)}
+                </div>
+            ))
+        ) : (
+            <p>Nenhuma série encontrada.</p>
+        )}
     </div>
     )
 }
 
 export default Home
+
