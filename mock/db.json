@@ -1,5 +1,5 @@
 {
-<<<<<<< HEAD
+
   "users": [
     {
       "id": "49ae",
@@ -25,18 +25,3 @@
     }
   ]
 }
-=======
-    "users": [
-      {
-        "id": "1",
-        "email": "admin",
-        "password": "admin"
-      },
-      {
-        "id": "2",
-        "email": "lara.favaro",
-        "password": "admin"
-      }
-    ]
-  }
->>>>>>> 3b8cc7fcfd1f858b34eb0327eb0fe1fc9eb567c4
