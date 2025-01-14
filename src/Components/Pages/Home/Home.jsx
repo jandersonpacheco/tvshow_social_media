@@ -1,12 +1,13 @@
+import styles from "./style.module.css"
 import axios from "axios"
 import { useEffect, useState } from 'react'
-import { Link } from "react-router-dom"
 
 const Home = () => {
     const [tvShows, setTvShows] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
     const [search, setSearch] = useState('')
+
 
     const headers = {
         'Content-Type': 'application/json',
@@ -40,6 +41,7 @@ const Home = () => {
         })
         setSearch('')
     }
+    
     useEffect(()=>{
         axios.get('https://api.themoviedb.org/3/trending/tv/week?language=pt-BR', {headers})
         .then((response)=>{
@@ -63,30 +65,37 @@ const Home = () => {
 
     return (
     <div className="main">
-        <nav>
-        <h1><Link to="/profile">Perfil</Link></h1>
+        <nav className={styles.nav}>
         <form onSubmit={handleSearch}>
             <input type="text" id="search" placeholder="Procure por uma série" value={search} onChange={(event) => setSearch(event.target.value)}></input>
             <button id="searchBtn">Pesquisar</button>
         </form>
+        <h1> {{search} && (
+            'Séries mais vistas da semana!'
+        )}</h1>
         </nav>
-        {tvShows.length > 0 ? (
-            tvShows.map((show) =>(
-                <div key={show.id}>
-                <h1>{show.name}</h1>
-                <p>{show.overview}</p>
-                <p>{show.vote_average}</p>
-                {show.poster_path && (
-                    <img
+        <div className={styles.container}>
+            {tvShows.length > 0 ? (
+                tvShows.map((show) =>(
+                    <div
+                        className={styles.tvShowContainer}
+                        key={show.id}>
+                    {show.poster_path && (
+                        <img
                         src={`https://image.tmdb.org/t/p/w500${show.poster_path}`}
-                        style={{ width: "200px", height: "auto" }}
-                    />
-)}
-                </div>
-            ))
-        ) : (
-            <p>Nenhuma série encontrada.</p>
-        )}
+                        className={styles.img}
+                        />
+                    )}
+                    <h2 className={styles.title}>{show.name}</h2>
+                    <p className={styles.description}>- Nota {show.vote_average}</p>
+                    </div>
+                ))
+            ) : (
+                <p>Nenhuma série encontrada.</p>
+            )}
+        </div>
     </div>
     )
 }
+
+export default Home

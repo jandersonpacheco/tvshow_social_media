@@ -1,0 +1,50 @@
+.signIn {
+    /* Estilos para a div de login */
+  }
+  
+  .signUp {
+    /* Estilos para a div de cadastro */
+  }
+  
+  .errorMessage {
+    color: red;
+    font-size: 1rem;
+    margin-top: 10px;
+  }
+  
+  .signInForm, .signUpForm {
+    /* Estilos para os formulários */
+  }
+  
+  .input {
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 2px solid #f5d500;
+    margin-bottom: 10px;
+    width: 30%;
+  }
+  
+  .button {
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    background-color: #f5d500;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
+  .button[disabled] {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .radioInput {
+    /* Estilos para os inputs de rádio */
+  }
+  
+  .label {
+    font-size: 1rem;
+    margin-right: 5px;
+  }
+  
