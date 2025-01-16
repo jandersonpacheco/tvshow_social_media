@@ -21,24 +21,6 @@
       "newEmail": "janderson.katsu@gmail.com",
       "newPassword": "admin",
       "confirmedPassword": "admin"
-    },
-    {
-      "id": "cc31",
-      "userId": "89823cdc-a537-483f-abbd-4a57a03ef96f",
-      "firstName": "Lara",
-      "lastName": "Favaro",
-      "newEmail": "lara.favaro@hotmail.com",
-      "newPassword": "123",
-      "confirmedNewPassword": "123"
-    },
-    {
-      "id": "5f00",
-      "userId": "803529ad-26d5-489e-805d-53dc09a45549",
-      "firstName": "",
-      "lastName": "",
-      "newEmail": "",
-      "newPassword": "",
-      "confirmedNewPassword": ""
     }
   ]
 }

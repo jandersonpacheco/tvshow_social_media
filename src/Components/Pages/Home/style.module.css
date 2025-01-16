@@ -29,12 +29,21 @@ body {
 
 .nav form {
     display: flex;
+    flex-direction: row;
     justify-content: center;
     gap: 10px;
     margin-top: 20px;
 }
 
-.nav input {
+.nav select {
+    padding: 10px;
+    font-size: 1rem;
+    border: 2px solid #f59300;
+    border-radius: 8px;
+    width: 250px;
+}
+
+.nav input{
     padding: 10px;
     font-size: 1rem;
     border: 2px solid #f59300;
@@ -59,9 +68,10 @@ body {
 .container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: flex-start;
     gap: 30px;
-    padding-top: 20px;
+    padding-top: 40px;
+    margin-left: 230px;
     background-color: #f8f4e1
     
 }

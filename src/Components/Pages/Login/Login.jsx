@@ -41,7 +41,7 @@ function switchForm(){
                 console.log('Usuário encontrado')
                 navigate('/home')
             }else{
-                console.error('Dados não encontrados')
+                console.error('Email ou senha inválida')
             }
     }
 
@@ -84,10 +84,10 @@ function newAccount(event){
                     </div>
                     <main className={styles.mainContainer}>
                     <div className={styles.formContainer}>
-                        <form className={styles.createAccount}>
-                            <input className={styles.email} id="email" type="text" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}></input>
-                            <input className={styles.password} id="password" type="password" placeholder="Senha" value={password} onChange={(e) => setPassword(e.target.value)}></input>
-                            <button className={styles.button} id="signInBtn"onClick={signInValidation}>Entrar</button>
+                        <form className={styles.createAccount} onSubmit={signInValidation}>
+                            <input className={styles.email} id="email" type="text" placeholder="Email" value={email} onChange={(event) => setEmail(event.target.value)} required></input>
+                            <input className={styles.password} id="password" type="password" placeholder="Senha" value={password} onChange={(event) => setPassword(event.target.value)} required></input>
+                            <button className={styles.button} id="signInBtn">Entrar</button>
                         </form>
                     </div>
                     </main>

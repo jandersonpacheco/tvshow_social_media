@@ -7,6 +7,7 @@ const Home = () => {
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
     const [search, setSearch] = useState('')
+    const [fill, setFill] = useState('')
 
 
     const headers = {
@@ -14,8 +15,78 @@ const Home = () => {
         'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwYTEyMzQ3MTk5NGVmMGU4YzlkNmVhMjlhOWY3YTM5YiIsIm5iZiI6MTczNjczNDY2NS4wNiwic3ViIjoiNjc4NDc3YzkwNjkwYWMwNmU3N2I2YmJjIiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.LPEqmskd9heCWoe_8TymhgsprUedEVuwEZrKVMhD1pw',
     }
     
+    function handleFill(event){
+        event.preventDefault()
+
+        const selectedFill = event.target.value
+        setFill(selectedFill)
+
+        switch(selectedFill){
+            case "trending":
+                return axios.get('https://api.themoviedb.org/3/trending/tv/week?language=pt-BR', {headers})
+                .then((response)=>{
+                    setTvShows(response.data.results)
+                    console.log(response.data.results)
+                    setLoading(false)
+                })
+                .catch((error)=>{
+                    setError('Erro ao carregar os dados!')
+                    setLoading(false)
+                })
+            break
+            case "airingToday":
+            return axios.get('https://api.themoviedb.org/3/tv/airing_today?language=pt-br&page=1', {headers})
+            .then((response)=>{
+                setTvShows(response.data.results)
+                console.log(response.data.results)
+                setLoading(false)
+            })
+            .catch((error)=>{
+                setError('Erro ao carregar os dados!')
+                setLoading(false)
+            })
+            break
+        case "onTheAir":
+            return axios.get('https://api.themoviedb.org/3/tv/on_the_air?language=pt-br&page=1', {headers})
+            .then((response)=>{
+                setTvShows(response.data.results)
+                console.log(response.data.results)
+                setLoading(false)
+            })
+            .catch((error)=>{
+                setError('Erro ao carregar os dados!')
+                setLoading(false)
+            })
+        break
+        case "popular":
+            return axios.get('https://api.themoviedb.org/3/tv/popular?language=pt-br&page=1', {headers})
+            .then((response)=>{
+                setTvShows(response.data.results)
+                console.log(response.data.results)
+                setLoading(false)
+            })
+            .catch((error)=>{
+                setError('Erro ao carregar os dados!')
+                setLoading(false)
+            })
+        break
+        case "topRated":
+            return axios.get('https://api.themoviedb.org/3/tv/top_rated?language=pt-br&page=1', {headers})
+            .then((response)=>{
+                setTvShows(response.data.results)
+                console.log(response.data.results)
+                setLoading(false)
+            })
+            .catch((error)=>{
+                setError('Erro ao carregar os dados!')
+                setLoading(false)
+            })
+        }
+        }
+
     function handleSearch(event){
         event.preventDefault()
+
         if(search === ''){
             return axios.get('https://api.themoviedb.org/3/trending/tv/week?language=pt-BR', {headers})
             .then((response)=>{
@@ -41,7 +112,7 @@ const Home = () => {
         })
         setSearch('')
     }
-    
+       
     useEffect(()=>{
         axios.get('https://api.themoviedb.org/3/trending/tv/week?language=pt-BR', {headers})
         .then((response)=>{
@@ -64,11 +135,18 @@ const Home = () => {
     }
 
     return (
-    <div className="main">
+    <div className={styles.header}>
         <nav className={styles.nav}>
-        <form onSubmit={handleSearch}>
+        <form className={styles.selectForm} onSubmit={handleSearch}>
+            <select type="select" name="topic" id="topic" onChange={(event) => {handleFill(event)}}>
+                <option value="trending">Mais Assistidas da Semana</option>
+                <option value="airingToday">Lançamentos do Dia</option>
+                <option value="onTheAir">No Ar</option>
+                <option value="popular">Populares</option>
+                <option value="topRated">Melhores Avaliadas</option>
+            </select>
             <input type="text" id="search" placeholder="Procure por uma série" value={search} onChange={(event) => setSearch(event.target.value)}></input>
-            <button id="searchBtn">Pesquisar</button>
+            <button id="searchBtn" >Pesquisar</button>
         </form>
         <h1> {{search} && (
             'Séries mais vistas da semana!'
