@@ -10,6 +10,7 @@ const Login = () => {
     const [password, setPassword] = useState('')
     const navigate = useNavigate()
 
+
 //SingIn area
     useEffect(() =>{
         axios.get('http://localhost:3000/users')
@@ -29,6 +30,7 @@ const Login = () => {
             }else{
                 console.error('Email ou senha inválida')
             }
+        }
 
     // SignUp area
     function newAccount(event) {
@@ -75,25 +77,23 @@ const Login = () => {
     }
 
     return (
-        <div>
+        <div className={styles.main}>
             <div className={styles.signIn}>
                 <h1>AQUI NASCE A MAIOR REDE SOCIAL DE SÉRIES DO MUNDO!</h1>
                 <h2>Login</h2>
-                {error && <p className={styles.errorMessage}>{error}</p>}
                 <form className={styles.signInForm}>
                     <input id="email" type="text" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} className={styles.input}/>
                     <input id="password" type="password" placeholder="Senha" value={password} onChange={(e) => setPassword(e.target.value)} className={styles.input}/>
-                    <button id="signInBtn" onClick={signInValidation} className={styles.button}></button>
+                    <button id="signInBtn" onClick={signInValidation} className={styles.button}>Entrar</button>
                 </form>
             </div>
             <div className={styles.signUp}>
                 <h2>Cadastre-se</h2>
-                {error && <p className={styles.errorMessage}>{error}</p>}
                 <form className={styles.signUpForm} onSubmit={newAccount}>
                     <input id="first-name" type="text" placeholder="Nome" className={styles.input} />
                     <input id="last-name" type="text" placeholder="Sobrenome" className={styles.input} />
                     <label htmlFor="birthday" className={styles.label}>Data de Nascimento</label>
-                    <input id="birthday" type="date" className={styles.input} />
+                    <input id="birthday" type="date" className={styles.input}/>
                     <div className={styles.genderSelection}>
                         <input name="gender" type="radio" value="male" className={styles.radioInput} />
                         <label htmlFor="gender" className={styles.label}>Masculino</label>
@@ -103,7 +103,7 @@ const Login = () => {
                     <input id="new-email" type="email" placeholder="Email" required className={styles.input} />
                     <input id="new-password" type="password" placeholder="Senha" required className={styles.input} />
                     <input id="confirmed-password" type="password" placeholder="Confirmar Senha" required className={styles.input}/>
-                    <button id="signUpBtn" type="submit" className={styles.button}></button>
+                    <button id="signUpBtn" type="submit" className={styles.button}>Cadastrar</button>
                 </form>
             </div>
         </div>

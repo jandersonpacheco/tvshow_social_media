@@ -3,20 +3,20 @@
 body {
     font-family: 'Roboto Slab', system-ui, sans-serif;
     font-optical-sizing: auto;
-    background-color: #FFF8E8;   
-    margin: 0;
+    background-color: #f8f4e1;   
+
     padding: 0;
 }
 
 .nav {
     text-align: center;
     padding: 20px;
-    background-color: #f8f4e1; /* Light yellow for a soft background */
-    border-bottom: 3px solid #f5d500;
+    background-color: #f8f4e1;
+    border-bottom: 3px solid #f07401;
 }
 
 .nav h1 {
-    font-family: 'Matemasie', sans-serif;
+    font-family: 'Roboto Slab', system-ui, sans-serif;
     font-size: 2rem;
     color: #2f4f4f;
     margin: 0;
@@ -33,7 +33,7 @@ body {
 .nav input {
     padding: 10px;
     font-size: 1rem;
-    border: 2px solid #f5d500;
+    border: 2px solid #f07401;
     border-radius: 8px;
     width: 300px;
 }
@@ -41,7 +41,7 @@ body {
 .nav button {
     padding: 10px 15px;
     font-size: 1rem;
-    background-color: #f5d500;
+    background-color: #f07401;
     border: none;
     border-radius: 8px;
     cursor: pointer;
@@ -49,20 +49,17 @@ body {
 }
 
 .nav button:hover {
-    background-color: #d5c400;
-}
-
-.main {
-    padding: 20px;
-    background-color: #fff;
+    background-color: #b45802;
 }
 
 .container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-evenly;
+    justify-content: space-around;
     gap: 30px;
-    margin-top: 20px;
+    padding-top: 20px;
+    background-color: #f8f4e1
+    
 }
 
 .tvShowContainer {
@@ -73,6 +70,7 @@ body {
     overflow: hidden;
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
     background-color: #fdfdfd;
+    cursor: pointer;
 }
 
 .tvShowContainer:hover {
