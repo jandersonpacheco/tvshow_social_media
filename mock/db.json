@@ -1,5 +1,4 @@
 {
-
   "users": [
     {
       "id": "49ae",
@@ -22,6 +21,15 @@
       "newEmail": "janderson.katsu@gmail.com",
       "newPassword": "admin",
       "confirmedPassword": "admin"
+    },
+    {
+      "id": "cc31",
+      "userId": "89823cdc-a537-483f-abbd-4a57a03ef96f",
+      "firstName": "Lara",
+      "lastName": "Favaro",
+      "newEmail": "lara.favaro@hotmail.com",
+      "newPassword": "123",
+      "confirmedNewPassword": "123"
     }
   ]
 }

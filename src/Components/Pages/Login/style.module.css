@@ -1,0 +1,152 @@
+<<<<<<< HEAD
+=======
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Slab:wght@100..900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.headerContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  padding: 30px;
+}
+
+.title{
+  display: block;
+  margin: 0 auto;
+  font-size: 24px;
+  font-weight: 600;
+  gap: 5px;
+  font-weight: 500;
+}
+
+.mainContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.formContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.createAccount{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  align-content: flex-start;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.firstName{
+  border: 1px solid;
+  border-color: #FFF8E8;;
+  padding: 10px;
+  min-width: 100%;
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+.lastName{
+  border: 1px solid;
+  border-color: #FFF8E8;;
+  padding: 10px;
+  min-width: 100%;
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+.email{
+  display: flex;
+  align-items: center;
+  align-content: baseline;
+  justify-content: center;
+  border: 1px solid;
+  border-color: #E8E9EA;
+  gap: 10px;
+  min-width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+.passwordSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: flex-start;
+  flex-wrap: wrap;
+  padding-top: 10px;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  column-gap: 10px;
+}
+
+.passwordContainer{
+  flex: 1;
+}
+
+.password{
+  border: 1px solid #E8E9EA;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  min-width: 100%;
+  box-sizing: border-box;
+}
+
+.confirmedPasswordContainer{
+  flex: 1;
+}
+
+.confirmedPassword{
+  border: 1px solid #E8E9EA;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  min-width: 100%;
+  box-sizing: border-box;
+}
+
+.button{
+  margin-top: 15px;
+  border: 1px solid;
+  border-color: #E8E9EA;
+  gap: 10px;
+  padding: 10px;
+  min-width: 100%;
+
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  background-color: #f59300;
+  color: #FFFFFF;
+  cursor: pointer;
+}
+>>>>>>> 08676e63359dec1e69d445e503c5a1d4f0c077f1
