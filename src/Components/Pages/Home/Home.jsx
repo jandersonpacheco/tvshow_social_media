@@ -87,7 +87,10 @@ const Home = () => {
     function handleSearch(event){
         event.preventDefault()
 
+        setFill('trending')
+
         if(search === ''){
+            
             return axios.get('https://api.themoviedb.org/3/trending/tv/week?language=pt-BR', {headers})
             .then((response)=>{
                 setTvShows(response.data.results)
@@ -105,6 +108,7 @@ const Home = () => {
             setTvShows(response.data.results)
             console.log(response.data.results)
             setLoading(false)
+            setFill('searching')
         })
         .catch((error)=>{
             setError('Erro ao carregar os dados!')
@@ -138,12 +142,13 @@ const Home = () => {
     <div className={styles.header}>
         <nav className={styles.nav}>
         <form className={styles.selectForm} onSubmit={handleSearch}>
-            <select type="select" name="topic" id="topic" onChange={(event) => {handleFill(event)}}>
-                <option value="trending">Mais Assistidas da Semana</option>
+            <select type="select" name="topic" id="topic" value={fill} onChange={(event) => {handleFill(event)}}>
+                <option value="trending" >Mais Assistidas da Semana</option>
                 <option value="airingToday">Lançamentos do Dia</option>
                 <option value="onTheAir">No Ar</option>
                 <option value="popular">Populares</option>
                 <option value="topRated">Melhores Avaliadas</option>
+                <option value="searching">Busca</option>
             </select>
             <input type="text" id="search" placeholder="Procure por uma série" value={search} onChange={(event) => setSearch(event.target.value)}></input>
             <button id="searchBtn" >Pesquisar</button>
