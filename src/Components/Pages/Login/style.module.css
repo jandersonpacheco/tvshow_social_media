@@ -1,50 +1,149 @@
-.signIn {
-    /* Estilos para a div de login */
-  }
-  
-  .signUp {
-    /* Estilos para a div de cadastro */
-  }
-  
-  .errorMessage {
-    color: red;
-    font-size: 1rem;
-    margin-top: 10px;
-  }
-  
-  .signInForm, .signUpForm {
-    /* Estilos para os formulários */
-  }
-  
-  .input {
-    padding: 10px;
-    font-size: 1rem;
-    border-radius: 8px;
-    border: 2px solid #f5d500;
-    margin-bottom: 10px;
-    width: 30%;
-  }
-  
-  .button {
-    padding: 10px 20px;
-    font-size: 1.2rem;
-    background-color: #f5d500;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-  }
-  
-  .button[disabled] {
-    background-color: #ccc;
-    cursor: not-allowed;
-  }
-  
-  .radioInput {
-    /* Estilos para os inputs de rádio */
-  }
-  
-  .label {
-    font-size: 1rem;
-    margin-right: 5px;
-  }
-  
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Slab:wght@100..900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.headerContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  padding: 30px;
+}
+
+.title{
+  display: block;
+  margin: 0 auto;
+  font-size: 24px;
+  font-weight: 600;
+  gap: 5px;
+  font-weight: 500;
+}
+
+.mainContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.formContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.createAccount{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  align-content: flex-start;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.firstName{
+  border: 1px solid;
+  border-color: #FFF8E8;;
+  padding: 10px;
+  min-width: 100%;
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+.lastName{
+  border: 1px solid;
+  border-color: #FFF8E8;;
+  padding: 10px;
+  min-width: 100%;
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+.email{
+  display: flex;
+  align-items: center;
+  align-content: baseline;
+  justify-content: center;
+  border: 1px solid;
+  border-color: #E8E9EA;
+  gap: 10px;
+  min-width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+.passwordSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: flex-start;
+  flex-wrap: wrap;
+  padding-top: 10px;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  column-gap: 10px;
+}
+
+.passwordContainer{
+  flex: 1;
+}
+
+.password{
+  border: 1px solid #E8E9EA;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  min-width: 100%;
+  box-sizing: border-box;
+}
+
+.confirmedPasswordContainer{
+  flex: 1;
+}
+
+.confirmedPassword{
+  border: 1px solid #E8E9EA;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  min-width: 100%;
+  box-sizing: border-box;
+}
+
+.button{
+  margin-top: 15px;
+  border: 1px solid;
+  border-color: #E8E9EA;
+  gap: 10px;
+  padding: 10px;
+  min-width: 100%;
+
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  background-color: #f59300;
+  color: #FFFFFF;
+  cursor: pointer;
+}

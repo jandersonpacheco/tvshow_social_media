@@ -1,159 +1,122 @@
-import styles from "./style.module.css";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { v4 as uuidv4 } from 'uuid';
+import styles from "./style.module.css"
+import { useNavigate } from "react-router-dom"
+import axios from "axios"
+import { useEffect, useState } from "react"
+import {v4 as uuidv4 } from 'uuid'
 
 const Login = () => {
-    const [data, setData] = useState([]);
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
-    const [isLoading, setIsLoading] = useState(false);
-    const navigate = useNavigate();
+    const [data, setData] = useState ([])
+    const [email, setEmail] = useState ('')
+    const [password, setPassword] = useState ('')
+    const [firstName, setFirstName] = useState ('')
+    const [lastName, setLastName] = useState ('')
+    const [newEmail, setNewEmail] = useState ('')
+    const [newPassword, setNewPassword] = useState ('')
+    const [confirmedNewPassword, setConfirmedNewPassword] = useState ('')
+    const navigate = useNavigate()
+    const [switchForm, setSwitchForm] = useState ('Cadastre-se')
 
-    // SignIn area
-    useEffect(() => {
+//Switch Form
+
+function signUp(){
+    setSwitchForm (switchForm === 'Cadastre-se' ? 'Já possui uma conta?' : 'Cadastre-se')
+        console.log(switchForm)
+}
+
+//SingIn area
+    useEffect(() =>{
         axios.get('http://localhost:3000/users')
             .then((response) => {
-                setData(response.data);
+                setData(response.data)
             })
-            .catch(error => console.error('Erro ao buscar os dados.', error));
-    }, []);
+            .catch(error => console.error('Erro ao buscar os dados.', error))
+    },[])
+    
+    function signInValidation(event){
+        event.preventDefault()
 
-    function signInValidation(event) {
-        event.preventDefault();
-
-        setIsLoading(true);
-        setError('');
-
-        const validation = data.find((user) => user.newEmail === email && user.newPassword === password);
-
-        if (validation) {
-            console.log('Usuário encontrado');
-            navigate('/home');
-        } else {
-            setError('Dados não encontrados. Tente novamente.');
-        }
-        setIsLoading(false);
+        const validation = data.find((user) => user.newEmail == email && user.newPassword == password)
+            if(validation){
+                console.log('Usuário encontrado')
+                navigate('/home')
+            }else{
+                console.error('Dados não encontrados')
+            }
     }
 
-    // SignUp area
-    function newAccount(event) {
-        event.preventDefault();
+//SignUp area
 
-        const firstName = event.target.firstName.value;
-        const lastName = event.target.lastName.value;
-        const birthday = event.target.birthday.value;
-        const gender = event.target.gender.value;
-        const newEmail = event.target.newEmail.value;
-        const newPassword = event.target.newPassword.value;
-        const confirmedPassword = event.target.confirmedPassword.value;
+function newAccount(event){
+    event.preventDefault()
 
-        const emailExists = data.some((user) => user.newEmail === newEmail);
-        if (emailExists) {
-            setError('Email já cadastrado!');
-            return;
-        }
-        if (newPassword !== confirmedPassword) {
-            setError('As senhas não conferem.');
-            return;
-        }
-
+    const emailExists = data.some((user) => user.newEmail === newEmail)
+    if(emailExists){
+        console.error('Email já cadastrado!')
+        return
+    }
+    if(newPassword === confirmedNewPassword){
         const newUserAccount = {
             userId: uuidv4(),
             firstName,
             lastName,
-            birthday,
-            gender,
             newEmail,
             newPassword,
-            confirmedPassword
-        };
-
-        setIsLoading(true);
+            confirmedNewPassword
+        }
         axios.post('http://localhost:3000/users', newUserAccount)
-            .then((response) => {
-                console.log('Usuário criado', response.data);
-                navigate('/home');
-            })
-            .catch(error => {
-                console.error('Erro ao criar o usuário', error);
-                setError('Erro ao criar a conta. Tente novamente.');
-            })
-            .finally(() => setIsLoading(false));
+            .then((response) =>{
+                console.log('Usuário criado', response.data)
+                navigate('/home')
+        })
+        .catch(error => console.error('Erro ao criar o usuário', error))
+    }else{
+        console.error('Senhas não conferem.')
     }
-
+}
     return (
-        <div>
-            <div className={styles.signIn}>
-                <h1>AQUI NASCE A MAIOR REDE SOCIAL DE SÉRIES DO MUNDO!</h1>
-                <h2>Login</h2>
-                {error && <p className={styles.errorMessage}>{error}</p>}
-                <form className={styles.signInForm}>
-                    <input
-                        id="email"
-                        type="text"
-                        placeholder="Email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        disabled={isLoading}
-                        className={styles.input}
-                    />
-                    <input
-                        id="password"
-                        type="password"
-                        placeholder="Senha"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        disabled={isLoading}
-                        className={styles.input}
-                    />
-                    <button
-                        id="signInBtn"
-                        onClick={signInValidation}
-                        disabled={isLoading}
-                        className={styles.button}
-                    >
-                        {isLoading ? 'Carregando...' : 'Entrar'}
-                    </button>
-                </form>
-            </div>
-            <div className={styles.signUp}>
-                <h2>Cadastre-se</h2>
-                {error && <p className={styles.errorMessage}>{error}</p>}
-                <form className={styles.signUpForm} onSubmit={newAccount}>
-                    <input id="first-name" type="text" placeholder="Nome" className={styles.input} />
-                    <input id="last-name" type="text" placeholder="Sobrenome" className={styles.input} />
-                    <label htmlFor="birthday" className={styles.label}>Data de Nascimento</label>
-                    <input id="birthday" type="date" className={styles.input} />
-                    <div className={styles.genderSelection}>
-                        <input name="gender" type="radio" value="male" className={styles.radioInput} />
-                        <label htmlFor="gender" className={styles.label}>Masculino</label>
-                        <input name="gender" type="radio" value="female" className={styles.radioInput} />
-                        <label htmlFor="gender" className={styles.label}>Feminino</label>
+    <div>
+        <h1>AQUI NASCE A MAIOR REDE SOCIAL DE SÉRIES DO MUNDO!</h1>
+            {switchForm === 'Cadastre-se' ? (
+                <div className={styles.headerContainer}>
+                    <div>                    
+                        <h2 className={styles.title}>Login</h2>
                     </div>
-                    <input id="new-email" type="email" placeholder="Email" required className={styles.input} />
-                    <input id="new-password" type="password" placeholder="Senha" required className={styles.input} />
-                    <input
-                        id="confirmed-password"
-                        type="password"
-                        placeholder="Confirmar Senha"
-                        required
-                        className={styles.input}
-                    />
-                    <button
-                        id="signUpBtn"
-                        type="submit"
-                        disabled={isLoading}
-                        className={styles.button}
-                    >
-                        {isLoading ? 'Carregando...' : 'Cadastre-se'}
-                    </button>
-                </form>
-            </div>
-        </div>
-    );
+                    <main className={styles.mainContainer}>
+                    <div className={styles.formContainer}>
+                        <form className={styles.createAccount}>
+                            <input className={styles.email} id="email" type="text" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}></input>
+                            <input className={styles.password} id="password" type="password" placeholder="Senha" value={password} onChange={(e) => setPassword(e.target.value)}></input>
+                            <button className={styles.button} id="signInBtn"onClick={signInValidation}>Entrar</button>
+                        </form>
+                    </div>
+                    </main>
+                </div>
+            ) : (
+                <div className={styles.headerContainer}>
+                    <h2 className={styles.title}>Cadastre-se</h2>
+                    <main className={styles.mainContainer}>
+                        <div className={styles.formContainer}>
+                            <form className={styles.mainContainer} onSubmit={newAccount}>
+                                <input className={styles.firstName} id="firstName" type="text" placeholder="Nome" value={firstName} onChange={(e) => setFirstName(e.target.value)}></input>
+                                <input className={styles.lastName} id="lastName" type="text" placeholder="Sobrenome" value={lastName} onChange={(e) => setLastName(e.target.value)}></input>
+                                <input className={styles.email} id="newEmail" type="email" placeholder="Email" value={newEmail} onChange={(e) => setNewEmail(e.target.value)}></input>
+                                <div className={styles.passwordSection}>
+                                    <div className={styles.passwordContainer}>
+                                        <input className={styles.password} id="newPassword" type="password" placeholder="Senha" value={newPassword} onChange={(e) => setNewPassword(e.target.value)}></input>
+                                    </div>
+                                    <div className={styles.confirmedPasswordContainer}>
+                                        <input className={styles.confirmedPassword} id="ConfirmedNewPassword" type="password" placeholder="Senha" value={confirmedNewPassword} onChange={(e) => setConfirmedNewPassword(e.target.value)}></input>
+                                    </div>
+                                </div>
+                                <button className={styles.button} id="singUpBtn">Cadastre-se</button>
+                            </form>
+                        </div>
+                    </main>
+                </div>
+            )}
+            <p id="newUser" onClick={signUp} style={{cursor:'pointer', color: 'blue'}}>{switchForm}</p>
+    </div>
+    )
 }
 
-export default Login;
+export default Login
