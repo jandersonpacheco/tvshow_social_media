@@ -14,13 +14,13 @@ const Login = () => {
     const [newPassword, setNewPassword] = useState ('')
     const [confirmedNewPassword, setConfirmedNewPassword] = useState ('')
     const navigate = useNavigate()
-    const [switchForm, setSwitchForm] = useState ('Cadastre-se')
+    const [switchedForm, setSwitchedForm] = useState ('Cadastre-se')
 
 //Switch Form
 
-function signUp(){
-    setSwitchForm (switchForm === 'Cadastre-se' ? 'Já possui uma conta?' : 'Cadastre-se')
-        console.log(switchForm)
+function switchForm(){
+    setSwitchedForm (switchedForm === 'Cadastre-se' ? 'Já possui uma conta?' : 'Cadastre-se')
+        console.log(switchedForm)
 }
 
 
@@ -43,11 +43,7 @@ function signUp(){
             }else{
                 console.error('Dados não encontrados')
             }
-<<<<<<< HEAD
-        }
-=======
     }
->>>>>>> 08676e63359dec1e69d445e503c5a1d4f0c077f1
 
 //SignUp area
 
@@ -79,41 +75,9 @@ function newAccount(event){
     }
 }
     return (
-<<<<<<< HEAD
-        <div className={styles.main}>
-            <div className={styles.signIn}>
-                <h1>AQUI NASCE A MAIOR REDE SOCIAL DE SÉRIES DO MUNDO!</h1>
-                <h2>Login</h2>
-                <form className={styles.signInForm}>
-                    <input id="email" type="text" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} className={styles.input}/>
-                    <input id="password" type="password" placeholder="Senha" value={password} onChange={(e) => setPassword(e.target.value)} className={styles.input}/>
-                    <button id="signInBtn" onClick={signInValidation} className={styles.button}>Entrar</button>
-                </form>
-            </div>
-            <div className={styles.signUp}>
-                <h2>Cadastre-se</h2>
-                <form className={styles.signUpForm} onSubmit={newAccount}>
-                    <input id="first-name" type="text" placeholder="Nome" className={styles.input} />
-                    <input id="last-name" type="text" placeholder="Sobrenome" className={styles.input} />
-                    <label htmlFor="birthday" className={styles.label}>Data de Nascimento</label>
-                    <input id="birthday" type="date" className={styles.input}/>
-                    <div className={styles.genderSelection}>
-                        <input name="gender" type="radio" value="male" className={styles.radioInput} />
-                        <label htmlFor="gender" className={styles.label}>Masculino</label>
-                        <input name="gender" type="radio" value="female" className={styles.radioInput} />
-                        <label htmlFor="gender" className={styles.label}>Feminino</label>
-                    </div>
-                    <input id="new-email" type="email" placeholder="Email" required className={styles.input} />
-                    <input id="new-password" type="password" placeholder="Senha" required className={styles.input} />
-                    <input id="confirmed-password" type="password" placeholder="Confirmar Senha" required className={styles.input}/>
-                    <button id="signUpBtn" type="submit" className={styles.button}>Cadastrar</button>
-                </form>
-            </div>
-        </div>
-=======
     <div>
         <h1>AQUI NASCE A MAIOR REDE SOCIAL DE SÉRIES DO MUNDO!</h1>
-            {switchForm === 'Cadastre-se' ? (
+            {switchedForm === 'Cadastre-se' ? (
                 <div className={styles.headerContainer}>
                     <div>                    
                         <h2 className={styles.title}>Login</h2>
@@ -133,7 +97,7 @@ function newAccount(event){
                     <h2 className={styles.title}>Cadastre-se</h2>
                     <main className={styles.mainContainer}>
                         <div className={styles.formContainer}>
-                            <form className={styles.mainContainer} onSubmit={newAccount}>
+                            <form className={styles.createAccount} onSubmit={newAccount}>
                                 <input className={styles.firstName} id="firstName" type="text" placeholder="Nome" value={firstName} onChange={(e) => setFirstName(e.target.value)}></input>
                                 <input className={styles.lastName} id="lastName" type="text" placeholder="Sobrenome" value={lastName} onChange={(e) => setLastName(e.target.value)}></input>
                                 <input className={styles.email} id="newEmail" type="email" placeholder="Email" value={newEmail} onChange={(e) => setNewEmail(e.target.value)}></input>
@@ -151,9 +115,10 @@ function newAccount(event){
                     </main>
                 </div>
             )}
-            <p id="newUser" onClick={signUp} style={{cursor:'pointer', color: 'blue'}}>{switchForm}</p>
+            <div className={styles.switchContainer}>
+                <p id="newUser" className={styles.switchBtn} onClick={switchForm}>{switchedForm}</p>
+            </div>
     </div>
->>>>>>> 08676e63359dec1e69d445e503c5a1d4f0c077f1
     )
 }
 

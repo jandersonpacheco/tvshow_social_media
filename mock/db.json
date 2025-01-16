@@ -30,6 +30,15 @@
       "newEmail": "lara.favaro@hotmail.com",
       "newPassword": "123",
       "confirmedNewPassword": "123"
+    },
+    {
+      "id": "5f00",
+      "userId": "803529ad-26d5-489e-805d-53dc09a45549",
+      "firstName": "",
+      "lastName": "",
+      "newEmail": "",
+      "newPassword": "",
+      "confirmedNewPassword": ""
     }
   ]
 }
