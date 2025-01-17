@@ -68,10 +68,9 @@ body {
 .container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start;
+    justify-content: space-around;
     gap: 30px;
     padding-top: 40px;
-    margin-left: 230px;
     background-color: #f8f4e1
     
 }
