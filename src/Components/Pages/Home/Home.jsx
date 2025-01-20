@@ -141,7 +141,7 @@ const Home = () => {
     },[])
 
     if(loading){
-        return <h3>Carregando...</h3>
+        return <h3 className={styles.loading}>Carregando...</h3>
     }
 
     if(error){
