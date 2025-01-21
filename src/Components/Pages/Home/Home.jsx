@@ -124,6 +124,7 @@ const Home = () => {
         axios.get('https://api.themoviedb.org/3/trending/tv/week?language=pt-BR', {headers})
             .then((response)=>{
                 setTvShowsTmdb(response.data.results)
+                console.clear()
                 console.log(response.data.results)
                 setLoading(false)
             })
