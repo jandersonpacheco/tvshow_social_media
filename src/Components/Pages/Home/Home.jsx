@@ -23,7 +23,7 @@ const Home = () => {
 
         switch(selectedFill){
             case "trending":
-                return axios.get('https://api.themoviedb.org/3/trending/tv/week?language=pt-BR', {headers})
+                return axios.get(`https://api.themoviedb.org/3/trending/tv/week?language=pt-BR&page=1`, {headers})
                 .then((response)=>{
                     setTvShowsTmdb(response.data.results)
                     console.log(response.data.results)
@@ -35,7 +35,7 @@ const Home = () => {
                 })
             break
             case "airingToday":
-            return axios.get('https://api.themoviedb.org/3/tv/airing_today?language=pt-br&page=1', {headers})
+            return axios.get(`https://api.themoviedb.org/3/tv/airing_today?language=pt-br&page=1`, {headers})
             .then((response)=>{
                 setTvShowsTmdb(response.data.results)
                 const sortedTvShows = response.data.results.sort((a,b)=> b.popularity - a.popularity)
@@ -48,7 +48,7 @@ const Home = () => {
             })
             break
         case "onTheAir":
-            return axios.get('https://api.themoviedb.org/3/tv/on_the_air?language=pt-br&page=1', {headers})
+            return axios.get(`https://api.themoviedb.org/3/tv/on_the_air?language=pt-br&page=1`, {headers})
             .then((response)=>{
                 setTvShowsTmdb(response.data.results)
                 const sortedTvShows = response.data.results.sort((a,b)=> b.popularity - a.popularity)
@@ -61,7 +61,7 @@ const Home = () => {
             })
         break
         case "popular":
-            return axios.get('https://api.themoviedb.org/3/tv/popular?language=pt-br&page=1', {headers})
+            return axios.get(`https://api.themoviedb.org/3/tv/popular?language=pt-br&page=1`, {headers})
             .then((response)=>{
                 setTvShowsTmdb(response.data.results)
                 const sortedTvShows = response.data.results.sort((a,b)=> b.note_avarage - a.note_avarage)
@@ -74,7 +74,7 @@ const Home = () => {
             })
         break
         case "topRated":
-            return axios.get('https://api.themoviedb.org/3/tv/top_rated?language=pt-br&page=1', {headers})
+            return axios.get(`https://api.themoviedb.org/3/tv/top_rated?language=pt-br&page=1`, {headers})
             .then((response)=>{
                 setTvShowsTmdb(response.data.results)
                 console.log(response.data.results)
@@ -96,7 +96,7 @@ const Home = () => {
 
         if(search === ''){
             
-            return axios.get('https://api.themoviedb.org/3/trending/tv/week?language=pt-BR', {headers})
+            return axios.get(`https://api.themoviedb.org/3/trending/tv/week?language=pt-BR&page=1`, {headers})
             .then((response)=>{
                 setTvShowsTmdb(response.data.results)
                 setLoading(false)
@@ -121,7 +121,7 @@ const Home = () => {
     }
 
     useEffect(()=>{
-        axios.get('https://api.themoviedb.org/3/trending/tv/week?language=pt-BR', {headers})
+        axios.get(`https://api.themoviedb.org/3/trending/tv/week?language=pt-BR&page=1`, {headers})
             .then((response)=>{
                 setTvShowsTmdb(response.data.results)
                 console.clear()

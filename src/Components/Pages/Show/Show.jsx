@@ -1,4 +1,4 @@
-import styles from "../Home/style.module.css"
+import styles from "./style.module.css"
 import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 import axios from "axios"
@@ -42,24 +42,40 @@ const Show = () => {
         <>
         {tvShowsTmdb ? (
             <div>
-                {tvShowsTmdb.poster_path && (
-                    <img
-                    src={`https://image.tmdb.org/t/p/w500${tvShowsTmdb.poster_path}`}
-                    className={styles.img}
-                    />
-                )}
-                <h1>{tvShowsTmdb.name}</h1>
-                <p>{tvShowsTmdb.overview}</p>
-                <p>Gênero: {tvShowsTmdb.genres.map(genre => genre.name).join(', ')}</p>
-                <p>Lançamento: {tvShowsTmdb.first_air_date}</p>
-                <p>Popularidade: {tvShowsTmdb.popularity}</p>
-                <p>Temporadas: {tvShowsTmdb.number_of_seasons}</p>
-                <p>Episódios Programagos: {tvShowsTmdb.number_of_episodes}</p>
-                {tvShowsTmdb.last_episode_to_air && tvShowsTmdb.last_episode_to_air.episode_number &&(
-                <p>Episódios Lançados: {tvShowsTmdb.last_episode_to_air.episode_number}</p>
-                )}
-                <p>Nota: {tvShowsTmdb.vote_average}</p>
-                <p>Total de Notas: {tvShowsTmdb.vote_count}</p>
+                <div className={styles.showDetails}>
+                    <div className={styles.showImg}>
+                        {tvShowsTmdb.poster_path && (
+                            <img
+                            src={`https://image.tmdb.org/t/p/w500${tvShowsTmdb.poster_path}`}
+                            className={styles.img}
+                            />
+                        )}
+                    </div>
+                    <div className={styles.showContent}>
+                        <div className={styles.title}>
+                            <h1 className={styles.title}>{tvShowsTmdb.name}</h1>
+                        </div>
+                        <div className={styles.statisticBoxContainer}>
+                            <p className={styles.sBvote_average}>{tvShowsTmdb.vote_average}</p>
+                            <div className={styles.statisticBox}>
+                                <p className={styles.statisticBoxTitle}>Popularidade</p>
+                                <p className={styles.sbPopularity}>{tvShowsTmdb.popularity}</p>
+                            </div>
+                            <div className={styles.statisticBox}>
+                                <p className={styles.statisticBoxTitle}>Avaliações</p>
+                                <p className={styles.sbVote_count}>{tvShowsTmdb.vote_count}</p>
+                            </div>
+                        </div>
+                        <p className={styles.overview}>{tvShowsTmdb.overview}</p>
+                        <p className={styles.genres}>Gênero: {tvShowsTmdb.genres.map(genre => genre.name).join(', ')}</p>
+                        <p className={styles.first_air_date}>Lançamento: {tvShowsTmdb.first_air_date}</p>
+                        <p className={styles.number_of_seasons}>Temporadas: {tvShowsTmdb.number_of_seasons}</p>
+                        <p className={styles.number_of_episodes}>Episódios Programados: {tvShowsTmdb.number_of_episodes}</p>
+                        {tvShowsTmdb.last_episode_to_air && tvShowsTmdb.last_episode_to_air.episode_number &&(
+                        <p className={styles.episode_number}>Episódios Lançados: {tvShowsTmdb.last_episode_to_air.episode_number}</p>
+                        )}
+                    </div>
+                </div>
             </div>
         ) : (
             <p>Série não encontrada.</p>

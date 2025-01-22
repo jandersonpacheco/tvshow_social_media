@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Matemasie&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Slab:wght@100..900&display=swap');
+
+body{
+    font-family: "Roboto Slab", system-ui;
+    font-optical-sizing: auto;
+    background-color: #FFF8E8;   
+}
+
+.showDetails{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 2%;
+    
+}
+
+.showImg{
+    display: flex;
+    justify-content: center;
+    margin-left: 10px;
+}
+
+.img{
+    height: 450px;
+    width: 300px;
+    object-fit: cover;
+    border-radius: 7%;
+}
+
+.title{
+    font-size: 1.8rem;
+    font-weight: 600;
+    padding-bottom: 1%;
+    padding-left: 2.5%;
+}
+
+.overview, .genres, .first_air_date, .sbPopularity, .number_of_seasons, .number_of_episodes, .episode_number, .sbVote_count{
+    font-size: 1rem;
+    padding-bottom: 2%;
+    padding-left: 5%;
+}
+
+.statisticBoxContainer{
+    display: flex;
+    margin-bottom: 2%;
+    margin-left: 5%;
+    column-gap: 20px;
+}
+
+.statisticBox{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 20px;
+    padding: 5px;
+    border-radius: 10%;
+    border: 1px solid;
+    max-width: fit-content;
+    width: 100%;
+    height: fit-content;
+    background-color: #f59300;
+    color: #fff
+}
+
+.sBvote_average{
+    font-size: 25px;
+    padding: 8px;
+    border-radius: 20%;
+    border: 1px solid;
+    max-width: fit-content;
+    width: 100%;
+    height: fit-content;
+    background-color: rgb(3, 179, 3);
+    color: #fff
+}
+
+.statisticBoxTitle{
+    font-size: 0.6rem;
+    font-weight: 600;
+}
+
+.sbPopularity{
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.sbVote_count{
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.overview{
+    max-width: 700px;
+}
