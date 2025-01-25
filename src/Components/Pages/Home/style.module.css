@@ -109,6 +109,7 @@
     .img {
         width: 14vw;
         height: auto;
+        min-height: 300px;
         object-fit: cover;
         border-radius: 12px;
         transition: transform 0.3s ease-in-out;
