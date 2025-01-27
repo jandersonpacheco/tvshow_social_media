@@ -1,7 +1,9 @@
+import Pagination from "./Pagination"
 import styles from "./style.module.css"
 import axios from "axios"
 import { useEffect, useState } from 'react'
 import { Link } from "react-router-dom"
+import TvShowCard from "./TvShowCard"
 
 const Home = () => {
     const [tvShowsTrending, setTvShowsTrending] = useState([])
@@ -104,23 +106,18 @@ const Home = () => {
                         {/* Trending Shows */}
                         <div className={styles.mainContent}>
                             <h1 className={styles.mainTitleContent}>Mais Vistas da Semana:</h1>
-                            <div className={styles.pageContainer}>
-                                <div className={styles.pageTitleContainer}>
-                                    <h3 className={styles.pageTitle}>Página: {pageTrending}</h3>
-                                </div>
-                                <div className={styles.pageBtnContainer}>
-                                    <button className={styles.pageBtn} type="text" value={pageTrending} onClick={prevPageTrending}>{'<'}</button>
-                                    <button className={styles.pageBtn} type="text" value={pageTrending} onClick={nextPageTrending}>{'>'}</button>
-                                </div>
-                            </div>
+                            <Pagination
+                                page ={pageTrending}
+                                nextPage={nextPageTrending}
+                                prevPage={prevPageTrending}
+                            />
                         </div>
                         <div className={styles.tvShowCategory}>
                             {tvShowsTrending.slice(0, 6).map((trending) => (
                                 <Link to={`/home/${trending.id}`} className={styles.tvShowContainer} key={trending.id}>
-                                    {trending.poster_path && (
-                                        <img className={styles.img} src={`https://image.tmdb.org/t/p/w500${trending.poster_path}`}/>
-                                    )}
-                                    <h2 className={styles.title}>{trending.name}</h2>
+                                    <TvShowCard 
+                                        show={trending}
+                                    />
                                 </Link>
                             ))}
                         </div>
@@ -128,25 +125,18 @@ const Home = () => {
                         {/* Popular Shows */}
                         <div className={styles.mainContent}>
                             <h2 className={styles.mainTitleContent}>Populares:</h2>
-                            <div className={styles.pageContainer}>
-                                <div className={styles.pageTitleContainer}>
-                                    <h3 className={styles.pageTitle}>Página: {pagePopular}</h3>
-                                 </div>
-                                <div className={styles.pageBtnContainer}>
-                                    <button className={styles.pageBtn} type="text" value={pagePopular} onClick={prevPagePopular}>{'<'}</button>
-                                    <button className={styles.pageBtn} type="text" value={pagePopular} onClick={nextPagePopular}>{'>'}</button>
-                                </div>
-                            </div>
+                            <Pagination
+                                page ={pagePopular}
+                                nextPage={nextPagePopular}
+                                prevPage={prevPagePopular}
+                            />
                         </div>
                         <div className={styles.tvShowCategory}>
                             {tvShowPopular.slice(0, 6).map((popular) => (
                                 <Link to={`/home/${popular.id}`} className={styles.tvShowContainer} key={popular.id}>
-                                    <div className={styles.tvShowContainer}>
-                                        {popular.poster_path && (
-                                            <img className={styles.img} src={`https://image.tmdb.org/t/p/w500${popular.poster_path}`}/>
-                                        )}
-                                        <h2 className={styles.title}>{popular.name}</h2>
-                                    </div>
+                                    <TvShowCard 
+                                        show={popular}
+                                    />
                                 </Link>
                             ))}
                         </div>
@@ -154,25 +144,18 @@ const Home = () => {
                         {/* Rating Shows */}
                         <div className={styles.mainContent}>
                             <h2 className={styles.mainTitleContent}>Melhores avaliadas:</h2>
-                            <div className={styles.pageContainer}>
-                                <div className={styles.pageTitleContainer}>
-                                    <h3 className={styles.pageTitle}>Página: {pagePopular}</h3>
-                                </div>
-                            <div className={styles.pageBtnContainer}>
-                                <button className={styles.pageBtn} type="text" value={pageRating} onClick={prevPageRating}>{'<'}</button>
-                                <button className={styles.pageBtn} type="text" value={pageRating} onClick={nextPageRating}>{'>'}</button>
-                            </div>
-                            </div>
+                            <Pagination
+                                page ={pageRating}
+                                nextPage={nextPageRating}
+                                prevPage={prevPageRating}
+                            />
                         </div>
                         <div className={styles.tvShowCategory}>
                             {tvShowRating.slice(0, 6).map((rating) => (
                                 <Link to={`/home/${rating.id}`} className={styles.tvShowContainer} key={rating.id}>
-                                    <div className={styles.tvShowContainer}>
-                                        {rating.poster_path && (
-                                        <img className={styles.img} src={`https://image.tmdb.org/t/p/w500${rating.poster_path}`}/>
-                            )}
-                                        <h2 className={styles.title}>{rating.name}</h2>
-                                    </div>
+                                    <TvShowCard 
+                                        show={rating}
+                                    />
                                 </Link>
                             ))}
                         </div>
@@ -185,12 +168,9 @@ const Home = () => {
                         <div className={styles.tvShowCategory}>
                             {tvShowsTrending.map((searchShow) => (
                                 <Link to={`/home/${searchShow.id}`} key={searchShow.id}>
-                                    <div className={styles.tvShowContainer}>
-                                        {searchShow.poster_path && (
-                                            <img className={styles.img} src={`https://image.tmdb.org/t/p/w500${searchShow.poster_path}`} />
-                                        )}
-                                        <h2 className={styles.title}>{searchShow.name}</h2>
-                                    </div>
+                                    <TvShowCard 
+                                        show={searchShow}
+                                    />
                                 </Link>
                             ))}
                         </div>
