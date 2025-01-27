@@ -15,7 +15,7 @@
     .nav {
         text-align: center;
         padding: 20px;
-        background-color: #f8f4e1;
+        background-color: #FFF8E8;
         border-bottom: 3px solid #f59300;
     }
 
@@ -64,25 +64,22 @@
         align-content: center;
         gap: 30px;
         padding-top: 5vh;
-        background-color: #f8f4e1;
+        background-color: #FFF8E8;
     }
 
-    .mainContent {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-    }
-
-    .mainTitleContainer{
+    .mainContent{
         display: flex;  
         flex-direction: row;
+        justify-content: space-between;
+        align-items: baseline
     }
 
     .mainTitleContent{
         font-size: 1.3rem;
         font-weight: bold;
         color: #333;
-        padding: 0.5vw 0 0 1.5vw;
+        padding: 0 0 0 1.5vw;
+        
     }
 
     .tvShowCategory {
@@ -91,7 +88,7 @@
         justify-content: flex-start;
         flex-wrap: wrap;
         gap: 20px;
-        padding: 0.5vw 0 0 1.5vw;
+        padding: 0.5vw 0 2vw 1.5vw;
     }
 
     .tvShowContainer{

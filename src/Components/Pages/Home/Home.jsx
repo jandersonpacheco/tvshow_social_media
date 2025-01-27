@@ -102,16 +102,16 @@ const Home = () => {
                 {search === "" ? (
                     <>
                         {/* Trending Shows */}
-                        <div className={styles.mainTitleContainer}>
+                        <div className={styles.mainContent}>
                             <h1 className={styles.mainTitleContent}>Mais Vistas da Semana:</h1>
-                        </div>
-                        <div className={styles.pageContainer}>
-                            <div className={styles.pageTitleContainer}>
-                                <h3 className={styles.pageTitle}>Página: {pageTrending}</h3>
-                            </div>
-                            <div className={styles.pageBtnContainer}>
-                                <button className={styles.pageBtn} type="text" value={pageTrending} onClick={prevPageTrending}>{'<'}</button>
-                                <button className={styles.pageBtn} type="text" value={pageTrending} onClick={nextPageTrending}>{'>'}</button>
+                            <div className={styles.pageContainer}>
+                                <div className={styles.pageTitleContainer}>
+                                    <h3 className={styles.pageTitle}>Página: {pageTrending}</h3>
+                                </div>
+                                <div className={styles.pageBtnContainer}>
+                                    <button className={styles.pageBtn} type="text" value={pageTrending} onClick={prevPageTrending}>{'<'}</button>
+                                    <button className={styles.pageBtn} type="text" value={pageTrending} onClick={nextPageTrending}>{'>'}</button>
+                                </div>
                             </div>
                         </div>
                         <div className={styles.tvShowCategory}>
@@ -126,16 +126,16 @@ const Home = () => {
                         </div>
                         
                         {/* Popular Shows */}
-                        <div className={styles.mainTitleContainer}>
+                        <div className={styles.mainContent}>
                             <h2 className={styles.mainTitleContent}>Populares:</h2>
-                        </div>
-                        <div className={styles.pageContainer}>
                             <div className={styles.pageContainer}>
-                                <h3 className={styles.pageTitle}>Página: {pagePopular}</h3>
-                            </div>
-                            <div className={styles.pageBtnContainer}>
-                                <button className={styles.pageBtn} type="text" value={pagePopular} onClick={prevPagePopular}>{'<'}</button>
-                                <button className={styles.pageBtn} type="text" value={pagePopular} onClick={nextPagePopular}>{'>'}</button>
+                                <div className={styles.pageTitleContainer}>
+                                    <h3 className={styles.pageTitle}>Página: {pagePopular}</h3>
+                                 </div>
+                                <div className={styles.pageBtnContainer}>
+                                    <button className={styles.pageBtn} type="text" value={pagePopular} onClick={prevPagePopular}>{'<'}</button>
+                                    <button className={styles.pageBtn} type="text" value={pagePopular} onClick={nextPagePopular}>{'>'}</button>
+                                </div>
                             </div>
                         </div>
                         <div className={styles.tvShowCategory}>
@@ -152,13 +152,17 @@ const Home = () => {
                         </div>
 
                         {/* Rating Shows */}
-                        <div className={styles.mainTitleContainer}>
+                        <div className={styles.mainContent}>
                             <h2 className={styles.mainTitleContent}>Melhores avaliadas:</h2>
-                        </div>
-                        <div className={styles.pageContainer}>
-                        <h3 className={styles.pageTitle}>Página: {pageRating}</h3>
-                            <button className={styles.pageBtn} type="text" value={pageRating} onClick={prevPageRating}>{'<'}</button>
-                            <button className={styles.pageBtn} type="text" value={pageRating} onClick={nextPageRating}>{'>'}</button>
+                            <div className={styles.pageContainer}>
+                                <div className={styles.pageTitleContainer}>
+                                    <h3 className={styles.pageTitle}>Página: {pagePopular}</h3>
+                                </div>
+                            <div className={styles.pageBtnContainer}>
+                                <button className={styles.pageBtn} type="text" value={pageRating} onClick={prevPageRating}>{'<'}</button>
+                                <button className={styles.pageBtn} type="text" value={pageRating} onClick={nextPageRating}>{'>'}</button>
+                            </div>
+                            </div>
                         </div>
                         <div className={styles.tvShowCategory}>
                             {tvShowRating.slice(0, 6).map((rating) => (
