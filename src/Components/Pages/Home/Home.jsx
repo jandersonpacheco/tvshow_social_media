@@ -10,7 +10,9 @@ const Home = () => {
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
     const [search, setSearch] = useState('')
-    const [page, setPage] = useState([1, 1, 1])
+    const [pageTrending, setPageTrending] = useState(1)
+    const [pagePopular, setPagePopular] = useState(1)
+    const [pageRating, setPageRating] = useState(1)
 
     const headers = {
         'Content-Type': 'application/json',
@@ -19,7 +21,7 @@ const Home = () => {
 
     useEffect(()=>{
         //Trending
-        axios.get(`https://api.themoviedb.org/3/trending/tv/week?language=pt-BR&page=${page}`, {headers})
+        axios.get(`https://api.themoviedb.org/3/trending/tv/week?language=pt-BR&page=${pageTrending}`, {headers})
             .then((response)=>{
                 setTvShowsTrending(response.data.results)
                 console.log(response.data.results)
@@ -31,7 +33,7 @@ const Home = () => {
             })
 
         //Popular
-        axios.get(`https://api.themoviedb.org/3/discover/tv?include_adult=false&language=pt-br&page=1&sort_by=vote_count.desc`, {headers})
+        axios.get(`https://api.themoviedb.org/3/discover/tv?include_adult=false&language=pt-br&page=${pagePopular}&sort_by=vote_count.desc`, {headers})
         .then((response)=>{
             setTvShowPopular(response.data.results)
             console.log(response.data.results)
@@ -43,7 +45,7 @@ const Home = () => {
         })
 
             //Rating
-            axios.get(`https://api.themoviedb.org/3/tv/top_rated?language=pt-br&page=1`, {headers})
+            axios.get(`https://api.themoviedb.org/3/tv/top_rated?language=pt-br&page=${pageRating}`, {headers})
             .then((response)=>{
                 setTvShowRating(response.data.results)
                 console.clear()
@@ -54,7 +56,7 @@ const Home = () => {
                 setError('Erro ao carregar os dados!')
                 setLoading(false)
             })
-    },[page])
+    },[pageTrending, pagePopular, pageRating])
     
     function handleSearch(event){
         event.preventDefault()
@@ -71,28 +73,14 @@ const Home = () => {
         })
     }
 
-    function firstPage(){        
-        setPage(1)
-    }
+    const nextPageTrending = () => setPageTrending(pageTrending + 1);
+    const prevPageTrending = () => setPageTrending(Math.max(pageTrending - 1, 1))
 
-    function previousPage(){
-        if(page <= 1)
-            return
-        
-        setPage(page - 1)
-        console.log(page)
-    }
+    const nextPagePopular = () => setPagePopular(pagePopular + 1);
+    const prevPagePopular = () => setPagePopular(Math.max(pagePopular - 1, 1))
 
-    function nextPage(index){
-        setPage((prevPage) => {
-            const newPage = [...prevPage]
-            newPage[index] += 1
-        })
-    }
-
-    function lastPage(){        
-        setPage(500)
-    }
+    const nextPageRating = () => setPageRating(pageRating + 1);
+  const prevPageRating = () => setPageRating(Math.max(pageRating - 1, 1))
 
     if(loading){
         return <h3 className={styles.loading}>Carregando...</h3>
@@ -118,11 +106,9 @@ const Home = () => {
                             <h1 className={styles.mainTitleContent}>Mais Vistas da Semana:</h1>
                         </div>
                         <div className={styles.pagesContainter}>
-                            <h3>Página: {page[0]}</h3>
-                            <button type="text" onClick={() => firstPage(0)}>{'<<'}</button>
-                            <button type="text" onClick={() => previousPage(0)}>{'<'}</button>
-                            <button type="text" onClick={() => nextPage(0)}>{'>'}</button>
-                            <button type="text" onClick={() => lastPage(0)}>{'>>'}</button>
+                            <h3>Página: {pageTrending}</h3>
+                            <button type="text" value={pageTrending} onClick={prevPageTrending}>{'<'}</button>
+                            <button type="text" value={pageTrending} onClick={nextPageTrending}>{'>'}</button>
                         </div>
                         <div className={styles.tvShowCategory}>
                             {tvShowsTrending.slice(0, 6).map((trending) => (
@@ -140,11 +126,9 @@ const Home = () => {
                             <h2 className={styles.mainTitleContent}>Populares:</h2>
                         </div>
                         <div className={styles.pagesContainter}>
-                            <h3>Página: {page[1]}</h3>
-                            <button type="text" value={page} onClick={() => firstPage(1)}>{'<<'}</button>
-                            <button type="text" value={page} onClick={() => previousPage(1)}>{'<'}</button>
-                            <button type="text" value={page} onClick={() => nextPage(1)}>{'>'}</button>
-                            <button type="text" value={page} onClick={() => lastPage(1)}>{'>>'}</button>
+                            <h3>Página: {pagePopular}</h3>
+                            <button type="text" value={pagePopular} onClick={prevPagePopular}>{'<'}</button>
+                            <button type="text" value={pagePopular} onClick={nextPagePopular}>{'>'}</button>
                         </div>
                         <div className={styles.tvShowCategory}>
                             {tvShowPopular.slice(0, 6).map((popular) => (
@@ -164,11 +148,9 @@ const Home = () => {
                             <h2 className={styles.mainTitleContent}>Melhores avaliadas:</h2>
                         </div>
                         <div className={styles.pagesContainter}>
-                            <h3>Página: {page[2]}</h3>
-                            <button type="text" value={page} onClick={() => firstPage(2)}>{'<<'}</button>
-                            <button type="text" value={page} onClick={() => previousPage(2)}>{'<'}</button>
-                            <button type="text" value={page} onClick={() => nextPage(2)}>{'>'}</button>
-                            <button type="text" value={page} onClick={() => lastPage(2)}>{'>>'}</button>
+                        <h3>Página: {pageRating}</h3>
+                            <button type="text" value={pageRating} onClick={prevPageRating}>{'<'}</button>
+                            <button type="text" value={pageRating} onClick={nextPageRating}>{'>'}</button>
                         </div>
                         <div className={styles.tvShowCategory}>
                             {tvShowRating.slice(0, 6).map((rating) => (
