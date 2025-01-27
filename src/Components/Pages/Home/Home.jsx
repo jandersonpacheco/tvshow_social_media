@@ -10,6 +10,7 @@ const Home = () => {
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
     const [search, setSearch] = useState('')
+    const [page, setPage] = useState([1, 1, 1])
 
     const headers = {
         'Content-Type': 'application/json',
@@ -18,7 +19,7 @@ const Home = () => {
 
     useEffect(()=>{
         //Trending
-        axios.get(`https://api.themoviedb.org/3/trending/tv/week?language=pt-BR&page=1`, {headers})
+        axios.get(`https://api.themoviedb.org/3/trending/tv/week?language=pt-BR&page=${page}`, {headers})
             .then((response)=>{
                 setTvShowsTrending(response.data.results)
                 console.log(response.data.results)
@@ -30,7 +31,7 @@ const Home = () => {
             })
 
         //Popular
-        axios.get(`https://api.themoviedb.org/3/tv/popular?language=pt-br&page=1`, {headers})
+        axios.get(`https://api.themoviedb.org/3/discover/tv?include_adult=false&language=pt-br&page=1&sort_by=vote_count.desc`, {headers})
         .then((response)=>{
             setTvShowPopular(response.data.results)
             console.log(response.data.results)
@@ -53,7 +54,7 @@ const Home = () => {
                 setError('Erro ao carregar os dados!')
                 setLoading(false)
             })
-    },[])
+    },[page])
     
     function handleSearch(event){
         event.preventDefault()
@@ -68,6 +69,29 @@ const Home = () => {
             setError('Erro ao carregar os dados!')
             setLoading(false)
         })
+    }
+
+    function firstPage(){        
+        setPage(1)
+    }
+
+    function previousPage(){
+        if(page <= 1)
+            return
+        
+        setPage(page - 1)
+        console.log(page)
+    }
+
+    function nextPage(index){
+        setPage((prevPage) => {
+            const newPage = [...prevPage]
+            newPage[index] += 1
+        })
+    }
+
+    function lastPage(){        
+        setPage(500)
     }
 
     if(loading){
@@ -93,6 +117,13 @@ const Home = () => {
                         <div className={styles.mainTitleContainer}>
                             <h1 className={styles.mainTitleContent}>Mais Vistas da Semana:</h1>
                         </div>
+                        <div className={styles.pagesContainter}>
+                            <h3>Página: {page[0]}</h3>
+                            <button type="text" onClick={() => firstPage(0)}>{'<<'}</button>
+                            <button type="text" onClick={() => previousPage(0)}>{'<'}</button>
+                            <button type="text" onClick={() => nextPage(0)}>{'>'}</button>
+                            <button type="text" onClick={() => lastPage(0)}>{'>>'}</button>
+                        </div>
                         <div className={styles.tvShowCategory}>
                             {tvShowsTrending.slice(0, 6).map((trending) => (
                                 <Link to={`/home/${trending.id}`} className={styles.tvShowContainer} key={trending.id}>
@@ -100,13 +131,20 @@ const Home = () => {
                                         <img className={styles.img} src={`https://image.tmdb.org/t/p/w500${trending.poster_path}`}/>
                                     )}
                                     <h2 className={styles.title}>{trending.name}</h2>
-                            </Link>
+                                </Link>
                             ))}
                         </div>
                         
                         {/* Popular Shows */}
                         <div className={styles.mainTitleContainer}>
-                            <h2 className={styles.mainTitleContent}>Popular:</h2>
+                            <h2 className={styles.mainTitleContent}>Populares:</h2>
+                        </div>
+                        <div className={styles.pagesContainter}>
+                            <h3>Página: {page[1]}</h3>
+                            <button type="text" value={page} onClick={() => firstPage(1)}>{'<<'}</button>
+                            <button type="text" value={page} onClick={() => previousPage(1)}>{'<'}</button>
+                            <button type="text" value={page} onClick={() => nextPage(1)}>{'>'}</button>
+                            <button type="text" value={page} onClick={() => lastPage(1)}>{'>>'}</button>
                         </div>
                         <div className={styles.tvShowCategory}>
                             {tvShowPopular.slice(0, 6).map((popular) => (
@@ -125,6 +163,13 @@ const Home = () => {
                         <div className={styles.mainTitleContainer}>
                             <h2 className={styles.mainTitleContent}>Melhores avaliadas:</h2>
                         </div>
+                        <div className={styles.pagesContainter}>
+                            <h3>Página: {page[2]}</h3>
+                            <button type="text" value={page} onClick={() => firstPage(2)}>{'<<'}</button>
+                            <button type="text" value={page} onClick={() => previousPage(2)}>{'<'}</button>
+                            <button type="text" value={page} onClick={() => nextPage(2)}>{'>'}</button>
+                            <button type="text" value={page} onClick={() => lastPage(2)}>{'>>'}</button>
+                        </div>
                         <div className={styles.tvShowCategory}>
                             {tvShowRating.slice(0, 6).map((rating) => (
                                 <Link to={`/home/${rating.id}`} className={styles.tvShowContainer} key={rating.id}>
@@ -141,7 +186,7 @@ const Home = () => {
                 ) : (
                     <>
                         <div className={styles.mainTitleContainer}>
-                            <h2 className={styles.mainTitleContent}>Resultados de {search}:</h2>
+                            <h2 className={styles.mainTitleContent}>Resultados por: {search}</h2>
                         </div>
                         <div className={styles.tvShowCategory}>
                             {tvShowsTrending.map((searchShow) => (
