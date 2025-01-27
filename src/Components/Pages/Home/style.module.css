@@ -128,3 +128,37 @@
         width: 200px;
         max-width: 100%;
     }
+
+    .pageContainer{
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+        column-gap: 1vh;
+    }
+
+    .pageTitle{
+        font-size: 18px;
+        font-weight: 500;
+    }
+
+    .pageBtnContainer{
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        column-gap: 0.5vh;
+    }
+
+    .pageBtn{
+        padding: 10px 15px;
+        font-size: 1rem;
+        background-color: #f59300;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .pageBtn:hover {
+        background-color: #b45802;
+    }
