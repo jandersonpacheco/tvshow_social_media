@@ -1,6 +1,6 @@
 import styles from "./style.module.css"
 
-const TvShowDetails = ({show, showVideo}) => {
+const TvShowDetails = ({show, showVideo, tvShowBackdrop}) => {
     const trailer = showVideo.results?.find(video => video.type ==="Trailer")
     return (
         <div className={styles.showDetails}>
@@ -51,7 +51,16 @@ const TvShowDetails = ({show, showVideo}) => {
                         <p>Nenhum trailer disponível.</p>
                     )}
                 </div>
+                <div className={styles.showVideo}>
+                {tvShowBackdrop.backdrops && (
+                    <img
+                        src={`https://image.tmdb.org/t/p/original/${tvShowBackdrop.backdrops[0].file_path}`}
+                        className={styles.img}
+                    />
+                )}
+                </div>
         </div>
+        
     )    
 }
 

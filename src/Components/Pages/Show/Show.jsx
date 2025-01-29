@@ -8,6 +8,7 @@ import Header from "../Header/Header.jsx"
 const Show = () => {
     const [tvShowsTmdb, setTvShowsTmdb] = useState(null)
     const [tvShowsVideo, setTvShowsVideo] = useState(null)
+    const [tvShowsBackdrop, setTvShowsBackdrop] = useState(null)
     const [error, setError] = useState(null)
     const [loading, setLoading] = useState(true)
     const {id} = useParams()
@@ -41,6 +42,17 @@ const Show = () => {
             setError('Erro ao carregar os videos!')
             setLoading(false)
         })
+        axios.get(`https://api.themoviedb.org/3/tv/${id}/images?include_image`, {headers})
+        .then((response)=>{
+            setTvShowsBackdrop(response.data)
+            console.clear()
+            console.log(response.data)
+            setLoading(false)
+        })
+        .catch((error)=>{
+            setError('Erro ao carregar os videos!')
+            setLoading(false)
+        })
     },[id])
     
 
@@ -61,6 +73,7 @@ const Show = () => {
                 <TvShowDetails
                 show={tvShowsTmdb}
                 showVideo={tvShowsVideo}
+                tvShowBackdrop={tvShowsBackdrop}
                 />
             </div>
         ) : (
