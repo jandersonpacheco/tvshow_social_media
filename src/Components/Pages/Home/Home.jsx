@@ -4,6 +4,7 @@ import axios from "axios"
 import { useEffect, useState } from 'react'
 import { Link } from "react-router-dom"
 import TvShowCard from "./TvShowCard"
+import Header from "../Header/Header"
 
 const Home = () => {
     const [tvShowsTrending, setTvShowsTrending] = useState([])
@@ -61,13 +62,13 @@ const Home = () => {
     },[pageTrending, pagePopular, pageRating])
     
     function handleSearch(event){
-        event.preventDefault()
 
         setSearch(event.target.value)
         axios.get(`https://api.themoviedb.org/3/search/tv?query=${search}&include_adult=false&language=pt-BR&page=1`, {headers})
         .then((response)=>{
             setTvShowsTrending(response.data.results)
             setLoading(false)
+            console.log(search)
         })
         .catch((error)=>{
             setError('Erro ao carregar os dados!')
@@ -94,12 +95,7 @@ const Home = () => {
 
     return (
     <div className={styles.header}>
-        <nav className={styles.nav}>
-        <form className={styles.selectForm}>
-            <input type="text" id="search" placeholder="Procure por uma série" value={search} onChange={handleSearch}></input>
-            <button id="searchBtn" disabled>Pesquisar</button>
-        </form>
-        </nav>
+        <Header onSearch={handleSearch} search={search}/>
         <div className={styles.mainContainer}>
                 {search === "" ? (
                     <>

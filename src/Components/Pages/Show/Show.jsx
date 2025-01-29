@@ -3,9 +3,11 @@ import styles from "./style.module.css"
 import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 import axios from "axios"
+import Header from "../Header/Header.jsx"
 
 const Show = () => {
     const [tvShowsTmdb, setTvShowsTmdb] = useState(null)
+    const [tvShowsVideo, setTvShowsVideo] = useState(null)
     const [error, setError] = useState(null)
     const [loading, setLoading] = useState(true)
     const {id} = useParams()
@@ -28,7 +30,19 @@ const Show = () => {
             setError('Erro ao carregar os dados!')
             setLoading(false)
         })
+        axios.get(`https://api.themoviedb.org/3/tv/${id}/videos?language=pt-br`, {headers})
+        .then((response)=>{
+            setTvShowsVideo(response.data)
+            console.clear()
+            console.log(response.data)
+            setLoading(false)
+        })
+        .catch((error)=>{
+            setError('Erro ao carregar os videos!')
+            setLoading(false)
+        })
     },[id])
+    
 
     if(loading){
         return <h3 className={styles.loading}>Carregando...</h3>
@@ -41,10 +55,12 @@ const Show = () => {
     
     return (
         <>
-        {tvShowsTmdb ? (
+        <Header />
+        {tvShowsTmdb && tvShowsVideo ? (
             <div>
                 <TvShowDetails
                 show={tvShowsTmdb}
+                showVideo={tvShowsVideo}
                 />
             </div>
         ) : (
