@@ -38,18 +38,25 @@ const Header = () => {
                     <button id="searchBtn" disabled>Pesquisar</button>
                 </form>
             </nav>
-            <div className={styles.mainTitleContainer}>
-                <h2 className={styles.mainTitleContent}>Resultados por: {search}</h2>
-            </div>
-            <div className={styles.tvShowCategory}>
-                {data.map((searchShow) => (
-                    <Link to={`/home/${searchShow.id}`} key={searchShow.id}>
-                        <TvShowCard 
-                            show={searchShow}
-                        />
-                    </Link>
-                ))}
-            </div>
+            {search !== "" ? (
+                <>
+                    <div className={styles.mainTitleContainer}>
+                        <h2 className={styles.mainTitleContent}>Resultados por: {search}</h2>
+                    </div>
+                    <div className={styles.tvShowCategory}>
+                        {data.map((searchShow) => (
+                            <Link to={`/home/${searchShow.id}`} key={searchShow.id}>
+                                <TvShowCard 
+                                    show={searchShow}
+                                />
+                            </Link>
+                        ))}
+                    </div>
+                </>
+                ) : (
+                    <></>
+                )}
+                
         </>
     )
 }

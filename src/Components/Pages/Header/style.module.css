@@ -14,7 +14,7 @@
 
     .nav {
         text-align: center;
-        padding: 20px;
+        padding: 50px;
         background-color: #FFF8E8;
         border-bottom: 3px solid #f59300;
     }
@@ -24,7 +24,7 @@
         font-size: 5vw;
         color: #2f4f4f;
         margin: 0;
-        padding: 10px;
+        padding: 20px;
     }
 
     .nav form {
@@ -78,7 +78,7 @@
         font-size: 1.3rem;
         font-weight: bold;
         color: #333;
-        padding: 0 0 0 1.5vw;
+        padding: 1.5vw 1.5vw 1.5vw;
         
     }
 
