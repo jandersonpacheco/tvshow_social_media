@@ -55,7 +55,7 @@ const TvShowDetails = ({show, showVideo, tvShowBackdrop}) => {
                 {tvShowBackdrop.backdrops && (
                     <img
                         src={`https://image.tmdb.org/t/p/original/${tvShowBackdrop.backdrops[0].file_path}`}
-                        className={styles.img}
+                        className={styles.backdrops}
                     />
                 )}
                 </div>
