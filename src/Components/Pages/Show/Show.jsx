@@ -3,7 +3,6 @@ import styles from "./style.module.css"
 import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 import axios from "axios"
-import Header from "../Header/Header.jsx"
 
 const Show = () => {
     const [tvShowsTmdb, setTvShowsTmdb] = useState(null)
@@ -67,7 +66,6 @@ const Show = () => {
     
     return (
         <>
-        <Header />
         {tvShowsTmdb && tvShowsVideo ? (
             <div>
                 <TvShowDetails
