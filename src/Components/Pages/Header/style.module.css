@@ -13,8 +13,10 @@
     }
 
     .nav {
+        display: flex;
+        justify-content: center;
         text-align: center;
-        padding: 50px;
+        padding: 10px;
         background-color: #FFF8E8;
         border-bottom: 3px solid #f59300;
     }
@@ -32,7 +34,6 @@
         flex-direction: row;
         justify-content: center;
         gap: 10px;
-        margin-top: 20px;
     }
 
     .nav input{
