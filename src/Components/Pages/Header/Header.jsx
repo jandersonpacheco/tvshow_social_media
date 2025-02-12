@@ -5,7 +5,7 @@ import useTvShowStore from "../../../store/tvShowStore.js"
 const Header = () => {
     const {search, setSearch} = useTvShowStore()
 
-    function handleSearch(){
+    function handleSearch(event){
         setSearch(event.target.value)
     }
 

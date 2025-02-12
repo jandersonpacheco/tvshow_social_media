@@ -4,8 +4,10 @@ import axios from "axios"
 import { useEffect, useState } from 'react'
 import { Link } from "react-router-dom"
 import TvShowCard from "./TvShowCard"
+import useTvShowStore from "../../../store/tvShowStore.js"
 
-const Home = ({search, onSearch}) => {
+const Home = () => {
+    const {search} = useTvShowStore()
     const [tvShowsTrending, setTvShowsTrending] = useState([])
     const [tvShowPopular, setTvShowPopular] = useState([])
     const [tvShowRating, setTvShowRating] = useState([])
@@ -92,7 +94,7 @@ const Home = ({search, onSearch}) => {
     return (
         <div className={styles.header}>
             <div className={styles.mainContainer}>
-                {search !== '' ? (
+                {search === '' ? (
                     <>
                         {/* Trending Shows */}
                         <div className={styles.mainContent}>
