@@ -1,6 +1,6 @@
-    import styles from "./style.module.css"
+    import styles from "./show.module.css"
 
-    const TvShowDetails = ({show, showVideo, tvShowBackdrop}) => {
+    const TvShowDetails = ({show, showVideo, tvShowBackdrop, vote_average}) => {
         const trailer = showVideo.results?.find(video => video.type ==="Trailer")
         const backdropUrl = tvShowBackdrop?.backdrops?.[0]?.file_path
         const backdropImageUrl = backdropUrl ? `https://image.tmdb.org/t/p/original/${backdropUrl}` : null
@@ -22,7 +22,7 @@
                             <h1 className={styles.title}>{show.name}</h1>
                         </div>
                     <div className={styles.statisticBoxContainer}>
-                        <p className={styles.sBvote_average}>{show.vote_average}</p>
+                        <p className={styles.sBvote_average}>{show.vote_average.toFixed(1)}</p>
                         <div className={styles.statisticBox}>
                             <p className={styles.statisticBoxTitle}>Popularidade</p>
                             <p className={styles.sbPopularity}>{show.popularity}</p>
@@ -34,7 +34,7 @@
                         </div>
                             <p className={styles.overview}>{show.overview}</p>
                             <p className={styles.genres}>Gênero: {show.genres.map(genre => genre.name).join(', ')}</p>
-                            <p className={styles.first_air_date}>Lançamento: {show.first_air_date}</p>
+                            <p className={styles.first_air_date}>Lançamento: {show.first_air_date.split('-').reverse().join('/')}</p>
                             <p className={styles.number_of_seasons}>Temporadas: {show.number_of_seasons}</p>
                             <p className={styles.number_of_episodes}>Episódios Programados: {show.number_of_episodes}</p>
                             {show.last_episode_to_air && show.last_episode_to_air.episode_number &&(

@@ -1,6 +1,6 @@
 import TvShowDetails from "./TvShowDetails.jsx"
 import TvShowCard from "../Home/TvShowCard.jsx"
-import styles from "./style.module.css"
+import styles from "./show.module.css"
 import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
@@ -48,8 +48,6 @@ const Show = () => {
         axios.get(`https://api.themoviedb.org/3/tv/${id}?language=pt-br`, {headers})
         .then((response)=>{
             setTvShowsTmdb(response.data)
-            console.clear()
-            console.log(response.data)
             setLoading(false)
         })
         .catch((error)=>{
@@ -59,7 +57,6 @@ const Show = () => {
         axios.get(`https://api.themoviedb.org/3/tv/${id}/videos?language=pt-br`, {headers})
         .then((response)=>{
             setTvShowsVideo(response.data)
-            console.clear()
             console.log(response.data)
             setLoading(false)
         })
@@ -70,7 +67,7 @@ const Show = () => {
         axios.get(`https://api.themoviedb.org/3/tv/${id}/images?include_image`, {headers})
         .then((response)=>{
             setTvShowsBackdrop(response.data)
-            console.clear()
+ 
             console.log(response.data)
             setLoading(false)
         })
@@ -88,7 +85,6 @@ const Show = () => {
     if(error){
         return <h3>{error}</h3>
     }
-    
     
     return (
         <>
