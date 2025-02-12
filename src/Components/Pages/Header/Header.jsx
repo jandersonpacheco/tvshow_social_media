@@ -1,9 +1,16 @@
 import styles from "./style.module.css"
 import { useState } from "react"
+import { Link } from "react-router-dom"
+import TvShowCard from "../Home/TvShowCard"
+import useTvShowStore from "../../../store/tvShowStore.js"
 
 
-const Header = ({search, onSearch}) => {
-    const [localSearch, setLocalSearch] = useState(search)
+const Header = () => {
+    const {search, setSearch} = useTvShowStore()
+    const [data, setData] = useState([])
+    const [loading, setLoading] = useState(true)
+    const [error, setError] = useState(null)
+
 
     const headers = {
         'Content-Type': 'application/json',
