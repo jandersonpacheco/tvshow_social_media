@@ -4,7 +4,6 @@ import axios from "axios"
 import { useEffect, useState } from 'react'
 import { Link } from "react-router-dom"
 import TvShowCard from "./TvShowCard"
-import Header from "../Header/Header"
 
 const Home = ({search, onSearch}) => {
     const [tvShowsTrending, setTvShowsTrending] = useState([])
