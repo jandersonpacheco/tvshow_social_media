@@ -12,51 +12,6 @@
         font-weight: 400;
     }
 
-    .nav {
-        text-align: center;
-        padding: 20px;
-        background-color: #FFF8E8;
-        border-bottom: 3px solid #f59300;
-    }
-
-    .nav h1 {
-        font-family: 'Roboto Slab', system-ui, sans-serif;
-        font-size: 5vw;
-        color: #2f4f4f;
-        margin: 0;
-        padding: 10px;
-    }
-
-    .nav form {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        gap: 10px;
-        margin-top: 20px;
-    }
-
-    .nav input{
-        padding: 10px;
-        font-size: 1rem;
-        border: 2px solid #f59300;
-        border-radius: 8px;
-        width: 25vw;
-    }
-
-    .nav button {
-        padding: 10px 15px;
-        font-size: 1rem;
-        background-color: #f59300;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-    }
-
-    .nav button:hover {
-        background-color: #b45802;
-    }
-
     .mainContainer{
         display: flex;
         flex-direction: column;
@@ -89,7 +44,7 @@
         flex-wrap: wrap;
         gap: 20px;
         padding: 0.5vw 0 2vw 1.5vw;
-        border-bottom: 3px solid #f59300;
+        border-bottom: 3px solid #b65903;
     }
 
     .tvShowContainer{
@@ -150,7 +105,7 @@
     .pageBtn{
         padding: 10px 15px;
         font-size: 1rem;
-        background-color: #f59300;
+        background-color: #b65903;
         border: none;
         border-radius: 8px;
         cursor: pointer;
@@ -158,5 +113,5 @@
     }
 
     .pageBtn:hover {
-        background-color: #b45802;
+        background-color: #e98528;
     }

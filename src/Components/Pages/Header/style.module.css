@@ -13,10 +13,12 @@
     }
 
     .nav {
+        display: flex;
+        justify-content: center;
         text-align: center;
-        padding: 20px;
-        background-color: #FFF8E8;
-        border-bottom: 3px solid #f59300;
+        padding: 10px;
+        background-color: #b65903;
+        border-bottom: 3px solid #FFF8E8;
     }
 
     .nav h1 {
@@ -24,7 +26,7 @@
         font-size: 5vw;
         color: #2f4f4f;
         margin: 0;
-        padding: 10px;
+        padding: 20px;
     }
 
     .nav form {
@@ -32,13 +34,12 @@
         flex-direction: row;
         justify-content: center;
         gap: 10px;
-        margin-top: 20px;
     }
 
     .nav input{
         padding: 10px;
         font-size: 1rem;
-        border: 2px solid #f59300;
+        border: 2px solid #FFF8E8;
         border-radius: 8px;
         width: 25vw;
     }
@@ -46,7 +47,7 @@
     .nav button {
         padding: 10px 15px;
         font-size: 1rem;
-        background-color: #f59300;
+        background-color: #FFF8E8;
         border: none;
         border-radius: 8px;
         cursor: pointer;
@@ -54,109 +55,5 @@
     }
 
     .nav button:hover {
-        background-color: #b45802;
-    }
-
-    .mainContainer{
-        display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
-        align-content: center;
-        gap: 30px;
-        padding-top: 5vh;
-        background-color: #FFF8E8;
-    }
-
-    .mainContent{
-        display: flex;  
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: baseline
-    }
-
-    .mainTitleContent{
-        font-size: 1.3rem;
-        font-weight: bold;
-        color: #333;
-        padding: 0 0 0 1.5vw;
-        
-    }
-
-    .tvShowCategory {
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
-        flex-wrap: wrap;
-        gap: 20px;
-        padding: 0.5vw 0 2vw 1.5vw;
-        border-bottom: 3px solid #f59300;
-    }
-
-    .tvShowContainer{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .tvShowContainer:hover
-
-    .tvShowImg:hover {
-        transform: scale(1.05);
-    }
-
-    .img {
-        width: 14vw;
-        height: auto;
-        min-height: 300px;
-        object-fit: cover;
-        border-radius: 12px;
-        transition: transform 0.3s ease-in-out;
-    }
-
-    .tvShowContainer:hover .img {
-        transform: scale(1.05);
-    }
-
-    .title {
-        font-size: 1rem;
-        font-weight: bold;
-        color: #333;
-        padding-top: 5px;
-        text-align: center;
-        width: 200px;
-        max-width: 100%;
-    }
-
-    .pageContainer{
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-end;
-        align-items: center;
-        column-gap: 1vh;
-    }
-
-    .pageTitle{
-        font-size: 18px;
-        font-weight: 500;
-    }
-
-    .pageBtnContainer{
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-end;
-        column-gap: 0.5vh;
-    }
-
-    .pageBtn{
-        padding: 10px 15px;
-        font-size: 1rem;
-        background-color: #f59300;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-    }
-
-    .pageBtn:hover {
-        background-color: #b45802;
+        background-color: #d1d1cb;
     }
