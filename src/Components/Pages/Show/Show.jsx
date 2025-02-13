@@ -131,9 +131,9 @@ const Show = () => {
                     </div>
                 </>
             )}
-            <button className={styles.castBtn}>Elenco</button>
+            <h1 className={styles.castBtn}>Elenco da Série</h1>
             <div className={styles.castCategory}>
-                {castInfo.map((cast) =>(
+                {castInfo.slice(0, 10).map((cast) =>(
                     <div className={styles.castConfig} key={cast.id}>
                         <Cast cast={cast}/>
                     </div>

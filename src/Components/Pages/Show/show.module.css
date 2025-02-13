@@ -132,16 +132,15 @@ body{
     display: flex;
     flex-direction: column;
     align-content: center;
-
 }
 
 .castImg{
     height: 18vh;
-    width: auto;
+    width: 13vh;
     border-radius: 7%;
 }
 
 .castName{
-    display: flex;
-    align-items: center;
+    max-width: 100%;
+    font-size: 14px;
 }
