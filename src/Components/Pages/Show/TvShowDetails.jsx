@@ -1,6 +1,6 @@
     import styles from "./show.module.css"
 
-    const TvShowDetails = ({show, showVideo, tvShowBackdrop, vote_average}) => {
+    const TvShowDetails = ({show, showVideo, tvShowBackdrop}) => {
         const trailer = showVideo.results?.find(video => video.type ==="Trailer")
         const backdropUrl = tvShowBackdrop?.backdrops?.[0]?.file_path
         const backdropImageUrl = backdropUrl ? `https://image.tmdb.org/t/p/original/${backdropUrl}` : null

@@ -118,3 +118,30 @@ body{
     height:40vh;
     border-radius: 2%;
 }
+
+.castCategory{
+    display: flex;
+    flex-direction: row;
+    column-gap: 0.5vh;
+    padding-top: 1vh;
+    align-items: baseline;
+    align-content: center;
+}
+
+.castContent, .castConfig{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+
+}
+
+.castImg{
+    height: 18vh;
+    width: auto;
+    border-radius: 7%;
+}
+
+.castName{
+    display: flex;
+    align-items: center;
+}
