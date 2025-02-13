@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import { Link } from "react-router-dom"
 import TvShowCard from "./TvShowCard"
 import Header from "../Header/Header"
+import useTvShowStore from "../../../store/tvShowStore"
 
 const Home = () => {
     const [tvShowsTrending, setTvShowsTrending] = useState([])
@@ -12,7 +13,7 @@ const Home = () => {
     const [tvShowRating, setTvShowRating] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
-    const [search, setSearch] = useState('')
+    const {search} = useTvShowStore()
     const [pageTrending, setPageTrending] = useState(1)
     const [pagePopular, setPagePopular] = useState(1)
     const [pageRating, setPageRating] = useState(1)
