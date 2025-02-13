@@ -10,16 +10,16 @@ body{
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    align-items: flex-start;
+    align-items: center;
     padding-left: 5%;
     padding-right: 5%;
     padding-top: 2%;
+    padding-bottom: 2%;
     position: relative;
     background-size: cover;
     background-position: center;
-    padding: 20px;
-    min-height: 500px;
-    color: white;
+    min-height: 100%;
+    color: #fff;
     backdrop-filter: blur(10px)
 }
 
@@ -37,13 +37,12 @@ body{
 .showImg{
     display: flex;
     justify-content: center;
-    margin-left: 10px;
+    margin-left: 1,5vh;
 }
 
 .img{
-    height: 450px;
-    width: 300px;
-    object-fit: cover;
+    height: 65vh;
+    width: 40vh;
     border-radius: 7%;
 }
 
@@ -55,7 +54,7 @@ body{
 }
 
 .overview, .genres, .first_air_date, .sbPopularity, .number_of_seasons, .number_of_episodes, .episode_number, .sbVote_count{
-    font-size: 1rem;
+    font-size: 0.9rem;
     padding-bottom: 2%;
     padding-left: 5%;
 }
@@ -64,15 +63,14 @@ body{
     display: flex;
     margin-bottom: 2%;
     margin-left: 5%;
-    column-gap: 20px;
+    column-gap: 1.5vh;
 }
 
 .statisticBox{
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-size: 20px;
-    padding: 5px;
+    padding: 0.7vh;
     border-radius: 10%;
     border: 1px solid;
     max-width: fit-content;
@@ -83,7 +81,7 @@ body{
 }
 
 .sBvote_average{
-    font-size: 25px;
+    font-size: 1.5rem;
     padding: 8px;
     border-radius: 20%;
     border: 1px solid;
@@ -100,22 +98,23 @@ body{
 }
 
 .sbPopularity{
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: 600;
 }
 
 .sbVote_count{
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: 600;
 }
 
-.overview{
-    max-width: 700px;
+.showVideo{
+    padding-left: 10vh;
+    padding-right: 10vh;
+    align-self: baseline;
 }
-
 .video{
     display: flex;
-    width:500px;
-    height:300px;
+    width:65vh;
+    height:40vh;
     border-radius: 2%;
 }

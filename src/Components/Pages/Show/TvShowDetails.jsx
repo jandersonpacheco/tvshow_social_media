@@ -40,8 +40,8 @@
                             {show.last_episode_to_air && show.last_episode_to_air.episode_number &&(
                                 <p className={styles.episode_number}>Episódios Lançados: {show.last_episode_to_air.episode_number}</p>
                             )}
-                    </div>
-                    <div className={styles.showVideo}>
+                        </div>
+                        <div className={styles.showVideo}>
                         {trailer ? (
                             <div key={trailer.id}>
                                 <h3>{trailer.name}</h3>
