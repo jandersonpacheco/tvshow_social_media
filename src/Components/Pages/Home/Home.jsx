@@ -8,21 +8,21 @@ import useTvShowStore from "../../../store/tvShowStore.js"
 
 const Home = () => {
     const {search} = useTvShowStore()
-    const [tvShowsTrending, setTvShowsTrending] = useState([])
-    const [tvShowPopular, setTvShowPopular] = useState([])
-    const [tvShowRating, setTvShowRating] = useState([])
-    const [tvShowSearch, setTvShowSearch] = useState([])
+    const [trendingTvShows, setTrendingTvShow] = useState([])
+    const [popularTvShow, setPopularTvShow] = useState([])
+    const [ratingTvShow, setRatingTvShow] = useState([])
+    const [searchTvShow, setSearchTvShow] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
-    const {pageTrending} = useTvShowStore()
-    const {pagePopular} = useTvShowStore()
-    const {pageRating} = useTvShowStore()
-    const {nextPageTrending} = useTvShowStore()
-    const {nextPagePopular} = useTvShowStore()
-    const {nextPageRating} = useTvShowStore()
-    const {prevPageTrending} = useTvShowStore()
-    const {prevPagePopular} = useTvShowStore()
-    const {prevPageRating} = useTvShowStore()
+    const {trendingPage} = useTvShowStore()
+    const {popularPage} = useTvShowStore()
+    const {ratingPage} = useTvShowStore()
+    const {nextTrendingPage} = useTvShowStore()
+    const {nextPopularPage} = useTvShowStore()
+    const {nextRatingPage} = useTvShowStore()
+    const {prevTrendingPage} = useTvShowStore()
+    const {prevPopularPage} = useTvShowStore()
+    const {prevRatingPage} = useTvShowStore()
 
     const headers = {
         'Content-Type': 'application/json',
@@ -31,9 +31,9 @@ const Home = () => {
 
     useEffect(() => {
         // Trending
-        axios.get(`https://api.themoviedb.org/3/trending/tv/week?language=pt-BR&page=${pageTrending}`, { headers })
+        axios.get(`https://api.themoviedb.org/3/trending/tv/week?language=pt-BR&page=${trendingPage}`, { headers })
             .then((response) => {
-                setTvShowsTrending(response.data.results)
+                setTrendingTvShow(response.data.results)
                 setLoading(false)
             })
             .catch((error) => {
@@ -42,9 +42,9 @@ const Home = () => {
             })
 
         // Popular
-        axios.get(`https://api.themoviedb.org/3/discover/tv?include_adult=false&language=pt-br&page=${pagePopular}&sort_by=vote_count.desc`, { headers })
+        axios.get(`https://api.themoviedb.org/3/discover/tv?include_adult=false&language=pt-br&page=${popularPage}&sort_by=vote_count.desc`, { headers })
             .then((response) => {
-                setTvShowPopular(response.data.results)
+                setPopularTvShow(response.data.results)
                 setLoading(false)
             })
             .catch((error) => {
@@ -53,22 +53,22 @@ const Home = () => {
             })
 
         // Rating
-        axios.get(`https://api.themoviedb.org/3/tv/top_rated?language=pt-br&page=${pageRating}`, { headers })
+        axios.get(`https://api.themoviedb.org/3/tv/top_rated?language=pt-br&page=${ratingPage}`, { headers })
             .then((response) => {
-                setTvShowRating(response.data.results)
+                setRatingTvShow(response.data.results)
                 setLoading(false)
             })
             .catch((error) => {
                 setError('Erro ao carregar os dados!')
                 setLoading(false)
             })
-    }, [pageTrending, pagePopular, pageRating])
+    }, [trendingPage, popularPage, ratingPage])
 
     useEffect(() => {
         if (search !== '') {
             axios.get(`https://api.themoviedb.org/3/search/tv?query=${search}&include_adult=false&language=pt-BR&page=1`, { headers })
                 .then((response) => {
-                    setTvShowSearch(response.data.results)
+                    setSearchTvShow(response.data.results)
                     setLoading(false)
                 })
                 .catch((error) => {
@@ -76,7 +76,7 @@ const Home = () => {
                     setLoading(false)
                 })
         } else {
-            setTvShowSearch([])
+            setSearchTvShow([])
         }
     }, [search])
 
@@ -97,13 +97,13 @@ const Home = () => {
                         <div className={styles.mainContent}>
                             <h1 className={styles.mainTitleContent}>Mais Vistas da Semana:</h1>
                                 <Pagination
-                                    page={pageTrending}
-                                    nextPage={nextPageTrending}
-                                    prevPage={prevPageTrending}
+                                    page={trendingPage}
+                                    nextPage={nextTrendingPage}
+                                    prevPage={prevTrendingPage}
                                 />
                         </div>
                         <div className={styles.tvShowCategory}>
-                            {tvShowsTrending.slice(0, 6).map((trending) => (
+                            {trendingTvShows.slice(0, 6).map((trending) => (
                                 <Link to={`/home/${trending.id}`} className={styles.tvShowContainer} key={trending.id}>
                                     <TvShowCard show={trending} />
                                 </Link>
@@ -114,13 +114,13 @@ const Home = () => {
                         <div className={styles.mainContent}>
                             <h2 className={styles.mainTitleContent}>Populares:</h2>
                             <Pagination
-                                page={pagePopular}
-                                nextPage={nextPagePopular}
-                                prevPage={prevPagePopular}
+                                page={popularPage}
+                                nextPage={nextPopularPage}
+                                prevPage={prevPopularPage}
                             />
                         </div>
                         <div className={styles.tvShowCategory}>
-                            {tvShowPopular.slice(0, 6).map((popular) => (
+                            {popularTvShow.slice(0, 6).map((popular) => (
                                 <Link to={`/home/${popular.id}`} className={styles.tvShowContainer} key={popular.id}>
                                     <TvShowCard show={popular} />
                                 </Link>
@@ -131,13 +131,13 @@ const Home = () => {
                         <div className={styles.mainContent}>
                             <h2 className={styles.mainTitleContent}>Melhores avaliadas:</h2>
                             <Pagination
-                                page={pageRating}
-                                nextPage={nextPageRating}
-                                prevPage={prevPageRating}
+                                page={ratingPage}
+                                nextPage={nextRatingPage}
+                                prevPage={prevRatingPage}
                             />
                         </div>
                         <div className={styles.tvShowCategory}>
-                            {tvShowRating.slice(0, 6).map((rating) => (
+                            {ratingTvShow.slice(0, 6).map((rating) => (
                                 <Link to={`/home/${rating.id}`} className={styles.tvShowContainer} key={rating.id}>
                                     <TvShowCard show={rating} />
                                 </Link>
@@ -150,7 +150,7 @@ const Home = () => {
                         <h2 className={styles.mainTitleContent}>Resultados por: {search}</h2>
                     </div>
                     <div className={styles.tvShowCategory}>
-                        {tvShowSearch.map((show) => (
+                        {searchTvShow.map((show) => (
                             <Link to={`/home/${show.id}`} key={show.id}>
                                 <TvShowCard show={show} />
                             </Link>

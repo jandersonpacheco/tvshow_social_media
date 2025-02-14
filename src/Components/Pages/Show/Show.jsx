@@ -7,6 +7,7 @@ import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import axios from "axios"
 import useTvShowStore from "../../../store/tvShowStore.js"
+import Pagination from "../Home/Pagination.jsx"
 
 const Show = () => {
     const {search} = useTvShowStore()
@@ -131,7 +132,12 @@ const Show = () => {
                     </div>
                 </>
             )}
-            <h1 className={styles.castTitle}>Elenco da Série</h1>
+            <div className={styles.castContainer}>
+                <h1 className={styles.castTitle}>Elenco da Série</h1>
+                <Pagination
+                    
+                />
+            </div>
             <div className={styles.castCategory}>
                 {castInfo.slice(0, 10).map((cast) =>(
                     <div className={styles.castConfig} key={cast.id}>
