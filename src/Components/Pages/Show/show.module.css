@@ -118,7 +118,6 @@ body{
     height:40vh;
     border-radius: 2%;
 }
-
 .pageBtnContainer{
     display: flex;
     flex-direction: row;
@@ -149,8 +148,8 @@ body{
 .castCategory{
     display: flex;
     flex-direction: row;
+    justify-content: center;
     column-gap: 0.5vh;
-    padding-left: 3vh;
     align-items: baseline;
     align-content: center;
     column-gap: 2vh;
@@ -161,23 +160,22 @@ body{
     display: flex;
     flex-direction: column;
     align-content: center;
-    min-height: 45vh;
+    min-height: 35vh;
 }
 
 .castImg{
-    height: 30vh;
-    width: auto;
+    height: 27.5vh;
+    width: 18.2vh;
     border-radius: 7%;
-    min-width: 100%;
 }
 
 .castName{
-    font-size: 12px;
+    font-size: 14px;
     font-weight: bold;
-    max-width: fit-content;
+    max-width: 18.2vh;
 }
 
 .castCharacter{
-    font-size: 12px;
-    max-width: fit-content;
+    font-size: 13px;
+    max-width: 18.2vh;
 }
