@@ -19,7 +19,7 @@
                 </div>
                     <div className={styles.showContent}>
                         <div className={styles.title}>
-                            <h1 className={styles.title}>{show.name}</h1>
+                            <h1 className={styles.title}>{show.original_name}</h1>
                         </div>
                     <div className={styles.statisticBoxContainer}>
                         <p className={styles.sBvote_average}>{show.vote_average ? show.vote_average.toFixed(1): 'N/A'}</p>

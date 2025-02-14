@@ -3,7 +3,12 @@
 body{
     font-family: "Roboto Slab", system-ui;
     font-optical-sizing: auto;
-    background-color: #FFF8E8;   
+    background-color: #FFF8E8;
+}
+
+.tvShowDetails, .tvShowCast{
+    margin-left: 15%;
+    margin-right: 15%;
 }
 
 .showDetails{
@@ -20,7 +25,8 @@ body{
     background-position: center;
     min-height: 100%;
     color: #fff;
-    backdrop-filter: blur(10px)
+    backdrop-filter: blur(10px);
+
 }
 
 .showDetails::after {
@@ -122,6 +128,8 @@ body{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    margin-left: 1vh;
+    margin-right: 4vh;
     column-gap: 0.5vh;
 }
 
@@ -154,6 +162,8 @@ body{
     align-content: center;
     column-gap: 2vh;
     padding-bottom: 200px;
+    margin-left: 15%;
+    margin-right: 15%;
 }
 
 .castConfig{
