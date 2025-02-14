@@ -10,7 +10,7 @@ import useTvShowStore from "../../../store/tvShowStore.js"
 import Pagination from "../Home/Pagination.jsx"
 
 const Show = () => {
-    const {search} = useTvShowStore()
+    const {search, castPage, nextCastPage, prevCastPage} = useTvShowStore()
     const [tvShowSearch, setTvShowSearch] = useState([])
     const [tvShowsTmdb, setTvShowsTmdb] = useState([])
     const [tvShowsVideo, setTvShowsVideo] = useState([])
@@ -60,9 +60,7 @@ const Show = () => {
             })
     }, [search])
 
-    function cleanInput(){
-        search = ''
-    }
+    const paginatedCast = castInfo
 
     useEffect(()=>{
         setLoading(true)
@@ -76,6 +74,11 @@ const Show = () => {
             setError('Erro ao carregar os dados!')
             setLoading(false)
         })
+
+        function cleanInput(){
+            search = ''
+        }
+
         //Get Trailer
         axios.get(`https://api.themoviedb.org/3/tv/${id}/videos?language=pt-br`, {headers})
         .then((response)=>{
@@ -132,14 +135,16 @@ const Show = () => {
                     </div>
                 </>
             )}
-            <div className={styles.castContainer}>
+            <div className={styles.pageBtnContainer}>
                 <h1 className={styles.castTitle}>Elenco da Série</h1>
                 <Pagination
-                    
+                    page={castPage}
+                    nextPage={nextCastPage}
+                    prevPage={prevCastPage}
                 />
             </div>
             <div className={styles.castCategory}>
-                {castInfo.slice(0, 10).map((cast) =>(
+                {paginatedCast.slice((castPage - 1) * 10, castPage * 10).map((cast) =>(
                     <div className={styles.castConfig} key={cast.id}>
                         <Cast cast={cast}/>
                     </div>

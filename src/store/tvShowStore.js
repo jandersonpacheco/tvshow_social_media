@@ -11,12 +11,18 @@ const useTvShowStore = create((set) => ({
     ratingPage: 1,
     setRatingPage: (page) => set ({pageRating: page}),
 
+    castPage: 1,
+    setCastPage: (page) => set ({castPage: page}),
+
     nextTrendingPage: () => set((state) =>({trendingPage: state.trendingPage + 1})),
     prevTrendingPage: () => set((state) =>({trendingPage: Math.max(state.trendingPage - 1, 1)})),
     nextPopularPage: () => set ((state) =>({popularPage: state.popularPage + 1})),
     prevPopularPage: () => set ((state) => ({popularPage: Math.max(state.popularPage -1, 1)})),
     nextRatingPage: () => set ((state) =>({ratingPage: state.ratingPage +1})),
-    prevRatingPage: () => set ((state) =>({ratingPage: Math.max(state.ratingPage -1, 1)}))
+    prevRatingPage: () => set ((state) =>({ratingPage: Math.max(state.ratingPage -1, 1)})),
+
+    nextCastPage: () => set((state) =>({castPage: state.castPage + 1})),
+    prevCastPage: () => set((state) =>({castPage: Math.max(state.castPage - 1, 1)})),
 }))
 
 export default useTvShowStore

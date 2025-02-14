@@ -119,9 +119,33 @@ body{
     border-radius: 2%;
 }
 
+.pageBtnContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    column-gap: 0.5vh;
+}
+
 .castTitle{
+    font-size: 1.3rem;
+    font-weight: bold;
     padding: 3vh;
 }
+
+.pageBtn{
+    padding: 3vh;
+    font-size: 1rem;
+    background-color: #b65903;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.pageBtn:hover {
+    background-color: #e98528;
+}
+
 .castCategory{
     display: flex;
     flex-direction: row;
@@ -156,25 +180,4 @@ body{
 .castCharacter{
     font-size: 12px;
     max-width: fit-content;
-}
-
-.pageBtnContainer{
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    column-gap: 0.5vh;
-}
-
-.pageBtn{
-    padding: 10px 15px;
-    font-size: 1rem;
-    background-color: #b65903;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.pageBtn:hover {
-    background-color: #e98528;
 }
