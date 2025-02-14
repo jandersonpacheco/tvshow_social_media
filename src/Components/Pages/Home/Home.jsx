@@ -14,9 +14,15 @@ const Home = () => {
     const [tvShowSearch, setTvShowSearch] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
-    const [pageTrending, setPageTrending] = useState(1)
-    const [pagePopular, setPagePopular] = useState(1)
-    const [pageRating, setPageRating] = useState(1)
+    const {pageTrending} = useTvShowStore()
+    const {pagePopular} = useTvShowStore()
+    const {pageRating} = useTvShowStore()
+    const {nextPageTrending} = useTvShowStore()
+    const {nextPagePopular} = useTvShowStore()
+    const {nextPageRating} = useTvShowStore()
+    const {prevPageTrending} = useTvShowStore()
+    const {prevPagePopular} = useTvShowStore()
+    const {prevPageRating} = useTvShowStore()
 
     const headers = {
         'Content-Type': 'application/json',
@@ -57,15 +63,6 @@ const Home = () => {
                 setLoading(false)
             })
     }, [pageTrending, pagePopular, pageRating])
-
-    const nextPageTrending = () => setPageTrending(pageTrending + 1)
-    const prevPageTrending = () => setPageTrending(Math.max(pageTrending - 1, 1))
-
-    const nextPagePopular = () => setPagePopular(pagePopular + 1)
-    const prevPagePopular = () => setPagePopular(Math.max(pagePopular - 1, 1))
-
-    const nextPageRating = () => setPageRating(pageRating + 1)
-    const prevPageRating = () => setPageRating(Math.max(pageRating - 1, 1))
 
     useEffect(() => {
         if (search !== '') {

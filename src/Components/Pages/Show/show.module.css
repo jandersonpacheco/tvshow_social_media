@@ -144,6 +144,7 @@ body{
     height: 30vh;
     width: auto;
     border-radius: 7%;
+    min-width: 100%;
 }
 
 .castName{
@@ -155,4 +156,25 @@ body{
 .castCharacter{
     font-size: 12px;
     max-width: fit-content;
+}
+
+.pageBtnContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    column-gap: 0.5vh;
+}
+
+.pageBtn{
+    padding: 10px 15px;
+    font-size: 1rem;
+    background-color: #b65903;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.pageBtn:hover {
+    background-color: #e98528;
 }

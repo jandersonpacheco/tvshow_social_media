@@ -11,7 +11,7 @@ const Cast = ({cast}) => {
                         className={styles.castImg}
                     />
                 )}
-                <h3 className={styles.castName}>{cast.original_name}</h3>
+                <h3 className={styles.castName}>{cast.name}</h3>
                 <h3 className={styles.castCharacter}>{cast.roles[0].character}</h3>
             </div>
         </div>
