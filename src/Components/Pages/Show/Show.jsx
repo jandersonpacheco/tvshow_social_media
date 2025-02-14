@@ -106,7 +106,7 @@ const Show = () => {
     if(error){
         return <h3>{error}</h3>
     }
-    
+
     return (
         <>
             {tvShowsTmdb && tvShowsVideo && search === '' ? (
@@ -131,7 +131,7 @@ const Show = () => {
                     </div>
                 </>
             )}
-            <h1 className={styles.castBtn}>Elenco da Série</h1>
+            <h1 className={styles.castTitle}>Elenco da Série</h1>
             <div className={styles.castCategory}>
                 {castInfo.slice(0, 10).map((cast) =>(
                     <div className={styles.castConfig} key={cast.id}>

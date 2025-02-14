@@ -22,7 +22,7 @@
                             <h1 className={styles.title}>{show.name}</h1>
                         </div>
                     <div className={styles.statisticBoxContainer}>
-                        <p className={styles.sBvote_average}>{show.vote_average.toFixed(1)}</p>
+                        <p className={styles.sBvote_average}>{show.vote_average ? show.vote_average.toFixed(1): 'N/A'}</p>
                         <div className={styles.statisticBox}>
                             <p className={styles.statisticBoxTitle}>Popularidade</p>
                             <p className={styles.sbPopularity}>{show.popularity}</p>
@@ -33,8 +33,8 @@
                         </div>
                         </div>
                             <p className={styles.overview}>{show.overview}</p>
-                            <p className={styles.genres}>Gênero: {show.genres.map(genre => genre.name).join(', ')}</p>
-                            <p className={styles.first_air_date}>Lançamento: {show.first_air_date.split('-').reverse().join('/')}</p>
+                            <p className={styles.genres}>Gênero: {show.genres ? show.genres.map(genre => genre.name).join(', '): ''}</p>
+                            <p className={styles.first_air_date}>Lançamento: {show.first_air_date ? show.first_air_date.split('-').reverse().join('/'): ''}</p>
                             <p className={styles.number_of_seasons}>Temporadas: {show.number_of_seasons}</p>
                             <p className={styles.number_of_episodes}>Episódios Programados: {show.number_of_episodes}</p>
                             {show.last_episode_to_air && show.last_episode_to_air.episode_number &&(

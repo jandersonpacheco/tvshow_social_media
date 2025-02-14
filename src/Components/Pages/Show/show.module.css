@@ -119,28 +119,40 @@ body{
     border-radius: 2%;
 }
 
+.castTitle{
+    padding: 3vh;
+}
 .castCategory{
     display: flex;
     flex-direction: row;
     column-gap: 0.5vh;
-    padding-top: 1vh;
+    padding-left: 3vh;
     align-items: baseline;
     align-content: center;
+    column-gap: 2vh;
+    padding-bottom: 200px;
 }
 
-.castContent, .castConfig{
+.castConfig{
     display: flex;
     flex-direction: column;
     align-content: center;
+    min-height: 45vh;
 }
 
 .castImg{
-    height: 18vh;
-    width: 13vh;
+    height: 30vh;
+    width: auto;
     border-radius: 7%;
 }
 
 .castName{
-    max-width: 100%;
-    font-size: 14px;
+    font-size: 12px;
+    font-weight: bold;
+    max-width: fit-content;
+}
+
+.castCharacter{
+    font-size: 12px;
+    max-width: fit-content;
 }
