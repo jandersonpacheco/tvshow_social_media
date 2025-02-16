@@ -1,6 +1,7 @@
 import TvShowDetails from "./TvShowDetails.jsx"
 import TvShowCard from "../Home/TvShowCard.jsx"
 import Cast from "./Cast.jsx"
+import SeasonDetails from "./SeasonDetails.jsx"
 import styles from "./show.module.css"
 import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
@@ -51,7 +52,6 @@ const Show = () => {
         axios.get(`https://api.themoviedb.org/3/tv/${id}/aggregate_credits`, { headers })
             .then((response) => {
                 setCastInfo(response.data.cast)
-                console.log(response.data.cast)
                 setLoading(false)
             })
             .catch((error) => {
@@ -68,6 +68,7 @@ const Show = () => {
         axios.get(`https://api.themoviedb.org/3/tv/${id}?language=pt-br`, {headers})
         .then((response)=>{
             setTvShowsTmdb(response.data)
+            console.log(response.data.seasons)
             setLoading(false)
         })
         .catch((error)=>{
@@ -75,15 +76,10 @@ const Show = () => {
             setLoading(false)
         })
 
-        function cleanInput(){
-            search = ''
-        }
-
         //Get Trailer
         axios.get(`https://api.themoviedb.org/3/tv/${id}/videos?language=pt-br`, {headers})
         .then((response)=>{
             setTvShowsVideo(response.data)
-            console.log(response.data)
             setLoading(false)
         })
         .catch((error)=>{
@@ -97,9 +93,9 @@ const Show = () => {
             setLoading(false)
         })
         .catch((error)=>{
-            setError('Erro ao carregar os videos!')
+            setError('Erro ao carregar o backdrop!')
             setLoading(false)
-        })
+        })     
     },[id])
     
 
@@ -148,6 +144,14 @@ const Show = () => {
                     <div className={styles.castConfig} key={cast.id}>
                         <Cast cast={cast}/>
                     </div>
+                ))}
+            </div>
+            <div className={styles.seasonDetails}>
+                <h3 className={styles.seasonDetailsTitle}>Episódios:</h3>
+            </div>
+            <div className={styles.seasonBtn}>
+                {tvShowsTmdb.seasons && tvShowsTmdb.seasons.map((season) => (
+                    <SeasonDetails key={season.id} season={season}/>
                 ))}
             </div>
         </>       

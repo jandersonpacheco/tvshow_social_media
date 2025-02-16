@@ -30,7 +30,7 @@ const Home = () => {
     }
 
     useEffect(() => {
-        // Trending
+        // Get Trending
         axios.get(`https://api.themoviedb.org/3/trending/tv/week?language=pt-BR&page=${trendingPage}`, { headers })
             .then((response) => {
                 setTrendingTvShow(response.data.results)
@@ -41,7 +41,7 @@ const Home = () => {
                 setLoading(false)
             })
 
-        // Popular
+        // Get Popular
         axios.get(`https://api.themoviedb.org/3/discover/tv?include_adult=false&language=pt-br&page=${popularPage}&sort_by=vote_count.desc`, { headers })
             .then((response) => {
                 setPopularTvShow(response.data.results)
@@ -52,7 +52,7 @@ const Home = () => {
                 setLoading(false)
             })
 
-        // Rating
+        // Get Rating
         axios.get(`https://api.themoviedb.org/3/tv/top_rated?language=pt-br&page=${ratingPage}`, { headers })
             .then((response) => {
                 setRatingTvShow(response.data.results)
@@ -64,6 +64,7 @@ const Home = () => {
             })
     }, [trendingPage, popularPage, ratingPage])
 
+    //Get Search
     useEffect(() => {
         if (search !== '') {
             axios.get(`https://api.themoviedb.org/3/search/tv?query=${search}&include_adult=false&language=pt-BR&page=1`, { headers })

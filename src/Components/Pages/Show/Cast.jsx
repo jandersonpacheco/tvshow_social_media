@@ -3,7 +3,7 @@ import styles from "./show.module.css"
 const Cast = ({cast}) => {
 
     return (
-        <div className={styles.castContainer}>
+        <>
             <div className={styles.castContent}>
                 {cast.profile_path && (
                     <img
@@ -14,7 +14,7 @@ const Cast = ({cast}) => {
                 <h3 className={styles.castName}>{cast.name}</h3>
                 <h3 className={styles.castCharacter}>{cast.roles[0].character}</h3>
             </div>
-        </div>
+        </>
     )
 }
 

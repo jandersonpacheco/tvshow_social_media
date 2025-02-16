@@ -40,7 +40,7 @@ body{
     margin-left: 1,5vh;
 }
 
-.img{
+.posterImg{
     height: 65vh;
     width: 40vh;
     border-radius: 7%;
@@ -118,7 +118,7 @@ body{
     border-radius: 2%;
 }
 
-.pageBtnContainer{
+.pageBtnContainer, .seasonDetails{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -127,7 +127,7 @@ body{
     column-gap: 0.5vh;
 }
 
-.castTitle{
+.castTitle, .seasonDetailsTitle{
     font-size: 1.3rem;
     font-weight: bold;
     padding: 3vh 0 3vh 0;
@@ -141,7 +141,6 @@ body{
     align-items: baseline;
     align-content: center;
     column-gap: 1.5vh;
-    margin-bottom: 1000px;
     border-bottom: 3px solid #b65903;
 }
 
@@ -168,4 +167,26 @@ body{
 .castCharacter{
     font-size: 12px;
     max-width: fit-content;
+}
+
+.seasonBtn{
+    display: flex;
+    flex-direction: row;
+    column-gap: 1.5vh;
+    margin-bottom: 1vh;
+    flex-wrap: wrap;
+}
+
+.seasonName{
+    padding: 10px 15px;
+    font-size: 1rem;
+    background-color: #b65903;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.seasonName:hover {
+    background-color: #e98528;
 }
