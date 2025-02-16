@@ -108,8 +108,7 @@ body{
 }
 
 .showVideo{
-    padding-left: 10vh;
-    padding-right: 10vh;
+    padding: 0 10vh 0 10vh;
     align-self: baseline;
 }
 .video{
@@ -123,38 +122,27 @@ body{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    margin-left: 4vh;
+    margin-right: 4vh;
     column-gap: 0.5vh;
 }
 
 .castTitle{
     font-size: 1.3rem;
     font-weight: bold;
-    padding: 3vh;
-}
-
-.pageBtn{
-    padding: 3vh;
-    font-size: 1rem;
-    background-color: #b65903;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.pageBtn:hover {
-    background-color: #e98528;
+    padding: 3vh 0 3vh 0;
 }
 
 .castCategory{
     display: flex;
     flex-direction: row;
     column-gap: 0.5vh;
-    padding-left: 3vh;
+    padding: 1vh 3vh 0 3vh ;
     align-items: baseline;
     align-content: center;
-    column-gap: 2vh;
-    padding-bottom: 200px;
+    column-gap: 1.5vh;
+    margin-bottom: 1000px;
+    border-bottom: 3px solid #b65903;
 }
 
 .castConfig{
