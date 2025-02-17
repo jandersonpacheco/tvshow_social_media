@@ -9,6 +9,7 @@ import { Link } from "react-router-dom"
 import axios from "axios"
 import useTvShowStore from "../../../store/tvShowStore.js"
 import Pagination from "../Home/Pagination.jsx"
+import useErrorAndLoadStore from "../../../store/errorAndLoadStore.js"
 
 const Show = () => {
     const {search, castPage, nextCastPage, prevCastPage} = useTvShowStore()
@@ -17,8 +18,7 @@ const Show = () => {
     const [tvShowsVideo, setTvShowsVideo] = useState([])
     const [tvShowsBackdrop, setTvShowsBackdrop] = useState([])
     const [castInfo, setCastInfo] = useState([])
-    const [error, setError] = useState(null)
-    const [loading, setLoading] = useState(true)
+    const {error, setError, loading, setLoading} = useErrorAndLoadStore()
     const {id} = useParams()
 
     const headers = {
@@ -29,7 +29,7 @@ const Show = () => {
     //Get Search
     useEffect(() => {
         if (search !== '') {
-            axios.get(`https://api.themoviedb.org/3/search/tv?query=${search}&include_adult=false&language=pt-BR&page=1`, { headers })
+            axios.get(`https://api.themoviedb.org/3/search/tv?query=${search}&include_adult=false&language=pt-BR&page=1`, {headers})
                 .then((response) => {
                     setTvShowSearch(response.data.results)
                     setLoading(false)
@@ -49,7 +49,7 @@ const Show = () => {
 
     //Get Cast
     useEffect(() => {
-        axios.get(`https://api.themoviedb.org/3/tv/${id}/aggregate_credits`, { headers })
+        axios.get(`https://api.themoviedb.org/3/tv/${id}/aggregate_credits`, {headers})
             .then((response) => {
                 setCastInfo(response.data.cast)
                 setLoading(false)
@@ -68,7 +68,6 @@ const Show = () => {
         axios.get(`https://api.themoviedb.org/3/tv/${id}?language=pt-br`, {headers})
         .then((response)=>{
             setTvShowsTmdb(response.data)
-            console.log(response.data.seasons)
             setLoading(false)
         })
         .catch((error)=>{
@@ -98,14 +97,8 @@ const Show = () => {
         })     
     },[id])
     
-
-    if(loading){
-        return <h3 className={styles.loading}>Carregando...</h3>
-    }
-    
-    if(error){
-        return <h3>{error}</h3>
-    }
+    if(loading) return <h3 className={styles.loading}>Carregando...</h3>
+    if(error) return <h3>{error}</h3>
 
     return (
         <>
@@ -151,7 +144,7 @@ const Show = () => {
             </div>
             <div className={styles.seasonBtn}>
                 {tvShowsTmdb.seasons && tvShowsTmdb.seasons.map((season) => (
-                    <SeasonDetails key={season.id} season={season}/>
+                    <SeasonDetails key={season.id} season={season} id={id}/>
                 ))}
             </div>
         </>       

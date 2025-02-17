@@ -23,6 +23,7 @@ const useTvShowStore = create((set) => ({
 
     nextCastPage: () => set((state) =>({castPage: state.castPage + 1})),
     prevCastPage: () => set((state) =>({castPage: Math.max(state.castPage - 1, 1)})),
+    
 }))
 
 export default useTvShowStore
