@@ -136,6 +136,7 @@ body{
 .castCategory{
     display: flex;
     flex-direction: row;
+    max-width: 100%;
     column-gap: 0.5vh;
     padding: 1vh 3vh 0 3vh ;
     align-items: baseline;
@@ -149,11 +150,13 @@ body{
     flex-direction: column;
     align-content: center;
     min-height: 45vh;
+    max-width: 100%;
 }
 
 .castImg{
     height: 30vh;
-    width: auto;
+    width: 100%;
+    max-width: 19.91vh;
     border-radius: 7%;
     min-width: 100%;
 }
