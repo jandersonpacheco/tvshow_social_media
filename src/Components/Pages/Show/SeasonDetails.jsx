@@ -6,11 +6,9 @@ import { useParams } from 'react-router-dom'
 
 const SeasonDetails = ({season}) => {
     const [seasonDetail, setSeasonDetail] = useState([])
-    const [seasonNumber, setSeasonNumber] = useState(1)
+    const [seasonInfo, setSeasonInfo] = useState([])
     const {error, setError, loading, setLoading} = useErrorAndLoadStore()
     const {id} = useParams()
-
-    if(season.name === 'Especiais') return null
 
     const headers = {
         'Content-Type': 'application/json',
@@ -18,6 +16,39 @@ const SeasonDetails = ({season}) => {
     }
 
     useEffect(() => {
+        axios.get(`https://api.themoviedb.org/3/tv/${id}?language=pt-br`, {headers})
+            .then((response) => {
+                setSeasonInfo(response.data.seasons)
+                console.log(response.data.seasons)
+                setLoading(false)
+            })
+            .catch((error) => {
+                setError('Erro ao carregar os dados!')
+                setLoading(false)
+            })
+    }, [id])
+
+    useEffect(() => {
+        if(seasonInfo.length > 0){
+            const seasonNumber = seasonInfo[0].season_number
+
+            axios.get(`https://api.themoviedb.org/3/tv/${id}/season/${seasonNumber}?language=pt-br`, {headers})
+            .then((response) => {
+                setSeasonDetail(response.data.episodes)
+                console.clear()
+                console.log(response.data.episodes)
+                setLoading(false)
+            })
+            .catch((error) => {
+                setError('Erro ao carregar os dados!')
+                setLoading(false)
+            })
+        }
+    }, [id, seasonInfo])
+
+    function seasonChanging(seasonNumber){
+        setSeasonDetail([])
+
         axios.get(`https://api.themoviedb.org/3/tv/${id}/season/${seasonNumber}?language=pt-br`, {headers})
             .then((response) => {
                 setSeasonDetail(response.data.episodes)
@@ -28,7 +59,7 @@ const SeasonDetails = ({season}) => {
                 setError('Erro ao carregar os dados!')
                 setLoading(false)
             })
-    }, [id, seasonNumber])
+    }
 
     if(loading) return <h3 className={styles.loading}>Carregando...</h3>
     if(error) return <h3>{error}</h3>
@@ -36,7 +67,14 @@ const SeasonDetails = ({season}) => {
     return(
         <div className={styles.seasonDetails}>
             <div className={styles.seasonBtn}>
-                <button className={styles.seasonName} id={season.season_number}>Temporada {season.season_number}</button>
+                {seasonInfo && seasonInfo.map((seasonNum) => (
+                    seasonNum.name !== 'Especiais' &&(
+                        <button
+                            className={styles.seasonName} id={seasonNum.season_number}
+                            onClick={() => seasonChanging(seasonNum.season_number)}>Temporada {seasonNum.season_number}
+                        </button>
+                    )
+                ))}
             </div>
             <div className={styles.episodeContainer}>
                 {seasonDetail && seasonDetail.map((episode) => (
@@ -49,7 +87,6 @@ const SeasonDetails = ({season}) => {
                         </div>
                         <div className={styles.episodeInfo}>
                             <h3>{episode.name}</h3>
-                            <p>{}</p>
                             <p>{episode.overview}</p>
                         </div>
                     </div>

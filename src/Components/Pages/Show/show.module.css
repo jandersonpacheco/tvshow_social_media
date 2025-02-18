@@ -172,6 +172,11 @@ body{
     max-width: fit-content;
 }
 
+.seasonDetails{
+    display: flex;
+    flex-direction: column;
+}
+
 .seasonBtn{
     display: flex;
     flex-direction: row;
@@ -193,3 +198,4 @@ body{
 .seasonName:hover {
     background-color: #e98528;
 }
+
