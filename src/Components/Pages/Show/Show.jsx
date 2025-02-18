@@ -1,6 +1,7 @@
 import TvShowDetails from "./TvShowDetails.jsx"
 import TvShowCard from "../Home/TvShowCard.jsx"
 import Cast from "./Cast.jsx"
+import SeasonDetails from "./SeasonDetails.jsx"
 import styles from "./show.module.css"
 import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
@@ -8,6 +9,7 @@ import { Link } from "react-router-dom"
 import axios from "axios"
 import useTvShowStore from "../../../store/tvShowStore.js"
 import Pagination from "../Home/Pagination.jsx"
+import useErrorAndLoadStore from "../../../store/errorAndLoadStore.js"
 
 const Show = () => {
     const {search, castPage, nextCastPage, prevCastPage} = useTvShowStore()
@@ -16,8 +18,7 @@ const Show = () => {
     const [tvShowsVideo, setTvShowsVideo] = useState([])
     const [tvShowsBackdrop, setTvShowsBackdrop] = useState([])
     const [castInfo, setCastInfo] = useState([])
-    const [error, setError] = useState(null)
-    const [loading, setLoading] = useState(true)
+    const {error, setError, loading, setLoading} = useErrorAndLoadStore()
     const {id} = useParams()
 
     const headers = {
@@ -28,7 +29,7 @@ const Show = () => {
     //Get Search
     useEffect(() => {
         if (search !== '') {
-            axios.get(`https://api.themoviedb.org/3/search/tv?query=${search}&include_adult=false&language=pt-BR&page=1`, { headers })
+            axios.get(`https://api.themoviedb.org/3/search/tv?query=${search}&include_adult=false&language=pt-BR&page=1`, {headers})
                 .then((response) => {
                     setTvShowSearch(response.data.results)
                     setLoading(false)
@@ -48,10 +49,9 @@ const Show = () => {
 
     //Get Cast
     useEffect(() => {
-        axios.get(`https://api.themoviedb.org/3/tv/${id}/aggregate_credits`, { headers })
+        axios.get(`https://api.themoviedb.org/3/tv/${id}/aggregate_credits`, {headers})
             .then((response) => {
                 setCastInfo(response.data.cast)
-                console.log(response.data.cast)
                 setLoading(false)
             })
             .catch((error) => {
@@ -75,15 +75,10 @@ const Show = () => {
             setLoading(false)
         })
 
-        function cleanInput(){
-            search = ''
-        }
-
         //Get Trailer
         axios.get(`https://api.themoviedb.org/3/tv/${id}/videos?language=pt-br`, {headers})
         .then((response)=>{
             setTvShowsVideo(response.data)
-            console.log(response.data)
             setLoading(false)
         })
         .catch((error)=>{
@@ -97,19 +92,13 @@ const Show = () => {
             setLoading(false)
         })
         .catch((error)=>{
-            setError('Erro ao carregar os videos!')
+            setError('Erro ao carregar o backdrop!')
             setLoading(false)
-        })
+        })     
     },[id])
     
-
-    if(loading){
-        return <h3 className={styles.loading}>Carregando...</h3>
-    }
-    
-    if(error){
-        return <h3>{error}</h3>
-    }
+    if(loading) return <h3 className={styles.loading}>Carregando...</h3>
+    if(error) return <h3>{error}</h3>
 
     return (
         <>
@@ -148,6 +137,14 @@ const Show = () => {
                     <div className={styles.castConfig} key={cast.id}>
                         <Cast cast={cast}/>
                     </div>
+                ))}
+            </div>
+            <div className={styles.seasonDetails}>
+                <h3 className={styles.seasonDetailsTitle}>Episódios:</h3>
+            </div>
+            <div className={styles.seasonBtn}>
+                {tvShowsTmdb.seasons && tvShowsTmdb.seasons.map((season) => (
+                    <SeasonDetails key={season.id} season={season} id={id}/>
                 ))}
             </div>
         </>       

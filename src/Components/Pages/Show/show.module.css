@@ -46,7 +46,7 @@ body{
     margin-left: 1,5vh;
 }
 
-.img{
+.posterImg{
     height: 65vh;
     width: 40vh;
     border-radius: 7%;
@@ -114,8 +114,7 @@ body{
 }
 
 .showVideo{
-    padding-left: 10vh;
-    padding-right: 10vh;
+    padding: 0 10vh 0 10vh;
     align-self: baseline;
 }
 .video{
@@ -124,58 +123,41 @@ body{
     height:40vh;
     border-radius: 2%;
 }
+
 .pageBtnContainer{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin-left: 1vh;
-    margin-right: 4vh;
     column-gap: 0.5vh;
 }
 
-.castTitle{
+.castTitle, .seasonDetailsTitle{
     font-size: 1.3rem;
     font-weight: bold;
-    padding: 3vh;
-}
-
-.pageBtn{
-    padding: 3vh;
-    font-size: 1rem;
-    background-color: #b65903;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.pageBtn:hover {
-    background-color: #e98528;
+    padding: 3vh 0 3vh 0;
 }
 
 .castCategory{
     display: flex;
     flex-direction: row;
-    justify-content: center;
     column-gap: 0.5vh;
+    padding-left: 3vh;
     align-items: baseline;
     align-content: center;
     column-gap: 2vh;
     padding-bottom: 200px;
-    margin-left: 15%;
-    margin-right: 15%;
 }
 
 .castConfig{
     display: flex;
     flex-direction: column;
     align-content: center;
-    min-height: 35vh;
+    min-height: 45vh;
 }
 
 .castImg{
-    height: 27.5vh;
-    width: 18.2vh;
+    height: 30vh;
+    width: auto;
     border-radius: 7%;
 }
 
