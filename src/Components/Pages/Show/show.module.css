@@ -153,11 +153,12 @@ body{
     flex-direction: column;
     align-content: center;
     min-height: 45vh;
+
 }
 
 .castImg{
-    height: 30vh;
-    width: auto;
+    height: 27.5vh;
+    width: 100%;
     border-radius: 7%;
 }
 
@@ -170,4 +171,23 @@ body{
 .castCharacter{
     font-size: 13px;
     max-width: 18.2vh;
+}
+
+.seasonBtn{
+    column-gap: 0.5vh;
+}
+
+.seasonDropdown{
+    padding: 10px 15px;
+    margin: 10px;
+    font-size: 1rem;
+    background-color: #a3a3a3;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.seasonDropdown:hover {
+    background-color: #e98528;
 }

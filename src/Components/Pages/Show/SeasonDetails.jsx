@@ -66,16 +66,19 @@ const SeasonDetails = ({season}) => {
 
     return(
         <div className={styles.seasonDetails}>
-            <div className={styles.seasonBtn}>
-                {seasonInfo && seasonInfo.map((seasonNum) => (
-                    seasonNum.name !== 'Especiais' &&(
-                        <button
-                            className={styles.seasonName} id={seasonNum.season_number}
-                            onClick={() => seasonChanging(seasonNum.season_number)}>Temporada {seasonNum.season_number}
-                        </button>
-                    )
-                ))}
+            <div className={styles.seasonSelect}>
+                <select onChange={(e) => seasonChanging(e.target.value)} className={styles.seasonDropdown}>
+                    <option value="">Selecione uma Temporada</option>
+                    {seasonInfo && seasonInfo.map((seasonNum) => (
+                        seasonNum.name !== 'Especiais' && (
+                            <option key={seasonNum.season_number} value={seasonNum.season_number}>
+                                Temporada {seasonNum.season_number}
+                            </option>
+                        )
+                    ))}
+                </select>
             </div>
+
             <div className={styles.episodeContainer}>
                 {seasonDetail && seasonDetail.map((episode) => (
                     <div className={styles.episodeInfo} key={episode.id}>

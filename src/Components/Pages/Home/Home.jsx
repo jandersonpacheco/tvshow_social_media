@@ -29,7 +29,7 @@ const Home = () => {
 
     const handleClick = (showId) => {
         cleanInput()
-            navigate(`/home/${showId}`)
+        navigate(`/home/${showId}`)
     }
 
     const headers = {
