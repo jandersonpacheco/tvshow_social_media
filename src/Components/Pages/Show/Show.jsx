@@ -28,6 +28,8 @@ const Show = () => {
 
     //Get Search
     useEffect(() => {
+        setLoading(true)
+        
         if (search !== '') {
             axios.get(`https://api.themoviedb.org/3/search/tv?query=${search}&include_adult=false&language=pt-BR&page=1`, {headers})
                 .then((response) => {
@@ -43,12 +45,12 @@ const Show = () => {
         }
     }, [search])
 
-    function cleanInput(){
-        search = ''
-    }
+    const cleanInput = () => search = ''
 
     //Get Cast
     useEffect(() => {
+        setLoading(true)
+
         axios.get(`https://api.themoviedb.org/3/tv/${id}/aggregate_credits`, {headers})
             .then((response) => {
                 setCastInfo(response.data.cast)
@@ -64,6 +66,7 @@ const Show = () => {
 
     useEffect(()=>{
         setLoading(true)
+
         //Get TV Show
         axios.get(`https://api.themoviedb.org/3/tv/${id}?language=pt-br`, {headers})
         .then((response)=>{

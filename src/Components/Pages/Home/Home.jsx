@@ -2,17 +2,17 @@ import Pagination from "./Pagination"
 import styles from "./style.module.css"
 import axios from "axios"
 import { useEffect, useState } from 'react'
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import TvShowCard from "./TvShowCard"
 import useTvShowStore from "../../../store/tvShowStore.js"
 
 const Home = () => {
-    const {search} = useTvShowStore()
     const [trendingTvShows, setTrendingTvShow] = useState([])
     const [popularTvShow, setPopularTvShow] = useState([])
     const [ratingTvShow, setRatingTvShow] = useState([])
     const [searchTvShow, setSearchTvShow] = useState([])
     const [loading, setLoading] = useState(true)
+    const {search} = useTvShowStore()
     const [error, setError] = useState(null)
     const {trendingPage} = useTvShowStore()
     const {popularPage} = useTvShowStore()
@@ -23,6 +23,14 @@ const Home = () => {
     const {prevTrendingPage} = useTvShowStore()
     const {prevPopularPage} = useTvShowStore()
     const {prevRatingPage} = useTvShowStore()
+    const navigate = useNavigate()
+
+    const cleanInput = () => search = ''
+
+    const handleClick = (showId) => {
+        cleanInput()
+            navigate(`/home/${showId}`)
+    }
 
     const headers = {
         'Content-Type': 'application/json',
@@ -152,7 +160,7 @@ const Home = () => {
                     </div>
                     <div className={styles.tvShowCategory}>
                         {searchTvShow.map((show) => (
-                            <Link to={`/home/${show.id}`} key={show.id}>
+                            <Link to={`/home/${show.id}`} key={show.id} onClick={() => handleClick(show.id)}>
                                 <TvShowCard show={show} />
                             </Link>
                         ))}
