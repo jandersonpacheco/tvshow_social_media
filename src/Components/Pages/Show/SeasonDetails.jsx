@@ -19,7 +19,7 @@ const SeasonDetails = ({season}) => {
         axios.get(`https://api.themoviedb.org/3/tv/${id}?language=pt-br`, {headers})
             .then((response) => {
                 setSeasonInfo(response.data.seasons)
-                console.log(response.data.seasons)
+
                 setLoading(false)
             })
             .catch((error) => {
@@ -28,32 +28,14 @@ const SeasonDetails = ({season}) => {
             })
     }, [id])
 
-    useEffect(() => {
-        if(seasonInfo.length > 0){
-            const seasonNumber = seasonInfo[0].season_number
-
-            axios.get(`https://api.themoviedb.org/3/tv/${id}/season/${seasonNumber}?language=pt-br`, {headers})
-            .then((response) => {
-                setSeasonDetail(response.data.episodes)
-                console.clear()
-                console.log(response.data.episodes)
-                setLoading(false)
-            })
-            .catch((error) => {
-                setError('Erro ao carregar os dados!')
-                setLoading(false)
-            })
-        }
-    }, [id, seasonInfo])
-
     function seasonChanging(seasonNumber){
         setSeasonDetail([])
 
         axios.get(`https://api.themoviedb.org/3/tv/${id}/season/${seasonNumber}?language=pt-br`, {headers})
             .then((response) => {
                 setSeasonDetail(response.data.episodes)
-                console.log(response.data.episodes)
                 setLoading(false)
+                console.log(response.data.episodes)
             })
             .catch((error) => {
                 setError('Erro ao carregar os dados!')
@@ -68,7 +50,7 @@ const SeasonDetails = ({season}) => {
         <div className={styles.seasonDetails}>
             <div className={styles.seasonSelect}>
                 <select onChange={(e) => seasonChanging(e.target.value)} className={styles.seasonDropdown}>
-                    <option value="">Selecione uma Temporada</option>
+                    <option disabled value="">Selecione uma Temporada</option>
                     {seasonInfo && seasonInfo.map((seasonNum) => (
                         seasonNum.name !== 'Especiais' && (
                             <option key={seasonNum.season_number} value={seasonNum.season_number}>
