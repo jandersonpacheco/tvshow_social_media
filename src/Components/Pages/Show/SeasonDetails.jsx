@@ -28,6 +28,20 @@ const SeasonDetails = ({season}) => {
             })
     }, [id])
 
+    useEffect(() => {
+        axios.get(`https://api.themoviedb.org/3/tv/${id}/season/1?language=pt-br`, {headers})
+            .then((response) => {
+                setSeasonDetail(response.data.episodes)
+                setLoading(false)
+                console.log(response.data.episodes)
+            })
+            .catch((error) => {
+                setError('Erro ao carregar os dados!')
+                setLoading(false)
+            })
+    }, [id])
+
+
     function seasonChanging(seasonNumber){
         setSeasonDetail([])
 

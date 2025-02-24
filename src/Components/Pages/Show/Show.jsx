@@ -18,6 +18,7 @@ const Show = () => {
     const [tvShowsVideo, setTvShowsVideo] = useState([])
     const [tvShowsBackdrop, setTvShowsBackdrop] = useState([])
     const [castInfo, setCastInfo] = useState([])
+    const [seasonNumber, setSeasonNumber] = useState(1)
     const {error, setError, loading, setLoading} = useErrorAndLoadStore()
     const {id} = useParams()
 
@@ -61,6 +62,21 @@ const Show = () => {
                 setLoading(false)
             })
     }, [search])
+
+    // Get Season Info
+    useEffect(() => {
+        axios.get(`https://api.themoviedb.org/3/tv/${id}?language=pt-br`, { headers })
+            .then((response) => {
+                setTvShowsTmdb(response.data)
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }, [id])
+
+    const handleSeasonChange = (e) => {
+        setSeasonNumber(e.target.value)
+    }
 
     const paginatedCast = castInfo
 
