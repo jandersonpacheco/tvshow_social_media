@@ -117,6 +117,7 @@ body{
     padding: 0 10vh 0 10vh;
     align-self: baseline;
 }
+
 .video{
     display: flex;
     width:65vh;
@@ -162,7 +163,7 @@ body{
     border-radius: 7%;
 }
 
-.castName{
+.castName, .epTitle{
     font-size: 14px;
     font-weight: bold;
     max-width: 18.2vh;
@@ -173,13 +174,9 @@ body{
     max-width: 18.2vh;
 }
 
-.seasonBtn{
-    column-gap: 0.5vh;
-}
-
 .seasonDropdown{
     padding: 10px 15px;
-    margin: 10px;
+    margin: 0 0 2vh 0;
     font-size: 1rem;
     background-color: #a3a3a3;
     border: none;
@@ -188,6 +185,27 @@ body{
     transition: background-color 0.3s ease;
 }
 
+.seasonDetails{
+    margin: 0 0 1vh 2vh;
+}
 .seasonDropdown:hover {
     background-color: #e98528;
+}
+
+.episodeInfo{
+    display: flex;
+    flex-direction: row;
+    column-gap: 1vh;
+}
+
+.epImgContainer{
+    display: flex;
+    margin: 0 0 1vh 0;
+}
+
+.epImg{
+        display: flex;
+        width:32.5vh;
+        height:20vh;
+        border-radius: 2%;
 }

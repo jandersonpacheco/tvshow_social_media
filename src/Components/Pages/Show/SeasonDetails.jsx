@@ -93,15 +93,15 @@ const SeasonDetails = ({seasons}) => {
             <div className={styles.episodeContainer}>
                 {seasonDetail && seasonDetail.map((episode) => (
                     <div className={styles.episodeInfo} key={episode.id}>
-                        <div className={styles.episodeImg}>
+                        <div className={styles.epImgContainer}>
                             <img
                                 src={`https://image.tmdb.org/t/p/w500${episode.still_path}`}
-                                className={styles.img}
+                                className={styles.epImg}
                             />
                         </div>
-                        <div className={styles.episodeInfo}>
-                            <h3>{episode.name}</h3>
-                            <p>{episode.overview}</p>
+                        <div className={styles.epiInfo}>
+                            <h3 className={styles.epTitle}>S0{episode.season_number}E0{episode.episode_number} - {episode.name}</h3>
+                            <p className={styles.epOverview}>{episode.overview}</p>
                         </div>
                     </div>
                 ))} 
