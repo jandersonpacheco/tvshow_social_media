@@ -92,17 +92,22 @@ const SeasonDetails = ({seasons}) => {
 
             <div className={styles.episodeContainer}>
                 {seasonDetail && seasonDetail.map((episode) => (
-                    <div className={styles.episodeInfo} key={episode.id}>
+                    <div className={styles.epContainer} key={episode.id}>
                         <div className={styles.epImgContainer}>
                             <img
                                 src={`https://image.tmdb.org/t/p/w500${episode.still_path}`}
                                 className={styles.epImg}
                             />
                         </div>
-                        <div className={styles.epiInfo}>
-                            <h3 className={styles.epTitle}>S0{episode.season_number}E0{episode.episode_number} - {episode.name}</h3>
-                            <p className={styles.epOverview}>{episode.overview}</p>
-                        </div>
+                        <div className={styles.ep}>
+                            <h3 className={styles.epTitle}>
+                                {episode.season_number > 9 ? `S${episode.season_number}` : `S0${episode.season_number}`}
+                                {episode.episode_number > 9 ? `S${episode.episode_number}` : `S0${episode.episode_number}`} - {episode.name}
+                            </h3>
+                            <p className={styles.epInfo}>{episode.air_date ? episode.air_date.split('-').reverse().join('/'): ''}</p>
+                            <p className={styles.epInfo}>{episode.overview ? episode.overview : 'Descrição indisponível.'}</p>
+                            <p className={styles.epVote}>{episode.vote_count > 0 ? `Nota: ${episode.vote_average.toFixed(1)}/10 (${episode.vote_count})` : 'Ainda sem avaliações.'}</p>
+                            </div>
                     </div>
                 ))} 
             </div>

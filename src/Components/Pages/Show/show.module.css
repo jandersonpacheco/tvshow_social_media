@@ -152,7 +152,7 @@ body{
     display: flex;
     flex-direction: column;
     align-content: center;
-    min-height: 45vh;
+    min-height: 5vh;
 
 }
 
@@ -163,7 +163,7 @@ body{
     border-radius: 7%;
 }
 
-.castName, .epTitle{
+.castName{
     font-size: 14px;
     font-weight: bold;
     max-width: 18.2vh;
@@ -192,10 +192,14 @@ body{
     background-color: #e98528;
 }
 
-.episodeInfo{
+.epContainer{
     display: flex;
     flex-direction: row;
     column-gap: 1vh;
+    border-bottom: 1px solid;
+    border-color: #e98528;
+    margin-bottom: 1vh;
+    width: 100vh;
 }
 
 .epImgContainer{
@@ -205,7 +209,17 @@ body{
 
 .epImg{
         display: flex;
-        width:32.5vh;
-        height:20vh;
+        width:29vh;
+        height:18vh;
         border-radius: 2%;
+}
+
+.epTitle{
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 0.8vh;
+}
+
+.epInfo{
+    font-size: 16px;
 }
