@@ -18,7 +18,6 @@ const Show = () => {
     const [tvShowsVideo, setTvShowsVideo] = useState([])
     const [tvShowsBackdrop, setTvShowsBackdrop] = useState([])
     const [castInfo, setCastInfo] = useState([])
-    const [seasonNumber, setSeasonNumber] = useState(1)
     const {error, setError, loading, setLoading} = useErrorAndLoadStore()
     const {id} = useParams()
 
@@ -162,9 +161,8 @@ const Show = () => {
                 <h3 className={styles.seasonDetailsTitle}>Episódios:</h3>
             </div>
             <div className={styles.seasonBtn}>
-                {tvShowsTmdb.seasons && tvShowsTmdb.seasons.map((season) => (
-                    <SeasonDetails key={season.id} season={season} id={id}/>
-                ))}
+                {tvShowsTmdb.seasons &&
+                    <SeasonDetails seasons={tvShowsTmdb.seasons} />}
             </div>
         </>       
     )

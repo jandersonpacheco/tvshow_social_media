@@ -4,8 +4,8 @@ import axios from 'axios'
 import useErrorAndLoadStore from '../../../store/errorAndLoadStore'
 import { useParams } from 'react-router-dom'
 
-const SeasonDetails = ({season}) => {
-    const [seasonDetail, setSeasonDetail] = useState([])
+const SeasonDetails = ({seasons}) => {
+    const [seasonDetail, setSeasonDetail] = useState(null)
     const [seasonInfo, setSeasonInfo] = useState([])
     const {error, setError, loading, setLoading} = useErrorAndLoadStore()
     const {id} = useParams()
@@ -14,6 +14,9 @@ const SeasonDetails = ({season}) => {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwYTEyMzQ3MTk5NGVmMGU4YzlkNmVhMjlhOWY3YTM5YiIsIm5iZiI6MTczNjczNDY2NS4wNiwic3ViIjoiNjc4NDc3YzkwNjkwYWMwNmU3N2I2YmJjIiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.LPEqmskd9heCWoe_8TymhgsprUedEVuwEZrKVMhD1pw',
     }
+
+    if (!seasons || seasons.length === 0) return <p>Nenhuma temporada disponível.</p>
+
 
     useEffect(() => {
         axios.get(`https://api.themoviedb.org/3/tv/${id}?language=pt-br`, {headers})
@@ -28,7 +31,20 @@ const SeasonDetails = ({season}) => {
             })
     }, [id])
 
-    useEffect(() => {
+        useEffect(() => {
+            axios.get(`https://api.themoviedb.org/3/tv/${id}?language=pt-br`, {headers})
+                .then((response) => {
+                    setSeasonInfo(response.data.seasons)
+
+                    setLoading(false)
+                })
+                .catch((error) => {
+                    setError('Erro ao carregar os dados!')
+                    setLoading(false)
+                })
+        }, [id])
+
+    if(seasonDetail === null){
         axios.get(`https://api.themoviedb.org/3/tv/${id}/season/1?language=pt-br`, {headers})
             .then((response) => {
                 setSeasonDetail(response.data.episodes)
@@ -39,8 +55,7 @@ const SeasonDetails = ({season}) => {
                 setError('Erro ao carregar os dados!')
                 setLoading(false)
             })
-    }, [id])
-
+    }
 
     function seasonChanging(seasonNumber){
         setSeasonDetail([])
