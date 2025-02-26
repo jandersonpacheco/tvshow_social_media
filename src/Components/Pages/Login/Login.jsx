@@ -51,10 +51,8 @@ function newAccount(event){
     event.preventDefault()
 
     const emailExists = data.some((user) => user.newEmail === newEmail)
-    if(emailExists){
-        console.error('Email já cadastrado!')
-        return
-    }
+    if(emailExists) return console.error('Email já cadastrado!')
+
     if(newPassword === confirmedNewPassword){
         const newUserAccount = {
             userId: uuidv4(),
@@ -85,9 +83,13 @@ function newAccount(event){
                     <main className={styles.mainContainer}>
                     <div className={styles.formContainer}>
                         <form className={styles.createAccount} onSubmit={signInValidation}>
-                            <input className={styles.email} id="email" type="text" placeholder="Email" value={email} onChange={(event) => setEmail(event.target.value)} required></input>
-                            <input className={styles.password} id="password" type="password" placeholder="Senha" value={password} onChange={(event) => setPassword(event.target.value)} required></input>
+                            <input className={styles.email} id="email" type="text" placeholder="Email" value={email} onChange={(event) => setEmail(event.target.value)}></input>
+                            <input className={styles.password} id="password" type="password" placeholder="Senha" value={password} onChange={(event) => setPassword(event.target.value)}></input>
                             <button className={styles.button} id="signInBtn">Entrar</button>
+                            <div className={styles.ssoBtn}>
+                                <button className={styles.googleBtn} id="singUpBtn">Entre com sua conta Google </button>
+                                <button className={styles.facebookBtn} id="singUpBtn">Entre com sua conta Facebook</button>
+                            </div>
                         </form>
                     </div>
                     </main>
