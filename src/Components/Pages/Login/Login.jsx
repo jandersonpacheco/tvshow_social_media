@@ -3,8 +3,11 @@ import { useNavigate } from "react-router-dom"
 import axios from "axios"
 import { useEffect, useState } from "react"
 import {v4 as uuidv4 } from 'uuid'
+import { GoogleLogin, googleLogout, useGoogleLogin } from "@react-oauth/google"
 
 const Login = () => {
+    const [user, setUser] = useState([])
+    const [profile, setProfile] = useState([])
     const [data, setData] = useState ([])
     const [email, setEmail] = useState ('')
     const [password, setPassword] = useState ('')
@@ -23,6 +26,39 @@ function switchForm(){
         console.log(switchedForm)
 }
 
+//SSO area
+const login = useGoogleLogin({
+    onSuccess: (codeResponse) => setUser(codeResponse),
+    onError: (error) => console.log('Falha ao logar', error)
+})
+
+const headers = {
+    Authorization: `Bearer ${user.access_token}`,
+    Accept: 'application/json'
+}
+
+useEffect(() => {
+    console.log("User:", user)
+
+    if (user?.credential){
+        axios.get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`,{ headers })
+            .then((response) =>{
+                setProfile(response.data)
+                console.log(response.data)
+                return axios.post('http://localhost:3000/users', response.data)
+            })
+            .then((response) => {
+                console.log("Usuário criado:", response.data);
+                navigate('/home');
+            })
+            .catch(error => console.error("Erro:", error));
+    }
+}, [user])
+
+const logout = () => {
+    googleLogout()
+    setProfile(null)
+}
 
 //SingIn area
     useEffect(() =>{
@@ -75,6 +111,17 @@ function newAccount(event){
     return (
     <div>
         <h1>AQUI NASCE A MAIOR REDE SOCIAL DE SÉRIES DO MUNDO!</h1>
+        {profile ?(
+            <div>
+                <img src={profile.picture} alt="imagem do usuário"/>
+                <h3>Usuário logado</h3>
+                <p>Nome: {profile.name}</p>
+                <p>Email: {profile.email}</p>
+                <button className={styles.button} onClick={logout}>Sair</button>
+            </div>
+        ):(
+            <></>
+        )}
             {switchedForm === 'Cadastre-se' ? (
                 <div className={styles.headerContainer}>
                     <div>                    
@@ -87,8 +134,7 @@ function newAccount(event){
                             <input className={styles.password} id="password" type="password" placeholder="Senha" value={password} onChange={(event) => setPassword(event.target.value)}></input>
                             <button className={styles.button} id="signInBtn">Entrar</button>
                             <div className={styles.ssoBtn}>
-                                <button className={styles.googleBtn} id="singUpBtn">Entre com sua conta Google </button>
-                                <button className={styles.facebookBtn} id="singUpBtn">Entre com sua conta Facebook</button>
+                                <GoogleLogin onClick={login}/>
                             </div>
                         </form>
                     </div>
