@@ -27,30 +27,19 @@ function switchForm(){
 }
 
 //SSO area
-const login = useGoogleLogin({
-    onSuccess: (codeResponse) => setUser(codeResponse),
-    onError: (error) => console.log('Falha ao logar', error)
-})
 
 const headers = {
     Authorization: `Bearer ${user.access_token}`,
     Accept: 'application/json',
-   'Cross-Origin-Opener-Policy': 'same-origin'
+    'Cross-Origin-Opener-Policy': 'same-origin'
 }
 
 useEffect(() => {
-    console.log("User:", user)
-
     if (user?.access_token){
         axios.get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`,{ headers })
             .then((response) =>{
                 setProfile(response.data)
                 console.log(response.data)
-                return axios.post('http://localhost:3000/users', response.data)
-            })
-            .then((response) => {
-                console.log("Usuário criado:", response.data);
-                navigate('/home');
             })
             .catch(error => console.error("Erro:", error));
     }
@@ -135,7 +124,13 @@ function newAccount(event){
                             <input className={styles.password} id="password" type="password" placeholder="Senha" value={password} onChange={(event) => setPassword(event.target.value)}></input>
                             <button className={styles.button} id="signInBtn">Entrar</button>
                             <div className={styles.ssoBtn}>
-                                <GoogleLogin onClick={login}/>
+                                <GoogleLogin
+                                    onSuccess={(response) =>{
+                                        console.log('Token recebido: ', response)
+                                        setUser(response)
+                                    }}
+                                    onError={() => console.log('Falha ao logar')}
+                                />
                             </div>
                         </form>
                     </div>
