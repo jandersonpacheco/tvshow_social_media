@@ -10,7 +10,6 @@ import axios from "axios"
 import useTvShowStore from "../../../store/tvShowStore.js"
 import Pagination from "../Home/Pagination.jsx"
 import useErrorAndLoadStore from "../../../store/errorAndLoadStore.js"
-
 const Show = () => {
     const {search, castPage, nextCastPage, prevCastPage} = useTvShowStore()
     const [tvShowSearch, setTvShowSearch] = useState([])

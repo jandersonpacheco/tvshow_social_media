@@ -5,10 +5,11 @@ import { useEffect, useState } from "react"
 import {v4 as uuidv4 } from 'uuid'
 import { GoogleLogin, googleLogout, useGoogleLogin } from "@react-oauth/google"
 import { jwtDecode } from "jwt-decode"
+import SSOUserInfo  from '../../../store/SSOUserInfo'
 
 const Login = () => {
     const [user, setUser] = useState([])
-    const [profile, setProfile] = useState(null)
+    const { profile, setProfile } = SSOUserInfo()
     const [data, setData] = useState ([])
     const [email, setEmail] = useState ('')
     const [password, setPassword] = useState ('')
@@ -102,7 +103,7 @@ function newAccount(event){
     return (
     <div>
         <h1>AQUI NASCE A MAIOR REDE SOCIAL DE SÉRIES DO MUNDO!</h1>
-        {profile !== null && (
+        {profile !== "" && (
             <div>
                 <img src={profile.picture} alt="imagem do usuário"/>
                 <h3>Usuário logado</h3>
