@@ -4,10 +4,11 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import {v4 as uuidv4 } from 'uuid'
 import { GoogleLogin, googleLogout, useGoogleLogin } from "@react-oauth/google"
+import { jwtDecode } from "jwt-decode"
 
 const Login = () => {
     const [user, setUser] = useState([])
-    const [profile, setProfile] = useState([])
+    const [profile, setProfile] = useState(null)
     const [data, setData] = useState ([])
     const [email, setEmail] = useState ('')
     const [password, setPassword] = useState ('')
@@ -27,28 +28,28 @@ function switchForm(){
 }
 
 //SSO area
-
-const headers = {
-    Authorization: `Bearer ${user.access_token}`,
-    Accept: 'application/json',
-    'Cross-Origin-Opener-Policy': 'same-origin'
-}
-
 useEffect(() => {
     if (user?.access_token){
+        const headers = {
+            Authorization: `Bearer ${user.access_token}`,
+            Accept: 'application/json',
+            'Cross-Origin-Opener-Policy': 'same-origin'
+        }
         axios.get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`,{ headers })
             .then((response) =>{
                 setProfile(response.data)
-                console.log(response.data)
+                console.log('Perfil atualizado: ', response.data)
             })
-            .catch(error => console.error("Erro:", error));
+            .catch(error => console.error("Erro ao buscar o perfil: ", error));
     }
 }, [user])
 
 const logout = () => {
     googleLogout()
     setProfile(null)
+    setUser(null)
 }
+
 
 //SingIn area
     useEffect(() =>{
@@ -101,7 +102,7 @@ function newAccount(event){
     return (
     <div>
         <h1>AQUI NASCE A MAIOR REDE SOCIAL DE SÉRIES DO MUNDO!</h1>
-        {profile ?(
+        {profile !== null && (
             <div>
                 <img src={profile.picture} alt="imagem do usuário"/>
                 <h3>Usuário logado</h3>
@@ -109,8 +110,6 @@ function newAccount(event){
                 <p>Email: {profile.email}</p>
                 <button className={styles.button} onClick={logout}>Sair</button>
             </div>
-        ):(
-            <></>
         )}
             {switchedForm === 'Cadastre-se' ? (
                 <div className={styles.headerContainer}>
@@ -125,11 +124,16 @@ function newAccount(event){
                             <button className={styles.button} id="signInBtn">Entrar</button>
                             <div className={styles.ssoBtn}>
                                 <GoogleLogin
-                                    onSuccess={(response) =>{
+                                    onSuccess = {(response) =>{
                                         console.log('Token recebido: ', response)
                                         setUser(response)
+                                        const userInfo = jwtDecode(response.credential)
+                                        setProfile(userInfo)
+                                        navigate('/home')
                                     }}
-                                    onError={() => console.log('Falha ao logar')}
+                                    onError = {() => console.log('Falha ao logar',
+                                    flow = 'auto-code'
+                                    )}
                                 />
                             </div>
                         </form>

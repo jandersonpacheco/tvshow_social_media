@@ -49,7 +49,6 @@ const SeasonDetails = ({seasons}) => {
             .then((response) => {
                 setSeasonDetail(response.data.episodes)
                 setLoading(false)
-                console.log(response.data.episodes)
             })
             .catch((error) => {
                 setError('Erro ao carregar os dados!')
@@ -64,7 +63,6 @@ const SeasonDetails = ({seasons}) => {
             .then((response) => {
                 setSeasonDetail(response.data.episodes)
                 setLoading(false)
-                console.log(response.data.episodes)
             })
             .catch((error) => {
                 setError('Erro ao carregar os dados!')
