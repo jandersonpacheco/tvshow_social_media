@@ -57,3 +57,7 @@
     .nav button:hover {
         background-color: #d1d1cb;
     }
+
+    .profileImg{
+        border-radius: 10%;
+    }

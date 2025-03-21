@@ -130,6 +130,7 @@ body{
     flex-direction: row;
     justify-content: space-between;
     column-gap: 0.5vh;
+    margin: 0 3vh 0 3vh;
 }
 
 .castTitle, .seasonDetailsTitle{
