@@ -41,13 +41,22 @@ const RandomSeries = () => {
       return <h3>{error}</h3>
   }
 
-  const handleRandom = (serieChoosed) => {
-    const newSerie = serieChoosed
-    const alreadyExists = random.find(serie => serie === newSerie)
+  const handleRandom = (serieId) => {
+
+    const alreadyExists = random.find(serie => serie.id === serieId)
+
     if(!alreadyExists){
-      setRandom(prevRandom => [...prevRandom, newSerie])
       setSelectedSerie('')
-      console.log(random)
+
+        axios.get(`https://api.themoviedb.org/3/tv/${serieId}?language=pt-br`, { headers })
+          .then((response) => {
+            const newSerie = response.data
+            setRandom(prevRandom => [...prevRandom, newSerie])
+            console.log(random)
+          })
+          .catch((error) => {
+              console.error(error);
+        })
     }else{
       console.log('Já adicionado')
     }
@@ -55,7 +64,7 @@ const RandomSeries = () => {
 
   const drawSerie = () => {
     const randomSelect = Math.floor(Math.random() * (random.length))
-    setSelectedSerie(`A série sorteada foi a: ${random[randomSelect]}`)
+    setSelectedSerie(`A série sorteada foi a: ${random[randomSelect].name}`)
   }
 
   const cleanList = () => {
@@ -63,16 +72,33 @@ const RandomSeries = () => {
     setSelectedSerie('')
   }
 
-   return (
+  return (
     <>
       <div>
           {random.length > 0 ?(
             <>
-              <ul>
-                {random.map((serie) => (
-                  <li key={serie}>{serie}</li>
-                ))}
-              </ul>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Título</th>
+                    <th>Temporadas</th>
+                    <th>Episódios</th>
+                    <th>Ano de Lançamento</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {random.map((serie) => (
+                    <tr key={serie.id}>
+                      <td>{serie.name}</td>
+                      <td>{serie.number_of_seasons}</td>
+                      <td>{serie.number_of_episodes}</td>
+                      <td>{serie.first_air_date.split('-',1)}</td>
+                      <td>{serie.status}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
               <button onClick={drawSerie}>Realizar sorteio</button>
               <button onClick={cleanList}>Limpar Lista de sorteio</button>              
             </>
@@ -94,7 +120,7 @@ const RandomSeries = () => {
               searchTvShow.map((tvShow) => (
                 <li key={tvShow.id}>
                   <h3>{tvShow.name}</h3>
-                  <button onClick={() => handleRandom(tvShow.name)}>Adicionar ao sorteio</button>
+                  <button onClick={() => handleRandom(tvShow.id)}>Adicionar ao sorteio</button>
                   {tvShow.poster_path && (
                     <img
                       src={`https://image.tmdb.org/t/p/w200${tvShow.poster_path}`}
