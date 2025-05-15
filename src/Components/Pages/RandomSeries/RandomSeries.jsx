@@ -1,3 +1,4 @@
+import styles from "./random-series.module.css"
 import axios from "axios"
 import { useEffect, useState } from 'react'
 import useTvShowStore from "../../../store/tvShowStore.js"
@@ -53,6 +54,14 @@ const RandomSeries = () => {
             const newSerie = response.data
             setRandom(prevRandom => [...prevRandom, newSerie])
             console.log(random)
+
+            const statusMap = {
+              'Ended': 'Finalizada',
+              'Canceled': 'Cancelada',
+              'Returning Series': 'Renovada'
+            }
+
+            newSerie.status = statusMap[newSerie.status] || newSerie.status
           })
           .catch((error) => {
               console.error(error);
@@ -77,30 +86,35 @@ const RandomSeries = () => {
       <div>
           {random.length > 0 ?(
             <>
-              <table>
+              <table className={styles.randomTable}>
                 <thead>
                   <tr>
-                    <th>Título</th>
-                    <th>Temporadas</th>
-                    <th>Episódios</th>
-                    <th>Ano de Lançamento</th>
-                    <th>Status</th>
+                    <th className={styles.randomTableHead}>Título</th>
+                    <th className={styles.randomTableHead}>Temporadas</th>
+                    <th className={styles.randomTableHead}>Episódios</th>
+                    <th className={styles.randomTableHead}>Ano de Lançamento</th>
+                    <th className={styles.randomTableHead}>Status</th>
                   </tr>
                 </thead>
                 <tbody>
                   {random.map((serie) => (
                     <tr key={serie.id}>
-                      <td>{serie.name}</td>
-                      <td>{serie.number_of_seasons}</td>
-                      <td>{serie.number_of_episodes}</td>
-                      <td>{serie.first_air_date.split('-',1)}</td>
-                      <td>{serie.status}</td>
+                      <td className={styles.randomTableBody}>{serie.name}</td>
+                      <td className={styles.randomTableBody}>{serie.number_of_seasons}</td>
+                      <td className={styles.randomTableBody}>{serie.number_of_episodes}</td>
+                      <td className={styles.randomTableBody}>{serie.first_air_date.split('-',1)}</td>
+                      <td className={styles.randomTableBody}>{serie.status}</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
-              <button onClick={drawSerie}>Realizar sorteio</button>
-              <button onClick={cleanList}>Limpar Lista de sorteio</button>              
+                <div>
+                  <h2 style={{color: 'green', fontWeight: 700}}>{selectedSerie}</h2>
+                </div>
+              <div className={styles.drawBtn}>
+                <button onClick={drawSerie}>Realizar sorteio</button>
+                <button onClick={cleanList}>Limpar Lista de sorteio</button>       
+              </div>       
             </>
             )
           :(
@@ -109,24 +123,20 @@ const RandomSeries = () => {
           </>
         )}
       </div>
-      <div>
-          <h2>{selectedSerie}</h2>
-      </div>
       {search !== '' ? (
         <>
-          <h2>Resultados para: "{search}"</h2>
           <ul>
             {searchTvShow.length > 0 ? (
               searchTvShow.map((tvShow) => (
                 <li key={tvShow.id}>
                   <h3>{tvShow.name}</h3>
-                  <button onClick={() => handleRandom(tvShow.id)}>Adicionar ao sorteio</button>
                   {tvShow.poster_path && (
                     <img
                       src={`https://image.tmdb.org/t/p/w200${tvShow.poster_path}`}
                       alt={tvShow.name}
                     />
                   )}
+                  <button onClick={() => handleRandom(tvShow.id)}>Adicionar ao sorteio</button>
                 </li>
               ))
             ) : (

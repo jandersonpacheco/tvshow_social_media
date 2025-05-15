@@ -1,0 +1,70 @@
+/* Estilos gerais da tabela */
+.randomTable {
+  width: 30%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  overflow-x: auto; /* Garante que a tabela seja rolável em telas menores */
+}
+
+.randomTableHead,.randomTableBody {
+  padding: 12px 15px;
+  text-align: center;
+  border: 1px solid #ddd;
+  border-radius: 8px
+}
+
+.randomTableHead {
+  background-color: #b65903;
+  color: #fff;
+  font-size: 1.1rem;
+}
+
+.randomTableBody {
+  background-color: #f9f9f9;
+}
+
+
+/* Ajuste do tamanho das colunas */
+.randomTableHead,
+.randomTableBody {
+  min-width: 120px;
+}
+
+.randomTableHead:nth-child(1) {
+  width: 40%;
+}
+
+.randomTableHead:nth-child(2),
+.randomTableHead:nth-child(3) {
+  width: 20%;
+}
+
+.randomTableHead:nth-child(4),
+.randomTableHead:nth-child(5) {
+  width: 15%;
+}
+
+/* Estilos para o botão */
+button {
+  padding: 10px 15px;
+  font-size: 1rem;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  background-color: #b65903;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #a35003;
+}
+
+.drawBtn{
+  width: 20%;
+  max-width: fit-content;
+  display: flex;
+  flex-direction: row;
+  column-gap: 10px;
+  margin-top: 10px  ;
+}
