@@ -70,8 +70,10 @@
     @media (max-width: 768px) {
     .nav {
         display: flex;
-        justify-content: space-between;
+        flex-direction: row-reverse;
+        justify-content: space-around;
         text-align: center;
+        max-width: 100%;
         padding: 1vw;
         background-color: #b65903;
         border-bottom: 3px solid #FFF8E8;
@@ -80,20 +82,19 @@
     .selectForm {
         display: flex;
         flex-direction: row;
-        justify-content: flex-start;
     }
 
     .searchBar{
         display: flex;
-        justify-self: flex-start;
         padding: 1vw;
-        font-size: 1rem;
+        font-size: 0.5rem;
         border: 2px solid #b65903;
         border-radius: 8px;
     }
 
     .cancelBtn{
         font-size: 0.6rem;
+        padding: 0.3vw 0.7vw;
         background-color: #7a3d03;
         border: none;
         border-radius: 8px;
@@ -105,13 +106,13 @@
         background-color: #8f4603;
     }
 
-    .profileImg{
-        border-radius: 10%;
+    .userContainer{
+        margin-left: 7%;
     }
 
     .userPhoto{
         border-radius: 50%;
-        max-width: 30%;
+        max-width: 50%;
     }
     .logoutBtn{
         font-size: 0.8rem;
