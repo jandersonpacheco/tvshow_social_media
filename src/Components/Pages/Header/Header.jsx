@@ -7,7 +7,7 @@ const Header = () => {
     const {search, setSearch} = useTvShowStore()
     const { profile } = SSOUserInfo()
     const { logout } = SSOUserInfo()
-    // const navigate = useNavigate()
+    const navigate = useNavigate('/login')
 
     const handleSearch = (event) => setSearch(event.target.value)
 
@@ -30,7 +30,7 @@ const Header = () => {
                             <h3>Usuário logado</h3>
                             <p>Nome: {profile.name}</p>
                             <p>Email: {profile.email}</p>
-                            <button className={styles.button} onClick={() => logout({/*navigate*/})}>Sair</button>
+                            <button className={styles.button} onClick={() => logout({navigate})}>Sair</button>
                         </div>
                     )}
                 <form className={styles.selectForm}>

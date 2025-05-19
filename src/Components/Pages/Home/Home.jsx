@@ -29,7 +29,7 @@ const Home = () => {
 
     const handleClick = (showId) => {
         cleanInput()
-        navigate(`/home/${showId}`)
+        navigate(`/${showId}`)
     }
 
     const headers = {
@@ -113,7 +113,7 @@ const Home = () => {
                         </div>
                         <div className={styles.tvShowCategory}>
                             {trendingTvShows.slice(0, 6).map((trending) => (
-                                <Link to={`/home/${trending.id}`} className={styles.tvShowContainer} key={trending.id}>
+                                <Link to={`/${trending.id}`} className={styles.tvShowContainer} key={trending.id}>
                                     <TvShowCard show={trending} />
                                 </Link>
                             ))}
@@ -130,7 +130,7 @@ const Home = () => {
                         </div>
                         <div className={styles.tvShowCategory}>
                             {popularTvShow.slice(0, 6).map((popular) => (
-                                <Link to={`/home/${popular.id}`} className={styles.tvShowContainer} key={popular.id}>
+                                <Link to={`/${popular.id}`} className={styles.tvShowContainer} key={popular.id}>
                                     <TvShowCard show={popular} />
                                 </Link>
                             ))}
@@ -147,7 +147,7 @@ const Home = () => {
                         </div>
                         <div className={styles.tvShowCategory}>
                             {ratingTvShow.slice(0, 6).map((rating) => (
-                                <Link to={`/home/${rating.id}`} className={styles.tvShowContainer} key={rating.id}>
+                                <Link to={`/${rating.id}`} className={styles.tvShowContainer} key={rating.id}>
                                     <TvShowCard show={rating} />
                                 </Link>
                             ))}
@@ -160,7 +160,7 @@ const Home = () => {
                     </div>
                     <div className={styles.tvShowCategory}>
                         {searchTvShow.map((show) => (
-                            <Link to={`/home/${show.id}`} key={show.id} onClick={() => handleClick(show.id)}>
+                            <Link to={`/${show.id}`} key={show.id} onClick={() => handleClick(show.id)}>
                                 <TvShowCard show={show} />
                             </Link>
                         ))}

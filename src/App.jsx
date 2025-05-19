@@ -8,10 +8,7 @@ function App() {
 
   return (
     <>
-      <Header/>
       <RouterProvider router = {router}/>
-      <Outlet/>
-      <Footer/>
     </>
   )
 }

@@ -67,7 +67,7 @@ const logout = () => {
         const validation = data.find((user) => user.newEmail == email && user.newPassword == password)
             if(validation){
                 console.log('Usuário encontrado')
-                navigate('/home')
+                navigate('/')
             }else{
                 console.error('Email ou senha inválida')
             }
@@ -93,7 +93,7 @@ function newAccount(event){
         axios.post('http://localhost:3000/users', newUserAccount)
             .then((response) =>{
                 console.log('Usuário criado', response.data)
-                navigate('/home')
+                navigate('/')
         })
         .catch(error => console.error('Erro ao criar o usuário', error))
     }else{
@@ -130,7 +130,7 @@ function newAccount(event){
                                         setUser(response)
                                         const userInfo = jwtDecode(response.credential)
                                         setProfile(userInfo)
-                                        navigate('/home')
+                                        navigate('/')
                                     }}
                                     onError = {() => console.log('Falha ao logar',
                                     flow = 'auto-code'
