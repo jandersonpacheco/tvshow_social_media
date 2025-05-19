@@ -14,40 +14,34 @@
 
     .nav {
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
         text-align: center;
+        max-height: 70px;
         padding: 10px;
         background-color: #b65903;
         border-bottom: 3px solid #FFF8E8;
     }
 
-    .nav h1 {
-        font-family: 'Roboto Slab', system-ui, sans-serif;
-        font-size: 5vw;
-        color: #2f4f4f;
-        margin: 0;
-        padding: 20px;
-    }
-
-    .nav form {
+    .selectForm {
         display: flex;
         flex-direction: row;
         justify-content: center;
+        margin-left: 35%;
         gap: 10px;
     }
 
-    .nav input{
+    .searchBar{
         padding: 10px;
         font-size: 1rem;
-        border: 2px solid #FFF8E8;
+        border: 2px solid #b65903;
         border-radius: 8px;
         width: 25vw;
     }
 
-    .nav button {
+    .cancelBtn, .logoutBtn {
         padding: 10px 15px;
         font-size: 1rem;
-        background-color: #FFF8E8;
+        background-color: #b65903;
         border: none;
         border-radius: 8px;
         cursor: pointer;
@@ -55,9 +49,72 @@
     }
 
     .nav button:hover {
-        background-color: #d1d1cb;
+        background-color: #8f4603;
     }
 
     .profileImg{
         border-radius: 10%;
+    }
+
+    .userContainer{
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        }
+
+    .userPhoto{
+        border-radius: 50%;
+        max-width: 25%;
+    }
+
+    @media (max-width: 768px) {
+    .nav {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-around;
+        text-align: center;
+        max-width: 100%;
+        padding: 1vw;
+        background-color: #b65903;
+        border-bottom: 3px solid #FFF8E8;
+    }
+
+    .selectForm {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .searchBar{
+        display: flex;
+        padding: 1vw;
+        font-size: 0.5rem;
+        border: 2px solid #b65903;
+        border-radius: 8px;
+    }
+
+    .cancelBtn{
+        font-size: 0.6rem;
+        padding: 0.3vw 0.7vw;
+        background-color: #7a3d03;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .nav button:hover {
+        background-color: #8f4603;
+    }
+
+    .userContainer{
+        margin-left: 7%;
+    }
+
+    .userPhoto{
+        border-radius: 50%;
+        max-width: 50%;
+    }
+    .logoutBtn{
+        font-size: 0.8rem;
+    }
     }
