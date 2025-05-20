@@ -1,70 +1,87 @@
+.drawSection{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  column-gap: 5%;
+}
+
 /* Estilos gerais da tabela */
+
 .randomTable {
   width: 30%;
   border-collapse: collapse;
-  margin: 20px 0;
+  min-height: max-content;
+  margin: 1%;
   overflow-x: auto; /* Garante que a tabela seja rolável em telas menores */
-}
-
-.randomTableHead,.randomTableBody {
-  padding: 12px 15px;
-  text-align: center;
-  border: 1px solid #ddd;
-  border-radius: 8px
 }
 
 .randomTableHead {
   background-color: #b65903;
   color: #fff;
-  font-size: 1.1rem;
-}
-
-.randomTableBody {
-  background-color: #f9f9f9;
-}
-
-
-/* Ajuste do tamanho das colunas */
-.randomTableHead,
-.randomTableBody {
-  min-width: 120px;
-}
-
-.randomTableHead:nth-child(1) {
-  width: 40%;
-}
-
-.randomTableHead:nth-child(2),
-.randomTableHead:nth-child(3) {
-  width: 20%;
-}
-
-.randomTableHead:nth-child(4),
-.randomTableHead:nth-child(5) {
-  width: 15%;
-}
-
-/* Estilos para o botão */
-button {
-  padding: 10px 15px;
-  font-size: 1rem;
-  cursor: pointer;
+  font-size: 0.9rem;
+  text-align: center;
   border: none;
+  border-radius: 5px;
+  min-width: 140px;
+}
+.randomTableBody {
+  font-size: 0.9rem;
+  text-align: center;
+  border: 1px solid #ddd;
   border-radius: 8px;
+  min-width: 140px;
+  background-color: #f9f9f9;
+  
+}
+
+.drawBtn {
   background-color: #b65903;
   color: white;
-  transition: background-color 0.3s ease;
+  border: none;
+  padding: 1%;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 8px;
 }
 
-button:hover {
-  background-color: #a35003;
-}
-
-.drawBtn{
-  width: 20%;
-  max-width: fit-content;
+.searchContainer{
   display: flex;
   flex-direction: row;
-  column-gap: 10px;
-  margin-top: 10px  ;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.searchContent{
+  display: flex;
+  flex-direction: column;
+  width:fit-content;
+  max-width: 10vw;
+  margin: 1%;
+  row-gap: 10px;
+}
+
+.poster {
+  width: fit-content;
+  max-width: 10vw;
+  height: auto;
+  min-height: 15vw;
+  border-radius: 8px;
+}
+
+.title {
+    font-size: clamp(0.8rem, 2.5vw, 1rem);
+    font-weight: bold;
+    padding-top: 5px;
+    text-align: center;
+    width: 100%;
+    max-width: 10vw;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

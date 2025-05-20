@@ -2,6 +2,7 @@ import styles from "./random-series.module.css"
 import axios from "axios"
 import { useEffect, useState } from 'react'
 import useTvShowStore from "../../../store/tvShowStore.js"
+import noPoster from '../../../assets/poster.png' // Alterar para não importar a imagem diretamente
 
 const RandomSeries = () => {
   const [random, setRandom] = useState([])
@@ -82,8 +83,8 @@ const RandomSeries = () => {
   }
 
   return (
-    <>
-      <div>
+    <section className={styles.drawSection}>
+      <div className={styles.tableContainer}>
           {random.length > 0 ?(
             <>
               <table className={styles.randomTable}>
@@ -111,43 +112,68 @@ const RandomSeries = () => {
                 <div>
                   <h2 style={{color: 'green', fontWeight: 700}}>{selectedSerie}</h2>
                 </div>
-              <div className={styles.drawBtn}>
-                <button onClick={drawSerie}>Realizar sorteio</button>
-                <button onClick={cleanList}>Limpar Lista de sorteio</button>       
+              <div className={styles.drawBtnContainer}>
+                <button className={styles.drawBtn} onClick={drawSerie}>Realizar sorteio</button>
+                <button className={styles.drawBtn}onClick={cleanList}>Limpar Lista de sorteio</button>       
               </div>       
             </>
             )
           :(
           <>
-            <h3>Pesquise por uma série</h3>
+            <table className={styles.randomTable}>
+              <thead>
+                <tr>
+                  <th className={styles.randomTableHead}>Título</th>
+                  <th className={styles.randomTableHead}>Temporadas</th>
+                  <th className={styles.randomTableHead}>Episódios</th>
+                  <th className={styles.randomTableHead}>Ano de Lançamento</th>
+                  <th className={styles.randomTableHead}>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                    <td className={styles.randomTableBody}></td>
+                    <td className={styles.randomTableBody}></td>
+                    <td className={styles.randomTableBody}></td>
+                    <td className={styles.randomTableBody}></td>
+                    <td className={styles.randomTableBody}></td>
+                  </tr>
+              </tbody>
+            </table>
           </>
         )}
       </div>
       {search !== '' ? (
-        <>
-          <ul>
+        <div className={styles.searchContainer}>
+          <ul className={styles.searchContainer}>
             {searchTvShow.length > 0 ? (
               searchTvShow.map((tvShow) => (
-                <li key={tvShow.id}>
-                  <h3>{tvShow.name}</h3>
-                  {tvShow.poster_path && (
+                <li className={styles.searchContent} key={tvShow.id}>
+                  <h3 className={styles.title}>{tvShow.name}</h3>
+                  {tvShow.poster_path ? (
                     <img
+                      className={styles.poster}
                       src={`https://image.tmdb.org/t/p/w200${tvShow.poster_path}`}
-                      alt={tvShow.name}
+                      alt={noPoster}
+                    />
+                  ):(
+                    <img
+                      className={styles.poster}
+                      src={noPoster}
                     />
                   )}
-                  <button onClick={() => handleRandom(tvShow.id)}>Adicionar ao sorteio</button>
+                  <button  className={styles.drawBtn} onClick={() => handleRandom(tvShow.id)}>Adicionar ao sorteio</button>
                 </li>
               ))
             ) : (
               <p>Nenhum resultado encontrado.</p>
             )}
           </ul>
-        </>
+        </div>
       ) : (
         <></>
       )}
-    </>
+    </section>
   )
 }
 

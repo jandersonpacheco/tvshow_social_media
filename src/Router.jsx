@@ -20,15 +20,13 @@ const router = createBrowserRouter ([
             {
                 path: '/:id',
                 element: <Show />
+            },
+            {
+                path:'/random-series',
+                element: <RandomSeries />
             }
         ]
     },
-
-    {
-        path:'/random-series',
-        element: <RandomSeries />
-    },
-
     {  
         path: '/profile/',
         element: <Profile />
