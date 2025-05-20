@@ -11,7 +11,7 @@ import useTvShowStore from "../../../store/tvShowStore.js"
 import Pagination from "../Home/Pagination.jsx"
 import useErrorAndLoadStore from "../../../store/errorAndLoadStore.js"
 const Show = () => {
-    const {search, castPage, nextCastPage, prevCastPage} = useTvShowStore()
+    const {search, setSearch, castPage, nextCastPage, prevCastPage} = useTvShowStore()
     const [tvShowSearch, setTvShowSearch] = useState([])
     const [tvShowsTmdb, setTvShowsTmdb] = useState([])
     const [tvShowsVideo, setTvShowsVideo] = useState([])
@@ -44,7 +44,7 @@ const Show = () => {
         }
     }, [search])
 
-    const cleanInput = () => search = ''
+    const cleanInput = () => setSearch = ['']
 
     //Get Cast
     useEffect(() => {

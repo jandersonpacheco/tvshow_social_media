@@ -11,6 +11,7 @@ const RandomSeries = () => {
   const [searchTvShow, setSearchTvShow] = useState([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
+  const [seriesDraw, setSeriesDraw] = useState([])
 
   const headers = {
     'Content-Type': 'application/json',
@@ -74,9 +75,9 @@ const RandomSeries = () => {
   function embaralhar (){
         for (let i = random.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
-      [random[i], random[j]] = [random[j], random[i]]; // troca os elementos
+      [random[i], random[j]] = [random[j], random[i]];
     }
-    return random;
+    return random
     }
 
 
@@ -87,9 +88,11 @@ const RandomSeries = () => {
     
     embaralhar()
 
-    const embaralhado = embaralhar([...random]); // usa spread para manter o original intacto
+    const embaralhado = embaralhar([...random])
 
-    console.log(embaralhado)
+    const setSeriesDraw = (embaralhado)
+
+    console.log(serieDraw)
 
     //setSelectedSerie(`A série sorteada foi a: ${random[randomSelect].name}`)
   }
@@ -132,31 +135,38 @@ const RandomSeries = () => {
               <div className={styles.drawBtnContainer}>
                 <button className={styles.drawBtn} onClick={drawSerie}>Realizar sorteio</button>
                 <button className={styles.drawBtn}onClick={cleanList}>Limpar Lista de sorteio</button>       
-              </div>       
+              </div>
+
+              {seriesDraw.length >= 7 ? (
+                <section className={styles.drawSection}>
+                  <table className={styles.randomTable}>
+                    <thead>
+                      <tr>
+                        <th className={styles.randomTableHead}>Título</th>
+                        <th className={styles.randomTableHead}>Temporadas</th>
+                        <th className={styles.randomTableHead}>Episódios</th>
+                        <th className={styles.randomTableHead}>Ano de Lançamento</th>
+                        <th className={styles.randomTableHead}>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {seriesDraw.map((serie) => (
+                        <tr key={serie.id}>
+                          <td className={styles.randomTableBody}>{serie[0].name}</td>
+                          <td className={styles.randomTableBody}>{serie.number_of_seasons}</td>
+                          <td className={styles.randomTableBody}>X</td>
+                          <td className={styles.randomTableBody}>{serie.first_air_date.split('-',1)}</td>
+                          <td className={styles.randomTableBody}>{serie.status}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </section>
+              ):(<></>)}       
             </>
             )
           :(
           <>
-            <table className={styles.randomTable}>
-              <thead>
-                <tr>
-                  <th className={styles.randomTableHead}>Título</th>
-                  <th className={styles.randomTableHead}>Temporadas</th>
-                  <th className={styles.randomTableHead}>Episódios</th>
-                  <th className={styles.randomTableHead}>Ano de Lançamento</th>
-                  <th className={styles.randomTableHead}>Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                  <tr>
-                    <td className={styles.randomTableBody}></td>
-                    <td className={styles.randomTableBody}></td>
-                    <td className={styles.randomTableBody}></td>
-                    <td className={styles.randomTableBody}></td>
-                    <td className={styles.randomTableBody}></td>
-                  </tr>
-              </tbody>
-            </table>
           </>
         )}
       </div>

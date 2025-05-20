@@ -47,7 +47,7 @@ const Header = () => {
                         onClick={() => handleLogout()}>Sair</button>
                     </div>
                 ):(
-                    <button className={styles.logoutBtn} onClick={() => navigate('/login')}>Entrar / Cadastre-se</button>
+                    <button className={styles.logoutBtn} onClick={() => navigate('/login')}>Entrar</button>
                 )}
             </nav> 
         </>
