@@ -54,7 +54,6 @@ const RandomSeries = () => {
           .then((response) => {
             const newSerie = response.data
             setRandom(prevRandom => [...prevRandom, newSerie])
-            console.log(random)
 
             const statusMap = {
               'Ended': 'Finalizada',
@@ -72,9 +71,27 @@ const RandomSeries = () => {
     }
   }
 
+  function embaralhar (){
+        for (let i = random.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [random[i], random[j]] = [random[j], random[i]]; // troca os elementos
+    }
+    return random;
+    }
+
+
   const drawSerie = () => {
-    const randomSelect = Math.floor(Math.random() * (random.length))
-    setSelectedSerie(`A série sorteada foi a: ${random[randomSelect].name}`)
+    if(random.length < 8){
+      return window.alert('Você precisa adicionar o mínimo de 4 séries.')
+    }
+    
+    embaralhar()
+
+    const embaralhado = embaralhar([...random]); // usa spread para manter o original intacto
+
+    console.log(embaralhado)
+
+    //setSelectedSerie(`A série sorteada foi a: ${random[randomSelect].name}`)
   }
 
   const cleanList = () => {
