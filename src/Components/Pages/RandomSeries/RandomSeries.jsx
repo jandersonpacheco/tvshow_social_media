@@ -11,12 +11,7 @@
     const [searchTvShow, setSearchTvShow] = useState([])
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null)
-    const [seriesDraw, setSeriesDraw] = useState([])
     const [players, setPlayers] = useState([])
-
-  useEffect(() => {
-  console.log('atualizando com effect', players); // Verifique quando players é atualizado
-}, [players])
 
     const headers = {
       'Content-Type': 'application/json',
@@ -87,13 +82,34 @@
     }
 
     const drawSerie = () => {
-      if(random.length < 4){
+      if(random.length < 2){
         return window.alert('Você precisa adicionar o mínimo de 4 séries.')
       }
 
       const shuffled = shuffleSeries([...random])
 
-      setPlayers(() => shuffled)
+      //Para dividir as séries em pares
+      const pairs = []
+      for(let i = 0 ; i < shuffled.length; i +=2){
+        if(shuffled.length % 2 !== 0){
+          shuffled.splice(-1,1)
+        }
+          pairs.push(shuffled.slice(i, i + 2))
+      }
+      
+      if(pairs.length > 8){
+        pairs.length = 8
+      }
+
+      if(pairs.length % 2 !== 0){
+        if(pairs.length === 1){
+          console.log('Final')
+        }else{
+          pairs.splice(-1,1)
+        }
+      }
+
+      setPlayers(() => pairs)
     }
 
     const drawResult = (id) => {
@@ -103,6 +119,7 @@
         if (player.id === id) {
           return { ...player, result: result }
         }
+
         return player
       })
 
@@ -110,8 +127,6 @@ setPlayers(updatedPlayers)
         console.log(players)
     }
 
-
-    
     const cleanList = () => {
       setRandom ([])
       setPlayers([])
@@ -123,6 +138,7 @@ setPlayers(updatedPlayers)
         <div className={styles.tableContainer}>
             {random.length > 0 ?(
               <>
+              {/*Inicio do body da tabela de sorteio*/} 
                 <table className={styles.randomTable}>
                   <thead>
                     <tr>
@@ -152,10 +168,10 @@ setPlayers(updatedPlayers)
                   <button className={styles.drawBtn} onClick={drawSerie}>Realizar sorteio</button>
                   <button className={styles.drawBtn}onClick={cleanList}>Limpar Lista de sorteio</button>       
                 </div>
-
-                {players.length >= 4 ? (
-                  <section className={styles.drawSection}>
-                    <table className={styles.randomTable}>
+                {/*Inicio do body da tabela Knockout*/} 
+                {players !== '' ? (
+                <section className={styles.drawSection}>
+                  <table className={styles.randomTable}>
                       <thead>
                         <tr>
                           <th className={styles.randomTableHead}></th>
@@ -166,62 +182,26 @@ setPlayers(updatedPlayers)
                         </tr>
                       </thead>
                       <tbody>
-                          <tr>
-                            {/*Inicio do body da tabela Knockout*/} 
-                            <td className={styles.randomTableBody}>{players[0].name}</td>
+                        {players.map((pairs, index) =>(
+                          <tr key={index}>
+                            <td className={styles.randomTableBody}>{pairs[0].name}</td>
                             <td className={styles.randomTableBody}>
                               <button 
-                                onClick={() => drawResult(players[0].id)}>{players[0]?.result === null || players[0]?.result === undefined ? 'Resultado' : players[0].result}
+                                onClick={() => drawResult(pairs[0].id)}>{pairs[0]?.result === null || pairs[0]?.result === undefined ? 'Resultado' : pairs[0].result}
                               </button>
                             </td>
                             <td className={styles.randomTableBody}>X</td>
                             <td className={styles.randomTableBody}>
                               <button
-                                onClick={() => drawResult(players[1].id)}>{players[1]?.result === null || players[1]?.result === undefined ? 'Resultado' : players[1].result}
+                                onClick={() => drawResult(pairs[1].id)}>{pairs[1]?.result === null || pairs[1]?.result === undefined ? 'Resultado' : pairs[1].result}
                               </button>
                           </td>
-                            <td className={styles.randomTableBody}>{players[1].name}</td>
+                            <td className={styles.randomTableBody}>{pairs[1].name}</td>
                           </tr>
-                          <tr>
-                            <td className={styles.randomTableBody}>{players[2].name}</td>
-                            <td className={styles.randomTableBody}>
-                              <button 
-                                onClick={() => drawResult(players[2].id)}>{players[2]?.result === null || players[2]?.result === undefined ? 'Resultado' : players[2].result}
-                              </button>
-                            </td>
-                            <td className={styles.randomTableBody}>X</td>
-                            <td className={styles.randomTableBody}>
-                              <button
-                                onClick={() => drawResult(players[3].id)}>{players[3]?.result === null || players[3]?.result === undefined ? 'Resultado' : players[3].result}
-                              </button>
-                          </td>
-                            <td className={styles.randomTableBody}>{players[3].name}</td>
-                          </tr>
-                          <tr>
-  {/*                       <td className={styles.randomTableBody}>{seriesDraw[2].name}</td>
-                            <td className={styles.randomTableBody}><button onClick={() => drawResult}>Clique Aqui</button></td>
-                            <td className={styles.randomTableBody}>X</td>
-                            <td className={styles.randomTableBody}><button onClick={() => drawResult}>Clique Aqui</button></td>
-                            <td className={styles.randomTableBody}>{seriesDraw[3].name}</td>
-                          </tr>
-                          <tr>
-                            <td className={styles.randomTableBody}>{seriesDraw[4].name}</td>
-                            <td className={styles.randomTableBody}><button onClick={() => drawResult}>Clique Aqui</button></td>
-                            <td className={styles.randomTableBody}>X</td>
-                            <td className={styles.randomTableBody}><button onClick={() => drawResult}>Clique Aqui</button></td>
-                            <td className={styles.randomTableBody}>{seriesDraw[5].name}</td>
-                          </tr>
-                          <tr>
-                            <td className={styles.randomTableBody}>{seriesDraw[6].name}</td>
-                            <td className={styles.randomTableBody}><button onClick={() => drawResult}>Clique Aqui</button></td>
-                            <td className={styles.randomTableBody}>X</td>
-                            <td className={styles.randomTableBody}><button onClick={() => drawResult}>Clique Aqui</button></td>
-                            <td className={styles.randomTableBody}>{seriesDraw[7].name}</td>*/}
-                          </tr>
+                        ))}
                       </tbody>
-                    </table>
-                  </section>
-                ):(<></>)}       
+                  </table>
+                </section>):(<></>)}
               </>
               )
             :(
@@ -257,7 +237,9 @@ setPlayers(updatedPlayers)
             </ul>
           </div>
         ) : (
-          <></>
+          <>
+          <h1>PROCURE POR SÉRIES PARA ADICIONAR AO SORTEIO </h1>
+          </>
         )}
       </section>
     )
