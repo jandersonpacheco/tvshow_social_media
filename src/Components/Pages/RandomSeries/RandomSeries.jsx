@@ -12,6 +12,7 @@
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null)
     const [players, setPlayers] = useState([])
+    const [teste, setTeste] = useState([])
 
     const headers = {
       'Content-Type': 'application/json',
@@ -83,7 +84,7 @@
 
     const drawSerie = () => {
       if(random.length < 2){
-        return window.alert('Você precisa adicionar o mínimo de 4 séries.')
+        return window.alert('Você precisa adicionar o mínimo de 2 séries.')
       }
 
       const shuffled = shuffleSeries([...random])
@@ -114,17 +115,18 @@
 
     const drawResult = (id) => {
       const result = Math.floor(Math.random() * 6 + 1)
+      console.log(id)
 
-      const updatedPlayers = players.map(player => {
-        if (player.id === id) {
-          return { ...player, result: result }
-        }
+      const updatedPlayers = players.map(player =>
+        player.map(serie =>{
+          if(id === serie.id) return {...serie, result}
+          return serie
+      }))
 
-        return player
-      })
-
-setPlayers(updatedPlayers)
+      setPlayers(updatedPlayers)
+      setTeste(updatedPlayers)
         console.log(players)
+      
     }
 
     const cleanList = () => {
@@ -196,11 +198,14 @@ setPlayers(updatedPlayers)
                                 onClick={() => drawResult(pairs[1].id)}>{pairs[1]?.result === null || pairs[1]?.result === undefined ? 'Resultado' : pairs[1].result}
                               </button>
                           </td>
-                            <td className={styles.randomTableBody}>{pairs[1].name}</td>
+                            <td className={styles.randomTableBody}>{pairs[1]?.name}</td>
                           </tr>
                         ))}
                       </tbody>
                   </table>
+                  <div className={styles.nextPhaseContainer}>
+                    <button className={styles.drawBtn}>Próxima Fase</button>
+                  </div>
                 </section>):(<></>)}
               </>
               )
