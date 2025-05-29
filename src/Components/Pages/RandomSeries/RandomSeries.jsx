@@ -12,7 +12,9 @@
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null)
     const [players, setPlayers] = useState([])
-    const [teste, setTeste] = useState([])
+    const [semiFinals, setSemiFinals] = useState([])
+    const [final, setFinal] = useState([])
+
 
     const headers = {
       'Content-Type': 'application/json',
@@ -104,18 +106,15 @@
 
       if(pairs.length % 2 !== 0){
         if(pairs.length === 1){
-          console.log('Final')
         }else{
           pairs.splice(-1,1)
         }
       }
-
       setPlayers(() => pairs)
     }
 
     const drawResult = (id) => {
       const result = Math.floor(Math.random() * 6 + 1)
-      console.log(id)
 
       const updatedPlayers = players.map(player =>
         player.map(serie =>{
@@ -124,9 +123,25 @@
       }))
 
       setPlayers(updatedPlayers)
-      setTeste(updatedPlayers)
-        console.log(players)
-      
+    }
+
+    //Próxima fase
+    const nextPhase = () => {
+
+      const phase = players.length
+      const winners = []
+      players.forEach(([player1, player2]) => {
+        const winner = player1.result > player2.result ? player1 : player2
+        if(phase >= 3) {
+          winners.push(winner)
+          setSemiFinals(winners)
+          return console.log(semiFinals)
+        }
+          if(phase <= 2) {
+            console.log('< 3')
+            setFinal(winner)}
+           return console.log(phase, {final})
+      })
     }
 
     const cleanList = () => {
@@ -170,8 +185,9 @@
                   <button className={styles.drawBtn} onClick={drawSerie}>Realizar sorteio</button>
                   <button className={styles.drawBtn}onClick={cleanList}>Limpar Lista de sorteio</button>       
                 </div>
+
                 {/*Inicio do body da tabela Knockout*/} 
-                {players !== '' ? (
+                {players !== '' && (
                 <section className={styles.drawSection}>
                   <table className={styles.randomTable}>
                       <thead>
@@ -204,9 +220,44 @@
                       </tbody>
                   </table>
                   <div className={styles.nextPhaseContainer}>
-                    <button className={styles.drawBtn}>Próxima Fase</button>
+                    <button className={styles.drawBtn} onClick={nextPhase}>Próxima Fase</button>
                   </div>
-                </section>):(<></>)}
+                </section>)}
+
+                {/*Inicio do body da tabela Knockout*/}
+                {semiFinals !== '' && (
+                <section className={styles.drawSection}>
+                  <table className={styles.randomTable}>
+                      <thead>
+                        <tr>
+                          <th className={styles.randomTableHead}></th>
+                          <th className={styles.randomTableHead}></th>
+                          <th className={styles.randomTableHead}>KNOCKOUT FASE</th>
+                          <th className={styles.randomTableHead}></th>
+                          <th className={styles.randomTableHead}></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {semiFinals.map((_, index) =>(
+                          <tr key={index}>
+                            <td className={styles.randomTableBody}>{player1.name}</td>
+                            <td className={styles.randomTableBody}>
+                              <button 
+                                onClick={() => drawResult(player1.id)}>{player1?.result === null || player1?.result === undefined ? 'Resultado' : player1.result}
+                              </button>
+                            </td>
+                            <td className={styles.randomTableBody}>X</td>
+                            <td className={styles.randomTableBody}>
+                              <button
+                                onClick={() => drawResult(player2.id)}>{player2?.result === null || player2?.result === undefined ? 'Resultado' : player2.result}
+                              </button>
+                          </td>
+                            <td className={styles.randomTableBody}>{player2?.name}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                  </table>
+                  </section>)}
               </>
               )
             :(
