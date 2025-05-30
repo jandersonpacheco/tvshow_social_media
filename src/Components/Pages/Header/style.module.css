@@ -26,7 +26,11 @@
         display: flex;
         align-items: center;
         cursor: pointer;
-        margin-right: 1.8%;
+    }
+
+    .randomIcon{
+        display: flex;
+        width: 4.5vw;
     }
 
     .selectForm {
@@ -69,7 +73,7 @@
     .userContainer{
         display: flex;
         align-items: center;
-        }
+    }
 
     .userPhoto{
         border-radius: 50%;
@@ -79,13 +83,18 @@
     @media (max-width: 768px) {
     .nav {
         display: flex;
-        flex-direction: row-reverse;
-        justify-content: space-around;
+        flex-direction: row;
+        justify-content: center;
         text-align: center;
         max-width: 100%;
         padding: 1vw;
         background-color: #b65903;
         border-bottom: 3px solid #FFF8E8;
+    }
+
+    .homeIcon{
+        display: flex;
+        margin-left: 3%;
     }
 
     .selectForm {
@@ -102,7 +111,7 @@
     }
 
     .cancelBtn{
-        font-size: 0.6rem;
+        font-size: 0.5rem;
         padding: 0.3vw 0.7vw;
         background-color: #7a3d03;
         border: none;
@@ -116,14 +125,19 @@
     }
 
     .userContainer{
-        margin-left: 7%;
+        margin-left: 7%
     }
 
     .userPhoto{
         border-radius: 50%;
-        max-width: 50%;
+        max-width: 5vh;
     }
     .logoutBtn{
-        font-size: 0.8rem;
+        font-size: 0.7rem;
     }
+
+    .randomIcon{
+        width: 9vh;
+        max-width: 9vh
     }
+}

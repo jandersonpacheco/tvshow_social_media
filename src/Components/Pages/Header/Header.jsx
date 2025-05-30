@@ -3,6 +3,7 @@ import useTvShowStore from "../../../store/tvShowStore.js"
 import { useNavigate } from "react-router-dom"
 import SSOUserInfo from '../../../store/SSOUserInfo.js'
 import homeIcon from '../../../assets/home.png' // Alterar para não importar a imagem diretamente
+import randomIcon from '../../../assets/random.png'
 
 const Header = () => {
     const {search, setSearch} = useTvShowStore()
@@ -32,8 +33,8 @@ const Header = () => {
         <>
             <nav className={styles.nav}>
                 <h1 className={styles.homeIcon} onClick={() => navigate('/')}><img src={homeIcon} alt="Home"></img></h1>
-
                 <form className={styles.selectForm}>
+                    <h1 className={styles.homeIcon} onClick={() => navigate ('/random-series')}><img className={styles.randomIcon} src={randomIcon} alt="Sorteio de Séries"></img></h1>
                     <input className={styles.searchBar} type="text" id="search" autoComplete="off"placeholder="Procure por uma série" value={search} onChange={handleSearch}></input>
                     <button className={styles.cancelBtn} id="searchBtn" disabled={search.trim() === ''} onClick={cancelSearch}>Cancelar</button>
                 </form>
