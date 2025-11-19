@@ -51,7 +51,6 @@ const logout = () => {
     setUser(null)
 }
 
-
 //SingIn area
     useEffect(() =>{
         axios.get('http://localhost:3000/users')
