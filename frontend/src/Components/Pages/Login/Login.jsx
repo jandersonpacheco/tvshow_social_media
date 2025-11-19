@@ -53,7 +53,7 @@ const Login = () => {
         
         axios.post('http://localhost:3001/auth/login', {email, password})
             .then((response) => {
-                setUserLogin(response.data.user.name)
+                setUserLogin(response.data.user)
                 navigate('/')
                 console.log(response.data.user.name)
             })

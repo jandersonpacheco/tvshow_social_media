@@ -8,15 +8,15 @@ import randomIcon from '../../../assets/random.png'
 const Header = () => {
     const {search, setSearch} = useTvShowStore()
     const { userLogin, ssoUser, setUserLogin, setSsoUser, logout } = useUserStore()
-    const navigate = useNavigate('/login')
+    const navigate = useNavigate()
 
     const handleLogout = () => {
     const name = ssoUser ? ssoUser.name : userLogin.name
     const confirmed = window.confirm(`Deseja realmente sair da sua conta, ${name}?`)
 
-        if(confirm){
+        if(confirmed){
             logout()
-            navigate('/')
+            navigate('/login')
         }
     }
 
@@ -43,7 +43,7 @@ const Header = () => {
                        {ssoUser && (
                             <img src={ssoUser.picture} className={styles.userPhoto} />
                         )}
-                        {<p>{ssoUser ? ssoUser.name : userLogin}</p>
+                        {<p>{ssoUser ? ssoUser.name : userLogin.name}</p>
                         /*<p>Email: {profile.email}</p>*/}
                         <button 
                         className={styles.logoutBtn}
