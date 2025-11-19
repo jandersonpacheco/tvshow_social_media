@@ -6,22 +6,22 @@ const prisma = new PrismaClient()
 
 export default {
     register: async (req, res) => {
-        const {name, lastName, userName, email, password, passwordConfirmation} = req.body
+        const {username, firstName, lastName, newEmail, newPassword, confirmedNewPassword} = req.body
 
-        if (!name || !lastName || !email || !password || !passwordConfirmation) return res.status(400).json({ message: 'Preencha todos os campos.'})
-        if (password !== passwordConfirmation) return res.status(400).json({ message: 'Senhas não conferem.'})
+        if (!firstName || !lastName || !newEmail || !newPassword || !confirmedNewPassword) return res.status(400).json({ message: 'Preencha todos os campos.'})
+        if (newPassword !== confirmedNewPassword) return res.status(400).json({ message: 'Senhas não conferem.'})
 
-        const emailExists = await prisma.users.findUnique({ where: {email} })
+        const emailExists = await prisma.users.findUnique({ where: {email: newEmail} })
         if(emailExists) return res.status(400).json({message: 'Email já cadastrado.'})
 
         try{
             const user = await prisma.users.create({
                 data:{
-                    name,
+                    name: firstName,
                     lastName,
-                    password,
-                    userName,
-                    email,
+                    password: newPassword,
+                    username,
+                    email: newEmail,
                     publicId: uuidv7()
                 }
             })

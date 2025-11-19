@@ -14,6 +14,7 @@ const Login = () => {
     const [email, setEmail] = useState ('')
     const [password, setPassword] = useState ('')
     const [firstName, setFirstName] = useState ('')
+    const [username, setUsername] = useState ('')
     const [lastName, setLastName] = useState ('')
     const [newEmail, setNewEmail] = useState ('')
     const [newPassword, setNewPassword] = useState ('')
@@ -77,27 +78,11 @@ const logout = () => {
 function newAccount(event){
     event.preventDefault()
 
-    const emailExists = data.some((user) => user.newEmail === newEmail)
-    if(emailExists) return console.error('Email já cadastrado!')
-
-    if(newPassword === confirmedNewPassword){
-        const newUserAccount = {
-            userId: uuidv4(),
-            firstName,
-            lastName,
-            newEmail,
-            newPassword,
-            confirmedNewPassword
-        }
-        axios.post('http://localhost:3000/users', newUserAccount)
+        axios.post('http://localhost:3001/auth/register', {username, firstName, lastName, newEmail, newPassword, confirmedNewPassword})
             .then((response) =>{
                 console.log('Usuário criado', response.data)
                 navigate('/')
         })
-        .catch(error => console.error('Erro ao criar o usuário', error))
-    }else{
-        console.error('Senhas não conferem.')
-    }
 }
     return (
     <div>
@@ -146,6 +131,7 @@ function newAccount(event){
                     <main className={styles.mainContainer}>
                         <div className={styles.formContainer}>
                             <form className={styles.createAccount} onSubmit={newAccount}>
+                                <input className={styles.firstName} id="username" type="text" placeholder="Nome de Usuário" value={username} onChange={(e) => setUsername(e.target.value)}></input>
                                 <input className={styles.firstName} id="firstName" type="text" placeholder="Nome" value={firstName} onChange={(e) => setFirstName(e.target.value)}></input>
                                 <input className={styles.lastName} id="lastName" type="text" placeholder="Sobrenome" value={lastName} onChange={(e) => setLastName(e.target.value)}></input>
                                 <input className={styles.email} id="newEmail" type="email" placeholder="Email" value={newEmail} onChange={(e) => setNewEmail(e.target.value)}></input>

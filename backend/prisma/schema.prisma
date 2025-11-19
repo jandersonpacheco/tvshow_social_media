@@ -14,6 +14,6 @@ model Users {
   email     String   @unique @db.VarChar(255)
   lastName  String   @db.VarChar(255)
   password  String   @db.VarChar(255)
-  userName  String?  @db.VarChar(255)
+  username  String?  @db.VarChar(255)
   createdAt DateTime @default(now())
 }
