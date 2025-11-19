@@ -134,7 +134,7 @@ const Show = () => {
                     </div>
                     <div className={styles.tvShowCategory}>
                         {tvShowSearch.map((show) => (
-                            <Link to={`/home/${show.id}`} key={show.id} onClick={cleanInput}>
+                            <Link to={`/${show.id}`} key={show.id} onClick={cleanInput}>
                                 <TvShowCard show={show}/>
                             </Link>
                         ))}
