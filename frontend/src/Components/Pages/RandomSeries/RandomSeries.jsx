@@ -75,6 +75,14 @@
       }
     }
 
+    const cleanList = () => {
+      setRandom ([])
+      setPlayers([])
+      setSemiFinals([])
+      setFinal([])
+      //setSelectedSerie('')
+    }
+
     const shuffleSeries = () => {
         const shuffled = [...random]
           for (let i = shuffled.length - 1; i > 0; i--) {
@@ -126,11 +134,10 @@
     }
 
     //Próxima fase
-    const nextPhase = () => {
-
-      const phase = players.length
+    const nextPhase = (stage) => {
+      const phase = stage.length
       const winners = []
-      players.forEach(([player1, player2]) => {
+      stage.forEach(([player1, player2]) => {
         const winner = player1.result > player2.result ? player1 : player2
         if(phase >= 3) {
           winners.push(winner)
@@ -139,15 +146,23 @@
         }
           if(phase <= 2) {
             console.log('< 3')
-            setFinal(winner)}
-           return console.log(phase, {final})
+            winners.push(winner)
+            console.log(winners)
+            setFinal(winners)
+          }
+          return console.log(phase, {final})
       })
     }
 
-    const cleanList = () => {
-      setRandom ([])
-      setPlayers([])
-      //setSelectedSerie('')
+    const generatePairs = (stage) => {
+      const pairs = []
+      
+      stage.forEach((_, index) =>{
+        if(index % 2 === 0 && stage[index + 1]) {
+          pairs.push([stage[index], stage[index + 1]])
+        }
+      })
+      return pairs
     }
 
     return (
@@ -220,11 +235,11 @@
                       </tbody>
                   </table>
                   <div className={styles.nextPhaseContainer}>
-                    <button className={styles.drawBtn} onClick={nextPhase}>Próxima Fase</button>
+                    <button className={styles.drawBtn} onClick={() => nextPhase(players)}>Próxima Fase</button>
                   </div>
                 </section>)}
 
-                {/*Inicio do body da tabela Knockout*/}
+                {/*Inicio do body da tabela Semi Final*/}
                 {semiFinals !== '' && (
                 <section className={styles.drawSection}>
                   <table className={styles.randomTable}>
@@ -232,32 +247,73 @@
                         <tr>
                           <th className={styles.randomTableHead}></th>
                           <th className={styles.randomTableHead}></th>
-                          <th className={styles.randomTableHead}>KNOCKOUT FASE</th>
+                          <th className={styles.randomTableHead}>SEMI FINAL</th>
                           <th className={styles.randomTableHead}></th>
                           <th className={styles.randomTableHead}></th>
                         </tr>
                       </thead>
                       <tbody>
-                        {semiFinals.map((_, index) =>(
+                        {generatePairs(semiFinals).map((pair, index) => (
                           <tr key={index}>
-                            <td className={styles.randomTableBody}>{player1.name}</td>
+                            <td className={styles.randomTableBody}>{pair[0].name}</td>
                             <td className={styles.randomTableBody}>
-                              <button 
-                                onClick={() => drawResult(player1.id)}>{player1?.result === null || player1?.result === undefined ? 'Resultado' : player1.result}
+                              <button onClick={() => drawResult(pair[0].id)}>
+                                {pair[0]?.result === null ? 'Resultado' : pair[0].result}
                               </button>
                             </td>
                             <td className={styles.randomTableBody}>X</td>
                             <td className={styles.randomTableBody}>
-                              <button
-                                onClick={() => drawResult(player2.id)}>{player2?.result === null || player2?.result === undefined ? 'Resultado' : player2.result}
+                              <button onClick={() => drawResult(pais[1].id)}>
+                                {pair[1]?.result === undefined ? 'Resultado' : pair[1].result}
                               </button>
-                          </td>
-                            <td className={styles.randomTableBody}>{player2?.name}</td>
+                            </td>
+                            <td className={styles.randomTableBody}>{pair[1]?.name}</td>
                           </tr>
                         ))}
                       </tbody>
                   </table>
-                  </section>)}
+                  <div className={styles.nextPhaseContainer}>
+                    <button className={styles.drawBtn} onClick={() => nextPhase(semiFinals)}>Próxima Fase</button>
+                  </div>
+                </section>)}
+
+                {/*Inicio do body da tabela Semi final*/}
+                {semiFinals !== '' && final !== '' && (
+                <section className={styles.drawSection}>
+                  <table className={styles.randomTable}>
+                      <thead>
+                        <tr>
+                          <th className={styles.randomTableHead}></th>
+                          <th className={styles.randomTableHead}></th>
+                          <th className={styles.randomTableHead}>FINAL</th>
+                          <th className={styles.randomTableHead}></th>
+                          <th className={styles.randomTableHead}></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {generatePairs(final).map((pair, index) => (
+                          <tr key={index}>
+                            <td className={styles.randomTableBody}>{pair[0].name}</td>
+                            <td className={styles.randomTableBody}>
+                              <button onClick={() => drawResult(pair[0].id)}>
+                                {pair[0]?.result === null ? 'Resultado' : pair[0].result}
+                              </button>
+                            </td>
+                            <td className={styles.randomTableBody}>X</td>
+                            <td className={styles.randomTableBody}>
+                              <button onClick={() => drawResult(pais[1].id)}>
+                                {pair[1]?.result === undefined ? 'Resultado' : pair[1].result}
+                              </button>
+                            </td>
+                            <td className={styles.randomTableBody}>{pair[1]?.name}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                  </table>
+                  <div className={styles.nextPhaseContainer}>
+                    <button className={styles.drawBtn} onClick={() => nextPhase(semiFinals)}>Próxima Fase</button>
+                  </div>
+                </section>)}
               </>
               )
             :(
