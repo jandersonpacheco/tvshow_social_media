@@ -1,22 +1,22 @@
 import styles from "./style.module.css"
 import useTvShowStore from "../../../store/tvShowStore.js"
 import { useNavigate } from "react-router-dom"
-import SSOUserInfo from '../../../store/SSOUserInfo.js'
+import useUserStore from '../../../store/SSOUserInfo.js'
 import homeIcon from '../../../assets/home.png' // Alterar para não importar a imagem diretamente
 import randomIcon from '../../../assets/random.png'
 
 const Header = () => {
     const {search, setSearch} = useTvShowStore()
-    const { profile } = SSOUserInfo()
-    const { logout } = SSOUserInfo()
+    const { userLogin, ssoUser, setUserLogin, setSsoUser, logout } = useUserStore()
     const navigate = useNavigate('/login')
 
     const handleLogout = () => {
-        const confirm = window.confirm(`Deseja realmente sair da sua conta, ${profile.name}?`)
+    const name = ssoUser ? ssoUser.name : userLogin.name
+    const confirmed = window.confirm(`Deseja realmente sair da sua conta, ${name}?`)
 
         if(confirm){
             logout()
-            return navigate('/')
+            navigate('/')
         }
     }
 
@@ -38,11 +38,13 @@ const Header = () => {
                     <input className={styles.searchBar} type="text" id="search" autoComplete="off"placeholder="Procure por uma série" value={search} onChange={handleSearch}></input>
                     <button className={styles.cancelBtn} id="searchBtn" disabled={search.trim() === ''} onClick={cancelSearch}>Cancelar</button>
                 </form>
-                {profile !== "" ? (
+                { (ssoUser || userLogin) ? (
                     <div className={styles.userContainer}>
-                        <img src={profile.picture} alt="imagem do usuário" className={styles.userPhoto}/>
-                        {/*<p>Nome: {profile.name}</p>
-                        <p>Email: {profile.email}</p>*/}
+                       {ssoUser && (
+                            <img src={ssoUser.picture} className={styles.userPhoto} />
+                        )}
+                        {<p>{ssoUser ? ssoUser.name : userLogin}</p>
+                        /*<p>Email: {profile.email}</p>*/}
                         <button 
                         className={styles.logoutBtn}
                         onClick={() => handleLogout()}>Sair</button>

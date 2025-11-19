@@ -1,15 +1,20 @@
-import { googleLogout } from '@react-oauth/google'
 import { create } from 'zustand'
+import { googleLogout } from '@react-oauth/google'
 
-const SSOUserInfo = create((set) => ({
-    profile: '',
-    setProfile: ((userInfo) => set ({ profile: userInfo })),
+const useUserStore = create((set) => ({
+  // Estado do usuário
+  userLogin: null,           // dados do usuário (login normal)
+  ssoUser: null,        // dados do SSO (Google)
+  
+  // Métodos
+  setUserLogin: (data) => set({ userLogin: data }),
+  setSsoUser: (data) => set({ ssoUser: data }),
 
-    logout: (navigate) => {
-        googleLogout()
-        set({profile: ''})
-        //navigate('/')
-    }
+  // Logout unificado
+  logout: () => {
+    googleLogout()      // encerra sessão SSO se existir
+    set({ user: null, ssoUser: null })
+  }
 }))
 
-export default SSOUserInfo
+export default useUserStore
