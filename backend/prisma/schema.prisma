@@ -4,8 +4,6 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
 }
 
 model Users {
@@ -16,5 +14,7 @@ model Users {
   lastName  String    @db.VarChar(255)
   password  String    @db.VarChar(255)
   username  String?   @db.VarChar(255)
+  profilePicture String? @db.VarChar(255)
+  profilePictureId BigInt? 
   createdAt DateTime  @default(now())
 }

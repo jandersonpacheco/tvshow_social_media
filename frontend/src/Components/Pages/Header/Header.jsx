@@ -43,8 +43,12 @@ const Header = () => {
                        {ssoUser && (
                             <img src={ssoUser.picture} className={styles.userPhoto} />
                         )}
-                        {<p>{ssoUser ? ssoUser.name : userLogin.name}</p>
-                        /*<p>Email: {profile.email}</p>*/}
+                        {
+                            <div className={styles.fotoProfiler}>
+                                <p>FOTO</p>
+                                <p>{ssoUser ? ssoUser.name : userLogin.name}</p>
+                            </div>
+                        }
                         <button 
                         className={styles.logoutBtn}
                         onClick={() => handleLogout()}>Sair</button>
