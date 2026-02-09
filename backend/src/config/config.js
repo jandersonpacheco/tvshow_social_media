@@ -14,7 +14,7 @@ dotenv.config({ path: join(__dirname, '../../.env')})
 export const PORT  = process.env.PORT
 
 //Cloudinary configs.
-export const cloudinary = Cloudinary.config ({
+export const cloudinaryAPI = Cloudinary.config ({
     cloud_name: process.env.CLOUDINARY_NAME,
     api_key: process.env.CLOUDINARY_KEY,
     api_secret: process.env.CLOUDINARY_SECRET

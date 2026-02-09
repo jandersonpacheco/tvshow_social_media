@@ -1,10 +1,10 @@
-import UploadPhoto from "../Profile/upload-photo"
+import UploadPhoto from "../Profile/Profile"
 
 const Footer = () => {
     
     return (
         <>
-            <UploadPhoto />
+            <Profile />
         </>
     )
 }

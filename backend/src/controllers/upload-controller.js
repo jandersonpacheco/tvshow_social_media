@@ -1,37 +1,32 @@
-import { uploader } from "../config/config.js"
-import { cloudinary } from "../config/config.js"
-import { PrismaClient } from '@prisma/client'
+import { cloudinaryAPI } from "../config/config.js"
+import {v2 as cloudinary} from 'cloudinary'
+import multer from 'multer'
+
+cloudinary.config({
+    cloudinaryAPI
+})
+
+const storage = multer.memoryStorage()
+export const upload = multer ({
+    storage: storage
+})
 
 export default {
-    upload: async (req, res) => {
-        try{
-            if(!req.file) return res.status(400).json({message: 'Nenhum arquivo enviado.'})
-
-            //Converter arquivo em base64
-            const base64Img = `data:${req.file.mimetype};base64,${req.file.buffer.toString('base64')}`
-
-            const result = await cloudinary.uploader.upload(base64Img, { folder: 'profile_pictures'})
-
-            res.json({url: result.secure_url})
-
-        }catch(error){
-            res.status(500).json({ error: err.message })
+    uploadPhoto: (req, res) => {
+        if(!req.file) return res.status(400).json({error: 'Nenhum arquivo enviado'})
+        
+        const stream = cloudinary.uploader.upload_stream({
+            resource_type: 'auto'
+        },
+        (error, result) => {
+            if (error) {
+                console.log(error)
+                return res.status(500).json({error: 'Erro ao enviar pra o Cloudinary'})
+            }
+            return res.json({public_id : result.public_id, url: result.secure_url })
         }
+        )
+        stream.end(req.file.buffer)
     },
-    updateProfilePicture: async (req, res) => {
-        const {id, profilePicture} = req.body
-
-        const prisma = new PrismaClient()
-
-        try{
-            const userUpdate = prisma.users.update({
-                where: {id},
-                data:{profilePicture}
-            })
-
-            res.status(201).json({message: {user}})
-        }catch(error){
-            res.status(500).json({mesage: `Erro: ${error}`})
-        }
-    }
 }
+
