@@ -1,4 +1,4 @@
-import UploadPhoto from "../Profile/Profile"
+import Profile from "../Profile/Profile.jsx"
 
 const Footer = () => {
     
